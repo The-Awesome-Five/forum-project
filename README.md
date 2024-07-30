@@ -22,7 +22,16 @@ Roles: {
 
 }
 
-Topics: {
+Categories: {
+
+    id: {
+        name: string
+        subcategories:[topics.ids];
+    },
+    ...
+}
+
+Subcategories: {
     
     id: {
         Name of the topic: String
@@ -82,3 +91,5 @@ Reports: {
     },
     ...
 }
+
+
