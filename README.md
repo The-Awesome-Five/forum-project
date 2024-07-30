@@ -1,6 +1,7 @@
 FireBase:
 
-Users:{
+Users: {
+
     id : {
         FirstName: String
         LastName: String
@@ -14,12 +15,15 @@ Users:{
 }
 
 Roles: {
+
     1:admin;
     2:Mod;
     3:User_Reg;
+
 }
 
 Topics: {
+    
     id: {
         Name of the topic: String
         Numbers: number
