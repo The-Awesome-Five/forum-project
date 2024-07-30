@@ -28,6 +28,7 @@ Topics: {
         Name of the topic: String
         Numbers: number
         PostID:[number];
+        Deleted: Boolean;
     }
     ....
 }
@@ -45,6 +46,7 @@ Posts: {
         NumberOfReplies: number;
         Likes: [{ID: Username},...];
         ReportsID: [reports.ID,...]
+        Deleted: Boolean;
     },
     ...
 }
@@ -60,6 +62,7 @@ Reply: {
         CreatedOn: Date;
         Likes: [{ID: Username},...];
         ReportsID: [reports.ID,...]
+         Deleted: Boolean;
     },
     ...
 }
@@ -75,6 +78,7 @@ Reports: {
         }
         CreatedOn: Date;
         ReportedPostID: ID
+        Resolved: Boolean;
     },
     ...
 }
