@@ -57,6 +57,7 @@ Posts: {
         Likes: [{ID: Username},...];
         ReportsID: [reports.ID,...]
         Deleted: Boolean;
+        RepliesId: [replyID]
     },
     ...
 }
