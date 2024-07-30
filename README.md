@@ -58,6 +58,7 @@ Posts: {
         ReportsID: [reports.ID,...]
         Deleted: Boolean;
         RepliesId: [replyID]
+        Latest Reply Date: Date
     },
     ...
 }
