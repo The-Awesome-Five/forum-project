@@ -1,4 +1,4 @@
-FireBase:
+#FireBase:
 
 Users: {
 
@@ -95,4 +95,20 @@ Reports: {
     ...
 }
 
-
+#Components:
+Main Page
+Subcategory Page
+Post Page
+Notification Page
+Notification Component 
+Account Profile
+Admin Menu
+Login Component
+Register Component
+Report Component
+Post Component
+Reports Page
+Search Page
+Search Component 
+Edit Post Component 
+ 
