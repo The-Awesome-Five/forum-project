@@ -7,6 +7,7 @@ Users:{
         Email: String
         Username: String
         PostIDs: [number]
+        CommentsIDs: [number]
         Notification:  [number]
         FavoritesIDs: [number];
         RoleId: number
