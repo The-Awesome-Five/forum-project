@@ -34,6 +34,7 @@ Categories: {
 Subcategories: {
     
     id: {
+        CategoryId: number
         Name of the topic: String
         Numbers: number
         PostID:[number];
@@ -45,7 +46,7 @@ Subcategories: {
 Posts: {
 
     id:{
-        CategoryID: number;
+        SubcategoryID: number;
         Title: String
         Content: String;
         CreatedBy : {
