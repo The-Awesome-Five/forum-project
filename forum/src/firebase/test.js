@@ -23,23 +23,16 @@ import { db } from "./config.js";
 //     console.log(e)
 // }
 
-const createPostAndUpdate = async (info) => {
-    let categoryId = 2;
+
+const setFunction = async (info, paths) => {
     const result = await push(ref(db, `post`), info);
     const id = result.key;
-
-    
-    const categories = [2, 3, 4]; 
-
-    const updatePromises = categories.map(categoryId => {
-        return update(ref(db), {
-            [`category/${categoryId}/posts/${id}`]: true,
+    for (const path of paths) {
+        await update(ref(db), {
+            [`${path}/${id}`]: true,
         });
-    });
-
-    await Promise.all(updatePromises);
+    }
 }
-
 
 const info={
     'Title': 'Test',
@@ -49,9 +42,9 @@ const info={
         'Test': 'Pesho'
     }
 }
+const paths= ['category/1/posts','category/2/posts','category/3/posts']
 
-
-createPostAndUpdate(info);
+setFunction(info, paths);
 // subcategoru/category
 // posts/subcategory/
 // replies/post/
