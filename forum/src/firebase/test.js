@@ -26,8 +26,8 @@ const pathForCreating= 'post'
 const name= ['post','-O3DZD7sTYnubHGSaxHM', 'Title']
 
 
-const pathing= ['post', '-O3DZD7sTYnubHGSaxHM','Content'];
+const pathing= ['post', '-O3D_PIFhA6FvYcEZ7zh'];
 const info='Big Test';
 let result= createPath(pathing);
-updateElement(info,result);
+// updateElement(info,result);
 console.log( await getElement(result))
