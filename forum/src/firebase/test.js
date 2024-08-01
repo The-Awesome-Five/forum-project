@@ -24,8 +24,8 @@ import { db } from "./config.js";
 // }
 
 
-const setFunction = async (info, paths) => {
-    const result = await push(ref(db, `post`), info);
+const setFunction = async (info, paths, pathForCreating) => {
+    const result = await push(ref(db, pathForCreating), info);
     const id = result.key;
     for (const path of paths) {
         await update(ref(db), {
@@ -43,8 +43,9 @@ const info={
     }
 }
 const paths= ['category/1/posts','category/2/posts','category/3/posts']
+const pathForCreating= 'post'
 
-setFunction(info, paths);
+setFunction(info, paths,pathForCreating);
 // subcategoru/category
 // posts/subcategory/
 // replies/post/
