@@ -1,7 +1,7 @@
 import { updateElement } from "./firebase-funcs.js";
 import { createElement } from "./firebase-funcs.js";
 import { createPath } from "./firebase-funcs.js";
-
+import { getElement } from "./firebase-funcs.js";
 
 // const info={
 //     'Title': 'Test',
@@ -30,3 +30,4 @@ const pathing= ['post', '-O3DZD7sTYnubHGSaxHM','Content'];
 const info='Big Test';
 let result= createPath(pathing);
 updateElement(info,result);
+console.log( await getElement(result))

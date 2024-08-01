@@ -109,3 +109,9 @@ export const createPath = (elements) => {
     }, )
     return result+'/';
 }
+
+export const getElement =async (pathing) =>{
+    const snapshot = await get(ref(db, `${pathing}`));
+    return snapshot.val();
+
+} 
