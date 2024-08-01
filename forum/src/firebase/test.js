@@ -1,53 +1,32 @@
-import {batchUpdates} from "./batchUpdates.js";
-import { ref, push } from 'firebase/database';
-import { get, set, query, equalTo, orderByChild, update } from 'firebase/database';
-import { db } from "./config.js";
-// const categoryOneId = 1;
-// const categoryTwoId = 2;
+import { updateElement } from "./firebase-funcs.js";
+import { createElement } from "./firebase-funcs.js";
+import { createPath } from "./firebase-funcs.js";
 
-// const objectOne = `Role/${1}`;
-// const objectTwo = `Role/${2}`;
-// const objectThree = `Role/${3}`;
 
-// const updates = {
-//     // Creating new data
-//     [objectOne]: {name: 'User', subcategories: ['']},
-//     [objectTwo]: {name: 'Mod', subcategories: ['']},
-//     [objectThree]: {name: 'Admin', subcategories: ['']},
-// };
-
-// try {
-//     const message = await batchUpdates(updates);
-//     console.log(message)
-// } catch (e) {
-//     console.log(e)
+// const info={
+//     'Title': 'Test',
+//     'Content': "Test",
+//     'CreatedOn': new Date().toDateString(),
+//     'User': {
+//         'Test': 'Pesho'
+//     }
 // }
-
-
-const setFunction = async (info, paths, pathForCreating) => {
-    const result = await push(ref(db, pathForCreating), info);
-    const id = result.key;
-    for (const path of paths) {
-        await update(ref(db), {
-            [`${path}/${id}`]: true,
-        });
-    }
-}
-
-const info={
-    'Title': 'Test',
-    'Content': "Test",
-    'CreatedOn': new Date().toDateString(),
-    'User': {
-        'Test': 'Pesho'
-    }
-}
-const paths= ['category/1/posts','category/2/posts','category/3/posts']
+const paths= ['category/1/posts','category/2/posts',{1:null}]
 const pathForCreating= 'post'
 
-setFunction(info, paths,pathForCreating);
+// setFunction(info, paths,pathForCreating);
 // subcategoru/category
 // posts/subcategory/
 // replies/post/
 
+// const pathForUpdate= 'post/-O3DZD7sTYnubHGSaxHM/Title'
+// createElement(info, pathForCreating);
+// updateElement('What to do',pathForUpdate);
 
+const name= ['post','-O3DZD7sTYnubHGSaxHM', 'Title']
+
+
+const pathing= ['post', '-O3DZD7sTYnubHGSaxHM','Content'];
+const info='Big Test';
+let result= createPath(pathing);
+updateElement(info,result);
