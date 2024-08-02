@@ -1,16 +1,18 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from './config.js';
-import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database';
+import { ref, push, get, set, update, remove, query, equalTo, orderByChild, orderByKey } from 'firebase/database';
 import { db } from './config.js';
 
-export const createElement = async (info, pathForCreating) => {
+export const createElement = async (data, pathForCreating) => {
         let id;
         try {
-        const result = await push(ref(db, pathForCreating), info);
+        const result = await push(ref(db, pathForCreating), data);
         id = result.key;
-        await update(ref(db), {
+       await update(ref(db), {
             [`${pathForCreating}/${id}/id`]: id,
         });
+
+       return id;
 
         }
         catch(e){
@@ -19,30 +21,45 @@ export const createElement = async (info, pathForCreating) => {
 
 }
 
-export const updateElement = async (info, pathForUpdate) => {
+export const updateElement = async (data, pathForUpdate) => {
     try {
         const updateObject = {
-            [`${pathForUpdate}`]: info,
+            [`${pathForUpdate}`]: data,
         };
         await update(ref(db), updateObject);
+
+        return 'Element edited successfully!'
         }
         catch(e){
-            console.log(e);
+            return e;
         }
 
 }
 
-export const createPath = (elements) => {
-    const result= elements.reduce((acc,current) =>{
+export const createPath = (...elements) => {
+    const result = elements.reduce((acc,current) =>{
         return acc+'/' +current;
     }, )
     return result+'/';
 }
 
 export const getElement =async (pathing) =>{
-    const snapshot = await get(ref(db, `${pathing}`));
-    return snapshot.val();
+    try {
+        const snapshot = await get(ref(db, `${pathing}`));
+        return snapshot.val();
+    } catch (e) {
+        return 'Error occurred: ' + e;
+    }
 
+}
+
+export const removeElement = async (pathing) => {
+    try {
+        await remove(ref(db, `${pathing}`));
+        return 'Element delete successfully!'
+    } catch (e) {
+        return 'Error occurred: ' + e;
+    }
 }
 
 /*export const registerUser = (email, password) => {
