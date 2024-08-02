@@ -1,4 +1,4 @@
-import { createElement, createPath, removeElement, updateElement } from "../firebase/firebase-funcs";
+import { createElement, createPath, removeElement, updateElement } from "../firebase/firebase-funcs.js";
 
 export const createPost = async (postInfo, subcategoriesId) => {
     const path = createPath('posts');
