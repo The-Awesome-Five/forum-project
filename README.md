@@ -10,6 +10,12 @@ Users: {
         Notification:  [number]
         FavoritesIDs: [number];
         RoleId: number
+        PostsID: {
+            postid:true
+        }
+        ReplyID: {
+            replyid:true
+        }
     }
     ....
 }
@@ -26,47 +32,53 @@ Categories: {
 
     id: {
         name: string
-        subcategories:[topics.ids];
+        isHidden: False;
     },
     ...
 }
 
 Subcategories: {
-    
-    id: {
-        CategoryId: number
-        Name of the topic: String
-        Numbers: number
-        PostID:[number];
-        Deleted: Boolean;
+    CategoryID
+        {
+            id: {
+                isLocked:false
+                isHidden:false;
+                Name of the Subcategory: String
+        
+        },
+            id: {
+                isLocked:false
+                isHidden:false;
+                Name of the Subcategory: String
+        },
+
     }
     ....
 }
 
 Posts: {
 
+subcategoryID:{
     id:{
-        SubcategoryID: number;
+        isLocked:false
+        isHidden:false;
         Title: String
         Content: String;
         CreatedBy : {
             ID: Username
         }
         CreatedOn: Date;
-        NumberOfReplies: number;
         Likes: [{ID: Username},...];
         ReportsID: [reports.ID,...]
-        Deleted: Boolean;
-        RepliesId: [replyID]
         Latest Reply Date: Date
     },
     ...
+    }
 }
 
 Reply: {
-    
+    postID{
     id:{
-        PostID: number;
         Content: String;
         CreatedBy : {
             ID: Username
@@ -74,8 +86,8 @@ Reply: {
         CreatedOn: Date;
         Likes: [{ID: Username},...];
         ReportsID: [reports.ID,...]
-         Deleted: Boolean;
     },
+    }
     ...
 }
 
