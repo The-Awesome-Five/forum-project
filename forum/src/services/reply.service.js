@@ -1,5 +1,6 @@
 import { createElement, createPath, removeElement, updateElement } from "../firebase/firebase-funcs";
-
+import { get, ref } from "firebase/database";
+import { db } from "../firebase/config";
 export const createReply = async (info, postID, subcategoriesId) => {
 
     const path= createPath('reply', postID)
