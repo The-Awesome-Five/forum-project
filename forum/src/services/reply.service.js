@@ -24,4 +24,12 @@ export const deleteReply = async(postID, replyID) =>{
     await removeElement(path);
 }
 
+
+export const getReplies = async (postID) => {
+    const path = createPath ('reply', postID)
+    const snapshot = await get(ref(db, path));
+    if (!snapshot.exists()) return [];
+
+    return Object.values(snapshot.val());
+};
 // missing get function
