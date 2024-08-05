@@ -1,6 +1,6 @@
-import { createElement } from "../firebase/firebase-funcs"
-import { createPath, getElement } from "../firebase/firebase-funcs";
-import { update } from "firebase/database";
+import {createElement, updateElement} from "../firebase/firebase-funcs"
+import { createPath } from "../firebase/firebase-funcs";
+import {hideSubcategories} from "./subcategory.service.js";
 
 export const createCategory = async (name) => {
 
@@ -12,18 +12,19 @@ export const createCategory = async (name) => {
     return createElement(data,'Category');
 }
 
-export const editCategory = async (prop, value, category_id) => {
+export const editCategory = async (data, category_id) => {
 
 
-    const pathToBeEdited = createPath('Category', category_id, prop)
-    
+    const pathToBeEdited = createPath('Category', category_id)
 
-    return updateElement(value, pathToBeEdited);
+    return updateElement(data, pathToBeEdited);
 }
 
 export const hideCategory = async (category_id) => {
 
+    await editCategory({isHidden: true}, true, category_id);
 
+    return hideSubcategories(category_id);
 
 }
 
@@ -52,7 +53,7 @@ export const lockUserFromCategory = async (category_id, user_id) => {
 
 // subcategory state - active, locked, deleted or hidden
 // lock - lock creating posts and replying to them
-// delete - delete subcategory, posts and replies 
+// delete - delete subcategory, posts and replies
 // hide - hide subcategory and posts - isHidden === true
 
 // posts - active, locked, deleted or hidden

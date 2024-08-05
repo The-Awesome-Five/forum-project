@@ -23,3 +23,5 @@ export const deleteReply = async(postID, replyID) =>{
     const path = createPath('reply', postID, replyID);
     await removeElement(path);
 }
+
+// missing get function

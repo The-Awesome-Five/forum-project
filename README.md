@@ -43,7 +43,7 @@ Subcategories: {
             id: {
                 isLocked:false
                 isHidden:false;
-                Name of the Subcategory: String
+                Name of the Subcategory: String,
         
         },
             id: {
