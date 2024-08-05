@@ -1,5 +1,5 @@
-import {createElement, updateElement} from "../firebase/firebase-funcs"
-import { createPath } from "../firebase/firebase-funcs";
+import {createElement, updateElement} from "../firebase/firebase-funcs.js"
+import { createPath } from "../firebase/firebase-funcs.js";
 import {hideSubcategories} from "./subcategory.service.js";
 
 export const createCategory = async (name) => {
@@ -12,10 +12,9 @@ export const createCategory = async (name) => {
     return createElement(data,'Category');
 }
 
-export const editCategory = async (data, category_id) => {
+export const editCategory = async (data, category_id, prop = '') => {
 
-
-    const pathToBeEdited = createPath('Category', category_id)
+    const pathToBeEdited = createPath('Category', category_id, prop)
 
     return updateElement(data, pathToBeEdited);
 }

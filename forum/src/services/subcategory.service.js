@@ -1,5 +1,6 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
 import {hidePosts, lockPosts, removePostsByCategoryId} from "./post.service.js";
+import {editCategory} from "./category.service.js";
 
 export const getSubcategoriesByCategoryId = async (category_id) => {
 
@@ -16,7 +17,9 @@ export const createSubcategory = async (name, category_id) => {
 
     }
 
-    return createElement(subcategory, `Subcategory/${category_id}`)
+    const id = await createElement(subcategory, `Subcategory/${category_id}`);
+
+    return createElement(id, `Category/${category_id}/subcategory_ids`)
 }
 
 export const editSubcategory = async (data, path, category_id, subcategory_id) => {
@@ -69,6 +72,7 @@ export const deleteSubcategory = async (category_id, subcategory_id) => {
     const removePath = createPath('Subcategory', category_id, subcategory_id)
 
     await removeElement(removePath);
+    await editCategory(null, category_id, `subcategory_ids/${subcategory_id}` )
 
     return removePostsByCategoryId(category_id);
 
