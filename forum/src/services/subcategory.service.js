@@ -20,7 +20,9 @@ export const createSubcategory = async (name, category_id) => {
     const id = await createElement(subcategory, `Subcategory/${category_id}`);
 
     // todo
-    await editCategory({[`${id}`]: name}, category_id, 'subcategory_ids')
+
+    console.log('Create Subcategory')
+    await editCategory(name, category_id, `subcategory_ids/${id}`)
 
     return id;
 }

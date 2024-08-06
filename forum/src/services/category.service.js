@@ -1,4 +1,4 @@
-import {createElement, updateElement} from "../firebase/firebase-funcs.js"
+import {createElement, updateElement, updateField} from "../firebase/firebase-funcs.js"
 import { createPath } from "../firebase/firebase-funcs.js";
 import {hideSubcategories} from "./subcategory.service.js";
 import {update} from "firebase/database";
@@ -14,9 +14,15 @@ export const createCategory = async (name) => {
     return createElement(data,'Category');
 }
 
-export const editCategory = async (data, category_id, prop) => {
+export const editCategory = async (data, category_id, prop = '') => {
 
-    return updateElement(data, `Category/${category_id}/${prop}`);
+    let pathToBeEdited = createPath('Category', category_id);
+
+    if (prop) {
+        pathToBeEdited = createPath(pathToBeEdited, prop)
+    }
+
+    return updateField(data, pathToBeEdited);
 }
 
 export const hideCategory = async (category_id) => {
@@ -27,9 +33,9 @@ export const hideCategory = async (category_id) => {
 
 }
 
-export const lockUserFromCategory = async (category_id, user_id) => {
+export const lockUserFromCategory = async (category_id, user_id, username) => {
 
-    return editCategory(user_id, category_id, `locked_users/${user_id}`);
+    return editCategory(username, category_id, `locked_users/${user_id}`);
 
 }
 

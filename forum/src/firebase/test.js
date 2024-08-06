@@ -52,20 +52,20 @@ import { createReply } from "../services/reply.service.js";
 // });
 
 try {
-    // const id = await createCategory('Games');
-    // await editCategory(1, id, 'subcategories_ids')
-    // await hideCategory(id);
-    // await lockUserFromCategory(id, 2);
-    // await lockUserFromCategory(id, 3);
-    // await editCategory(2, id, 'subcategories_ids')
+    const id = await createCategory('Games');
+    await editCategory(1, id, 'subcategory_ids')
+    await hideCategory(id);
+    await lockUserFromCategory(id, 2, 'Pesho');
+    await lockUserFromCategory(id, 3, 'Gosho');
+    await editCategory(2, id, 'subcategory_ids')
 
-    const id = await createSubcategory('PC Gaming', 23123123);
-    await hideSubcategory(23123123, id);
-    await unhideSubcategory(23123123, id);
+    const sub_id = await createSubcategory('PC Gaming', id);
+    await hideSubcategory(id, sub_id);
+   await unhideSubcategory(id, sub_id);
 
-    const id_2 = await createSubcategory('Console Gaming', 23123123);
+    const id_2 = await createSubcategory('Console Gaming', id);
 
-    await hideSubcategories(23123123);
+    await hideSubcategories(id);
 
 } catch (e) {
     console.log(e)
