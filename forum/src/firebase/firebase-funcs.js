@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
-import { auth } from './config.js';
+// import { auth } from './config.js';
 import { ref, push, get, set, update, remove, query, equalTo, orderByChild, orderByKey } from 'firebase/database';
-import { db } from './config.js';
+// import { db } from './config.js';
 
 export const createElement = async (data, pathForCreating) => {
         let id;
