@@ -36,6 +36,23 @@ export const updateElement = async (data, pathForUpdate) => {
     }
 }
 
+export const updateField = async (data, pathForUpdate) => {
+    try {
+        const updateObject = {
+            [`${pathForUpdate}`]: data,
+        };
+        await update(ref(db), updateObject);
+
+        return 'Element edited successfully!'
+    }
+    catch(e){
+        console.log(e);
+        return e;
+    }
+
+}
+
+
 export const createPath = (...elements) => {
     const result = elements.reduce((acc,current) =>{
         return acc+'/' +current;
@@ -137,4 +154,4 @@ export const getUserData = async (uid) => {
     return snapshot.val();
 };*/
 
-DONOTTOUCHTHISFUNCTION();
+// DONOTTOUCHTHISFUNCTION();
