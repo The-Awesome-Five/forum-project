@@ -11,10 +11,22 @@ function App() {
     }, []);
 
   return (
-    <>
-      <h1>Testing</h1>
-        <button onClick={() => createElement('user', 'Roles')}>Create</button>
-    </>
+
+    <Router>
+    <HeaderBar />
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/latest" element={<Latest />} />
+      <Route path="/top" element={<Top />} />
+      <Route path="/about" element={<About />} />
+      <Route path="/profile" element={<Profile />} />
+    </Routes>
+  </Router>
+  
+    // <>
+    //   <h1>Testing</h1>
+    //     <button onClick={() => createElement('user', 'Roles')}>Create</button>
+    // </>
   )
 }
 

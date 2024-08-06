@@ -10,15 +10,15 @@ const headerBar = () => {
             </div>
 
             <div className="nav-links">
-                 <a href="#lastest">LASTEST</a>
-                 <a href="#top">TOP</a>
-                 <a href="#about">ABOUT</a>
+                 <Link to="/lastest">LASTEST</Link>
+                 <Link to="/top">TOP</Link>
+                 <Link to="/about">ABOUT</Link>
             </div>
 
             <div className="profile-icon">
-                <a href="profile">
+                <Link to="/profile">
                     <img src="/img/profile-icon.png" alt="" />
-                </a>
+                </Link>
             </div>
 
         </div>
