@@ -17,8 +17,8 @@ export const updatePost = async (postInfo, subcategory_id, postId) => {
     await updateElement(postInfo, path);
 };
 
-export const deletePost = async (postId) => {
-    const path = createPath('Posts', postId);
+export const deletePost = async (subcategoryId, postId) => {
+    const path = createPath('Posts', subcategoryId, postId);
     await removeElement(path);
 };
 
@@ -28,10 +28,10 @@ export const hidePosts = async (subcategory_id) => {
     try {
        
         const posts = await getElement(`Posts/${subcategory_id}`);
-        const posts_id = posts.map(post => post.id);
+        const postsToUpdate=Object.keys(posts)
 
  
-        await Promise.all(posts_id.map(postId => updatePost({ isHidden: true, isLocked: true }, postId)));
+        await Promise.all(postsToUpdate.map(postId => updatePost({ isHidden: true, isLocked: true }, subcategory_id, postId)));
 
         return 'Posts hidden successfully!';
     } catch (e) {
@@ -44,14 +44,13 @@ export const lockPosts = async (subcategory_id) => {
     try {
       
         const posts = await getElement(`Posts/${subcategory_id}`);
-        console.log(posts);
-        posts.flat();
-        const posts_id = posts.map(post => post.id);
+        const postsToUpdate=Object.keys(posts)
+        // posts.flat();
 
         
-        await Promise.all(posts_id.map(postId => updatePost({ isLocked: true }, postId)));
+        await Promise.all(postsToUpdate.map(postId => updatePost({ isLocked: true }, subcategory_id, postId)));
 
-        return 'Posts locked successfully!';
+        console.log( 'Posts locked successfully!');
     } catch (e) {
         console.error('Failed to lock posts', e);
         return e.message;
@@ -62,9 +61,9 @@ export const removePostsByCategoryId = async (subcategory_id) => {
     try {
        
         const posts = await getElement(`Posts/${subcategory_id}`);
-        const postsIds = posts.map(post => post.id);
+        const postsToUpdate=Object.keys(posts)
 
-        await Promise.all(postsIds.map(postId => deletePost(postId)));
+        await Promise.all(postsToUpdate.map(postId => deletePost(subcategory_id, postId)));
 
         return 'Posts removed successfully!';
     } catch (e) {

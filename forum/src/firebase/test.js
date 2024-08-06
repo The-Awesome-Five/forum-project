@@ -9,7 +9,7 @@ import {
     hideSubcategory,
     lockSubcategory, unhideSubcategory, unlockSubcategory
 } from "../services/subcategory.service.js";
-import { createPost, lockPosts } from "../services/post.service.js";
+import { createPost, deletePost, lockPosts, removePostsByCategoryId } from "../services/post.service.js";
 import { createReply } from "../services/reply.service.js";
 
 // const testingFunc = async () => {
@@ -105,6 +105,7 @@ console.log( await getElement(result))*!/*/
 try{
     const categoryid= await createCategory('PC Gaming');
     const subcategoriesId= await createSubcategory('Help', categoryid);
+    const subcategoriesId1= await createSubcategory('Something', categoryid);
     const info=  {
         "id": "post1",
         'createdOn': new Date().toLocaleTimeString(),
@@ -115,7 +116,18 @@ try{
         },
         'updatedOn': null,
       }
+      const info1=  {
+        "id": "post3",
+        'createdOn': new Date().toLocaleTimeString(),
+        "isHidden": false,
+        "isLocked": false,
+        createdBy:{
+        "username": "Post 3",
+        },
+        'updatedOn': null,
+      }
     const postId= await createPost(info, subcategoriesId);
+    const postId1= await createPost(info1, subcategoriesId1);
     const reply=  {
         "id": "post2",
         'createdOn': new Date().toLocaleTimeString(),
@@ -127,7 +139,7 @@ try{
       }
     const replyid= await createReply(info,postId,subcategoriesId);
 
-    await lockPosts(subcategoriesId);
+    await removePostsByCategoryId(subcategoriesId); 
 }
 catch(e){
     console.log(e);
