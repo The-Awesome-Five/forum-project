@@ -62,6 +62,11 @@ export const removeElement = async (pathing) => {
     }
 }
 
+export const DONOTTOUCHTHISFUNCTION = async () =>{
+
+    await remove(ref(db));
+}
+
 /*export const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
 };
@@ -131,3 +136,5 @@ export const getUserData = async (uid) => {
     const snapshot = await get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)));
     return snapshot.val();
 };*/
+
+DONOTTOUCHTHISFUNCTION();
