@@ -25,26 +25,52 @@ export const deletePost = async (postId) => {
 // added by Doni
 
 export const hidePosts = async (subcategory_id) => {
+    try {
+       
+        const posts = await getElement(`Posts/${subcategory_id}`);
+        const posts_id = posts.map(post => post.id);
 
-    const posts_id = getElement(`posts/${subcategory_id}`).map(post => post.id);
+ 
+        await Promise.all(posts_id.map(postId => updatePost({ isHidden: true, isLocked: true }, postId)));
 
-    return posts_id.forEach(post => updatePost({isHidden: true, isLocked: true}, post.id))
-}
+        return 'Posts hidden successfully!';
+    } catch (e) {
+        console.error('Failed to hide posts', e);
+        return e.message;
+    }
+};
 
 export const lockPosts = async (subcategory_id) => {
+    try {
+      
+        const posts = await getElement(`Posts/${subcategory_id}`);
+        console.log(posts);
+        posts.flat();
+        const posts_id = posts.map(post => post.id);
 
-    const posts_id = getElement(`posts/${subcategory_id}`).map(post => post.id);
+        
+        await Promise.all(posts_id.map(postId => updatePost({ isLocked: true }, postId)));
 
-    return posts_id.forEach(post => updatePost({isLocked: true}, post.id))
-
-}
+        return 'Posts locked successfully!';
+    } catch (e) {
+        console.error('Failed to lock posts', e);
+        return e.message;
+    }
+};
 
 export const removePostsByCategoryId = async (subcategory_id) => {
+    try {
+       
+        const posts = await getElement(`Posts/${subcategory_id}`);
+        const postsIds = posts.map(post => post.id);
 
-    const postsIds = getElement(`posts/${subcategory_id}`).map(post => post.id);
+        await Promise.all(postsIds.map(postId => deletePost(postId)));
 
-    return postsIds.forEach(postId => deletePost(postId));
-
-}
+        return 'Posts removed successfully!';
+    } catch (e) {
+        console.error('Failed to remove posts', e);
+        return e.message;
+    }
+};
 
 //missing hiding and getting post funcs
