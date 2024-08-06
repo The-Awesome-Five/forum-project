@@ -1,7 +1,7 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
 
 export const createPost = async (postInfo, subcategoriesId) => {
-    const path = createPath('posts',subcategoriesId );
+    const path = createPath('Posts',subcategoriesId );
     const postId = await createElement(postInfo, path);
 
     const pathForUserUpdate = createPath('user', postInfo.createdBy.username);
@@ -12,13 +12,13 @@ export const createPost = async (postInfo, subcategoriesId) => {
 };
 
 
-export const updatePost = async (postInfo, postId) => {
-    const path = createPath('posts', postId);
+export const updatePost = async (postInfo, subcategory_id, postId) => {
+    const path = createPath('Posts',subcategory_id, postId);
     await updateElement(postInfo, path);
 };
 
 export const deletePost = async (postId) => {
-    const path = createPath('posts', postId);
+    const path = createPath('Posts', postId);
     await removeElement(path);
 };
 

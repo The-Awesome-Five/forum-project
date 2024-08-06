@@ -1,27 +1,31 @@
-import { createElement, createPath, removeElement, updateElement } from "../firebase/firebase-funcs";
+import { createElement, createPath, removeElement, updateElement } from "../firebase/firebase-funcs.js";
 import { get, ref } from "firebase/database";
-import { db } from "../firebase/config";
+import { db } from "../firebase/config.js";
 export const createReply = async (info, postID, subcategoriesId) => {
 
-    const path= createPath('reply', postID)
+    const path= createPath('Reply', postID)
     const id= await createElement(info, path);
-    const pathForUpdate=  createPath('Posts', subcategoriesId, postID, 'updatedOn')
-    // post/ID/POSTID/updatedOn
-    await updateElement(info.createdOn, pathForUpdate);
-    const pathForUserUpdate= createPath('user', info.createdBy.username)
+    const pathForUpdate=  createPath('Posts', subcategoriesId, postID,)
+    console.log(pathForUpdate);
+    
+    await updateElement({'updatedOn':info.createdOn }, pathForUpdate);
+    const pathForUserUpdate= createPath('User', info.createdBy.username)
     await createElement (id, pathForUserUpdate);
+    return id;
 }
 
 export const updateReply= async (info, postID, replyID) => {
+    console.log('I am here');
+    console.log(info);
 
-    const path = createPath('reply', postID, replyID);
+    const path = createPath('Reply', postID, replyID);
     await updateElement (info, path);
 
 }
 
 export const deleteReply = async(postID, replyID) =>{
 
-    const path = createPath('reply', postID, replyID);
+    const path = createPath('Reply', postID, replyID);
     await removeElement(path);
 }
 
