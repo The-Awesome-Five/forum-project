@@ -14,15 +14,9 @@ export const createCategory = async (name) => {
     return createElement(data,'Category');
 }
 
-export const editCategory = async (data, category_id, prop = '') => {
+export const editCategory = async (data, category_id, prop) => {
 
-    let pathToBeEdited = createPath('Category', category_id)
-
-    if (prop) {
-        pathToBeEdited = createPath(pathToBeEdited, prop)
-    }
-
-    return updateElement(data, pathToBeEdited);
+    return updateElement(data, `Category/${category_id}/${prop}`);
 }
 
 export const hideCategory = async (category_id) => {

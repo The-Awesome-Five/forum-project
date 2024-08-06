@@ -4,7 +4,7 @@ import {editCategory} from "./category.service.js";
 
 export const getSubcategoriesByCategoryId = async (category_id) => {
 
-    return getElement(`Category/${category_id}/subcategories_ids`)
+    return getElement(`Category/${category_id}/subcategory_ids`)
 
 }
 
@@ -19,10 +19,13 @@ export const createSubcategory = async (name, category_id) => {
 
     const id = await createElement(subcategory, `Subcategory/${category_id}`);
 
-    return createElement(id, `Category/${category_id}/subcategory_ids`)
+    // todo
+    await editCategory({[`${id}`]: name}, category_id, 'subcategory_ids')
+
+    return id;
 }
 
-export const editSubcategory = async (data, path, category_id, subcategory_id) => {
+export const editSubcategory = async (data, category_id, subcategory_id) => {
 
     const pathToBeEdited = createPath('Subcategory', category_id, subcategory_id)
 
@@ -32,34 +35,53 @@ export const editSubcategory = async (data, path, category_id, subcategory_id) =
 
 export const hideSubcategory = async (category_id, subcategory_id) => {
 
-    const pathToBeHidden = createPath('Subcategory', category_id, subcategory_id);
+    await editSubcategory({isHidden: true, isLocked: true}, category_id, subcategory_id)
 
-    await updateElement({isHidden: true, isLocked: true}, pathToBeHidden );
-
-    return hidePosts(subcategory_id);
+    //todo
+    return //hidePosts(subcategory_id);
 
 }
 
 export const lockSubcategory = async (category_id, subcategory_id) => {
 
-    const pathToBeLocked = createPath('Subcategory', category_id, subcategory_id);
+   await editSubcategory({isLocked: true}, category_id, subcategory_id)
 
-    await updateElement({isLocked: true}, pathToBeLocked );
-
-    return lockPosts(subcategory_id);
+    //todo
+    return //lockPosts(subcategory_id);
 
 }
 
+export const unhideSubcategory = async (category_id, subcategory_id) => {
 
+    await editSubcategory({isHidden: false, isLocked: false}, category_id, subcategory_id)
+
+    //todo
+    return //hidePosts(subcategory_id);
+
+}
+
+export const unlockSubcategory = async (category_id, subcategory_id) => {
+
+    await editSubcategory({isLocked: false}, category_id, subcategory_id)
+
+    //todo
+    return //lockPosts(subcategory_id);
+
+}
+
+//todo
 export const hideSubcategories = async (category_id) => {
 
-    const subcategoryIds = await Object.values(getSubcategoriesByCategoryId(category_id)).map(sub => sub.id);
+    const subcategory_ids = await getSubcategoriesByCategoryId(category_id);
 
-    await subcategoryIds.forEach(sub => editSubcategory({isHidden: true, isLocked: true}, `Subcategory/${category_id}/${sub.id}`));
+    const keys_sub_ids = Object.keys(subcategory_ids);
 
-    return subcategoryIds.forEach(sub => hidePosts(sub.id));
+    await keys_sub_ids.forEach(sub => hideSubcategory(category_id,sub));
+
+    return // keys_sub_ids.forEach(sub => hidePosts(sub.id));
 }
 
+//todo
 export const lockSubcategories = async (category_id, ...subcategoryIds) => {
 
     await subcategoryIds.forEach(sub => editSubcategory({isLocked: true}, `Subcategory/${category_id}/${sub.id}`));
@@ -67,6 +89,7 @@ export const lockSubcategories = async (category_id, ...subcategoryIds) => {
     return lockPosts(subcategoryIds);
 }
 
+//todo
 export const deleteSubcategory = async (category_id, subcategory_id) => {
 
     const removePath = createPath('Subcategory', category_id, subcategory_id)
