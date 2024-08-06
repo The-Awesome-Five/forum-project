@@ -99,6 +99,6 @@ export const deleteSubcategory = async (category_id, subcategory_id) => {
     await removeElement(removePath);
     await editCategory(null, category_id, `subcategory_ids/${subcategory_id}` )
 
-    return removePostsByCategoryId(category_id);
+    return removePostsByCategoryId(subcategory_id);
 
 }

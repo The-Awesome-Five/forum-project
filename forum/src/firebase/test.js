@@ -140,7 +140,7 @@ try{
       }
     const replyid= await createReply(info,postId,subcategoriesId);
 
-    deleteSubcategory(categoryid,subcategoriesId);
+    deleteSubcategory(categoryid, subcategoriesId);
 }
 catch(e){
     console.log(e);
