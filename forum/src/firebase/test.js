@@ -2,7 +2,7 @@ import {removeElement, updateElement} from "./firebase-funcs.js";
 import { createElement } from "./firebase-funcs.js";
 import { createPath } from "./firebase-funcs.js";
 import { getElement } from "./firebase-funcs.js";
-import {createCategory, editCategory} from "../services/category.service.js";
+import {createCategory, editCategory, hideCategory, lockUserFromCategory} from "../services/category.service.js";
 import {getSubcategoriesByCategoryId} from "../services/subcategory.service.js";
 
 // const testingFunc = async () => {
@@ -44,9 +44,17 @@ import {getSubcategoriesByCategoryId} from "../services/subcategory.service.js";
 //     console.error("An error occurred:", error);
 // });
 
-const id = createCategory('Games');
-await editCategory({subcategory_ids: 1}, id);
-console.log(getSubcategoriesByCategoryId(id))
+try {
+    const id = await createCategory('Games');
+    await editCategory(1, id, 'subcategories_ids')
+    await hideCategory(id);
+    await lockUserFromCategory(id, 2);
+    await lockUserFromCategory(id, 3);
+    await editCategory(2, id, 'subcategories_ids')
+
+} catch (e) {
+    console.log(e)
+}
 
 
 /*// const info={

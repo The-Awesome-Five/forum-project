@@ -4,7 +4,7 @@ import {editCategory} from "./category.service.js";
 
 export const getSubcategoriesByCategoryId = async (category_id) => {
 
-    return getElement(`Subcategory/${category_id}`)
+    return getElement(`Category/${category_id}/subcategories_ids`)
 
 }
 
@@ -53,7 +53,7 @@ export const lockSubcategory = async (category_id, subcategory_id) => {
 
 export const hideSubcategories = async (category_id) => {
 
-    const subcategoryIds = await getSubcategoriesByCategoryId(category_id).map(sub => sub.id);
+    const subcategoryIds = await Object.values(getSubcategoriesByCategoryId(category_id)).map(sub => sub.id);
 
     await subcategoryIds.forEach(sub => editSubcategory({isHidden: true, isLocked: true}, `Subcategory/${category_id}/${sub.id}`));
 

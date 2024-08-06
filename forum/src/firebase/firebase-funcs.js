@@ -26,6 +26,9 @@ export const updateElement = async (data, pathForUpdate) => {
         const updateObject = {
             [`${pathForUpdate}`]: data,
         };
+
+        console.log(updateObject)
+
         await update(ref(db), updateObject);
 
         return 'Element edited successfully!'
