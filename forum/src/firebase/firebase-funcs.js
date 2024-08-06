@@ -23,20 +23,17 @@ export const createElement = async (data, pathForCreating) => {
 
 export const updateElement = async (data, pathForUpdate) => {
     try {
-        const updateObject = {
-            [`${pathForUpdate}`]: data,
-        };
+        // Create a reference to the path where you want to update data
+        const dataRef = ref(db, pathForUpdate);
 
-        console.log(updateObject)
+        // Perform the update with the provided data
+        await update(dataRef, data);
 
-        await update(ref(db), updateObject);
-
-        return 'Element edited successfully!'
-        }
-        catch(e){
-            return e;
-        }
-
+        return 'Element edited successfully!';
+    } catch (e) {
+        console.error('Update failed', e);
+        return e.message;
+    }
 }
 
 export const createPath = (...elements) => {

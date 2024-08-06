@@ -44,17 +44,17 @@ import {getSubcategoriesByCategoryId} from "../services/subcategory.service.js";
 //     console.error("An error occurred:", error);
 // });
 
-try {
-    const id = await createCategory('Games');
-    await editCategory(1, id, 'subcategories_ids')
-    await hideCategory(id);
-    await lockUserFromCategory(id, 2);
-    await lockUserFromCategory(id, 3);
-    await editCategory(2, id, 'subcategories_ids')
+// try {
+//     const id = await createCategory('Games');
+//     await editCategory(1, id, 'subcategories_ids')
+//     await hideCategory(id);
+//     await lockUserFromCategory(id, 2);
+//     await lockUserFromCategory(id, 3);
+//     await editCategory(2, id, 'subcategories_ids')
 
-} catch (e) {
-    console.log(e)
-}
+// } catch (e) {
+//     console.log(e)
+// }
 
 
 /*// const info={
