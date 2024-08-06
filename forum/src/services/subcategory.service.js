@@ -40,7 +40,7 @@ export const hideSubcategory = async (category_id, subcategory_id) => {
     await editSubcategory({isHidden: true, isLocked: true}, category_id, subcategory_id)
 
     //todo
-    return //hidePosts(subcategory_id);
+    return hidePosts(subcategory_id);
 
 }
 
@@ -49,7 +49,7 @@ export const lockSubcategory = async (category_id, subcategory_id) => {
    await editSubcategory({isLocked: true}, category_id, subcategory_id)
 
     //todo
-    return //lockPosts(subcategory_id);
+    return lockPosts(subcategory_id);
 
 }
 
@@ -58,7 +58,7 @@ export const unhideSubcategory = async (category_id, subcategory_id) => {
     await editSubcategory({isHidden: false, isLocked: false}, category_id, subcategory_id)
 
     //todo
-    return //hidePosts(subcategory_id);
+    return  hidePosts(subcategory_id);
 
 }
 
@@ -67,7 +67,7 @@ export const unlockSubcategory = async (category_id, subcategory_id) => {
     await editSubcategory({isLocked: false}, category_id, subcategory_id)
 
     //todo
-    return //lockPosts(subcategory_id);
+    return lockPosts(subcategory_id);
 
 }
 
@@ -80,7 +80,7 @@ export const hideSubcategories = async (category_id) => {
 
     await keys_sub_ids.forEach(sub => hideSubcategory(category_id,sub));
 
-    return // keys_sub_ids.forEach(sub => hidePosts(sub.id));
+    return keys_sub_ids.forEach(sub => hidePosts(sub.id));
 }
 
 //todo

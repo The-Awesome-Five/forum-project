@@ -5,6 +5,7 @@ import { getElement } from "./firebase-funcs.js";
 import {createCategory, editCategory, hideCategory, lockUserFromCategory} from "../services/category.service.js";
 import {
     createSubcategory,
+    deleteSubcategory,
     getSubcategoriesByCategoryId, hideSubcategories,
     hideSubcategory,
     lockSubcategory, unhideSubcategory, unlockSubcategory
@@ -51,25 +52,25 @@ import { createReply } from "../services/reply.service.js";
 //     console.error("An error occurred:", error);
 // });
 
-try {
-    const id = await createCategory('Games');
-    await editCategory(1, id, 'subcategory_ids')
-    await hideCategory(id);
-    await lockUserFromCategory(id, 2, 'Pesho');
-    await lockUserFromCategory(id, 3, 'Gosho');
-    await editCategory(2, id, 'subcategory_ids')
+// try {
+//     const id = await createCategory('Games');
+//     await editCategory(1, id, 'subcategory_ids')
+//     await hideCategory(id);
+//     await lockUserFromCategory(id, 2, 'Pesho');
+//     await lockUserFromCategory(id, 3, 'Gosho');
+//     await editCategory(2, id, 'subcategory_ids')
 
-    const sub_id = await createSubcategory('PC Gaming', id);
-    await hideSubcategory(id, sub_id);
-   await unhideSubcategory(id, sub_id);
+//     const sub_id = await createSubcategory('PC Gaming', id);
+//     await hideSubcategory(id, sub_id);
+//    await unhideSubcategory(id, sub_id);
 
-    const id_2 = await createSubcategory('Console Gaming', id);
+//     const id_2 = await createSubcategory('Console Gaming', id);
 
-    await hideSubcategories(id);
+//     await hideSubcategories(id);
 
-} catch (e) {
-    console.log(e)
-}
+// } catch (e) {
+//     console.log(e)
+// }
 
 
 /*// const info={
@@ -139,7 +140,7 @@ try{
       }
     const replyid= await createReply(info,postId,subcategoriesId);
 
-    await removePostsByCategoryId(subcategoriesId); 
+    deleteSubcategory(categoryid,subcategoriesId);
 }
 catch(e){
     console.log(e);

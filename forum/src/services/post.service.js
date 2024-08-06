@@ -4,7 +4,7 @@ export const createPost = async (postInfo, subcategoriesId) => {
     const path = createPath('Posts',subcategoriesId );
     const postId = await createElement(postInfo, path);
 
-    const pathForUserUpdate = createPath('user', postInfo.createdBy.username);
+    const pathForUserUpdate = createPath('User', postInfo.createdBy.username);
     console.log('this is post: ' + postId)
     await createElement(postId, pathForUserUpdate);
 
