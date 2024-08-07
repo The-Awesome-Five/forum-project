@@ -154,4 +154,4 @@ export const getUserData = async (uid) => {
     return snapshot.val();
 };*/
 
-DONOTTOUCHTHISFUNCTION();
+// DONOTTOUCHTHISFUNCTION();
