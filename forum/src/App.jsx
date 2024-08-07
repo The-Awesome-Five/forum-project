@@ -27,11 +27,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<Register />} />
-              {/*
-      <Route path="/latest" element={<Latest />} />
+              
+      {/* <Route path="/latest" element={<Latest />} />
       <Route path="/top" element={<Top />} />
       <Route path="/about" element={<About />} />
-      <Route path="/profile" element={<Profile />} />*/}
+      <Route path="/profile" element={<Profile />} /> */}
             </Routes>
         </>
 
