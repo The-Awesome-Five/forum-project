@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react'
 import './App.css'
 import {createElement, getElement} from "./firebase/firebase-funcs.js";
+import {Route, Router, Routes} from "react-router";
+import HeaderBar from "./components/headerBar/headerBar.jsx";
 
 function App() {
   const [elements, setElements] = useState({});
@@ -22,7 +24,7 @@ function App() {
       <Route path="/profile" element={<Profile />} />
     </Routes>
   </Router>
-  
+
     // <>
     //   <h1>Testing</h1>
     //     <button onClick={() => createElement('user', 'Roles')}>Create</button>
