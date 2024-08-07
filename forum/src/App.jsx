@@ -11,11 +11,12 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { AppContext } from '../state/app.context.js';
 import { getUserDataByUID } from './services/user.service.js';
 import { auth } from './firebase/config.js';
-import { useLocation, navigate, Navigate } from "react-router-dom";
+import { useLocation, useNavigate, Navigate } from "react-router-dom";
 import { logoutUser } from './services/auth.service.js';
 function App() {
     const [elements, setElements] = useState({});
-
+    const navigate = useNavigate();
+  
   useEffect(() => {
     const fetchElements = async () => {
       const elems = await getElement('Roles');
