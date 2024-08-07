@@ -1,0 +1,29 @@
+.category {
+    text-align: left;
+    display: grid;
+    grid-template-areas:
+    "logo title"
+    "empty links";
+    grid-template-rows: 100px 1fr;
+    grid-template-columns: 100px 1fr;
+    background-color: rgb(57, 103, 149);
+    color: white;
+}
+
+.category-logo {
+    grid-area: logo
+}
+
+.category-title {
+    grid-area: title
+}
+
+.category-subcategory {
+    grid-area: links
+}
+
+.category-logo img {
+    padding: 20px;
+    max-width: 50px;
+    max-height: 50px;
+}
