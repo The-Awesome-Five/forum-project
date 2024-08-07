@@ -1,5 +1,6 @@
 import * as Firebase from "./auth.service.js";
-import { auth, createUserWithEmailAndPassword } from '../firebase/config.js';
+import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '../firebase/config.js';
+import { signOut } from "firebase/auth";
 
 export const registerUser = async (email, password) => {
     try {
@@ -10,10 +11,10 @@ export const registerUser = async (email, password) => {
     }
   };
 
-export const loginUser = (user) => {
-    return Firebase.loginUser(user);
-}
+  export const loginUser = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
-export const logoutUser = (user) => {
-    return Firebase.logoutUser(user);
-}
+  export const logoutUser = () => {
+    return signOut(auth);
+  };
