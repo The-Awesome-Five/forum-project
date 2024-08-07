@@ -1,12 +1,7 @@
 div > .headerbar {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: rgb(57, 103, 149);
-    border-radius: 10px;
-    margin-bottom: 20px;
     margin-top: 20px;
 }
+
 .logo > img{
     height: 55px;
 }
@@ -15,6 +10,7 @@ div > .headerbar {
     display: flex;
     align-items: center;
     margin-right: auto;
+     cursor: pointer;
 }
 
 .logo:hover {
@@ -42,16 +38,87 @@ div > .headerbar {
 .profile-icon {
     margin-left: 500px;
     font-size: 20px;
+    cursor: pointer;
 }
 
-.profile-icon > a > img {
+.profile-icon > img {
     height: 30px;
 
 }
 
 .profile-icon > a > img:hover {
     height: 30px;
-    transform: scale(1.04);
+   
 }
+
+.dropdown {
+    position: relative;
+  }
+  
+  .dropdown-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + .25rem);
+    background-color: white;
+    padding: .75rem;
+    border-radius: .25rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .1);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-10px);
+    transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+    text-align: left;
+  }
+  
+  .dropdown-menu.show {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+  
+  .dropdown-menu a {
+    display: block;
+    padding: 0.5rem 0;
+    color: #333;
+    text-decoration: none;
+    transition: background-color 150ms ease-in-out;
+  }
+  
+  .dropdown-menu a:hover {
+    background-color: #f0f0f0;
+  }
+
+  .header-wrapper {
+    position: relative;
+    height: 270px; 
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .headerbar {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: rgb(57, 103, 149); 
+    border-radius: 10px;
+    margin-bottom: 20px;
+    z-index: 2; 
+    position: relative;
+    width: 1;
+  }
+
+  .banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px; 
+    background-size: cover;
+    background-position: center;
+    z-index: 1; 
+    
+  }
+
 
   
