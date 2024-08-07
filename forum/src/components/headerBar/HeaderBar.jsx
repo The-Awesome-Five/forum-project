@@ -1,7 +1,8 @@
 import React from "react";
-import './headerBar.css'
+import './HeaderBar.css'
+import {Link} from "react-router-dom";
 
-const headerBar = () => {
+const HeaderBar = () => {
     return (
         <div className="headerbar">
 
@@ -25,4 +26,4 @@ const headerBar = () => {
     )
 }
 
-export default headerBar;
+export default HeaderBar;
