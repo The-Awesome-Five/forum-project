@@ -14,6 +14,7 @@ const HeaderBar = () => {
                  <Link to="/latest">LASTEST</Link>
                  <Link to="/top">TOP</Link>
                  <Link to="/about">ABOUT</Link>
+                 <Link to='/register'> REGISTER</Link>
             </div>
 
             <div className="profile-icon">
