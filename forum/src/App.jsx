@@ -59,11 +59,9 @@ function App() {
             <HeaderBar/>
             <Home/>
             <div>
-      {user ? (
+      {user &&
         <button onClick={() => logout()}>Logout</button>
-      ) : (
-        <Navigate to="/login" replace />
-      )}
+      }
       
       <Routes>
         <Route path="/" element={<Home />} />
