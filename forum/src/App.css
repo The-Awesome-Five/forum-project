@@ -1,7 +1,5 @@
-body {
-  background-color: rgb(23, 29, 37);
-  margin: 0;
-  height: 100vh;
+html[lang="en"]{
+  background-color: rgb(23,29,37) ;
 }
 
 #root {

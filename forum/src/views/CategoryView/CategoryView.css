@@ -1,4 +1,10 @@
 .category-view {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
 }
+
+.category {
+    border-radius: 20px;
+}
+

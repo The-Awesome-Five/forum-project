@@ -1,9 +1,11 @@
-.headerbar {
+div > .headerbar {
     display: flex;
     align-items: center;
     padding: 10px 20px;
     background-color: rgb(57, 103, 149);
     border-radius: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 .logo > img{
     height: 55px;
