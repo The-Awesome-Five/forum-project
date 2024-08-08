@@ -35,7 +35,9 @@
 }
 
 .category-subcategory {
-    grid-area: links
+    grid-area: links;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .category-logo img {
