@@ -14,7 +14,7 @@ import {auth} from './firebase/config.js';
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
-
+import { Subcategory } from './components/Subcategory/Subcategory.jsx';
 
 function App() {
     const [elements, setElements] = useState({});
@@ -63,19 +63,23 @@ function App() {
                 <div>
                     <Routes>
                         <Route path="/" element={<Home />} />
+                        <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
                         {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
                         <Route path="/profile" element={<ProfileView />} />
 
-                        {/* <Route path="/latest" element={<Latest />} />
-      <Route path="/top" element={<Top />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/profile" element={<Profile />} /> */}
-                    </Routes>
-                </div>
-            </AppContext.Provider>
-        </>
+                    {/* Uncomment and add your other routes as necessary */}
+                    {/* 
+                    <Route path="/latest" element={<Latest />} />
+                    <Route path="/top" element={<Top />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/profile" element={<Profile />} /> 
+                    */}
+                </Routes>
+            </div>
+        </AppContext.Provider>
+    </>
 
         // <>
         //   <h1>Testing</h1>

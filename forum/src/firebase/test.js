@@ -110,24 +110,24 @@ console.log( await getElement(result))*!/*/
 
 
 try {
-    const category = {
-        name: "PC Gaming",
-        imgUrl: '/img/category-logo-test.png',
-        description: 'This is PC Gaming category'
-    }
-    const category2 = {
-        name: "Console Gaming",
-        imgUrl: '/img/category-logo-test.png',
-        description: 'This is Console Gaming category'
-    }
-    const categoryid= await createCategory(category);
-    const categoryid2= await createCategory(category2);
-    const subcategoriesId= await createSubcategory('PC Hardware', categoryid, '/img/subcategory-logo.png');
-    const subcategoriesId1= await createSubcategory('PC Software', categoryid, '/img/subcategory-logo.png');
-    const subcategoriesId2= await createSubcategory('PC News', categoryid, '/img/subcategory-logo.png');
-    const subcategoriesId3= await createSubcategory('Console Hardware', categoryid2, '/img/subcategory-logo.png');
-    const subcategoriesId4= await createSubcategory('Console Software', categoryid2, '/img/subcategory-logo.png');
-    const subcategoriesId5= await createSubcategory('Console News', categoryid2, '/img/subcategory-logo.png');
+    // const category = {
+    //     name: "PC Gaming",
+    //     imgUrl: '/img/category-logo-test.png',
+    //     description: 'This is PC Gaming category'
+    // }
+    // const category2 = {
+    //     name: "Console Gaming",
+    //     imgUrl: '/img/category-logo-test.png',
+    //     description: 'This is Console Gaming category'
+    // }
+    // const categoryid= await createCategory(category);
+    // const categoryid2= await createCategory(category2);
+    // const subcategoriesId= await createSubcategory('PC Hardware', categoryid, '/img/subcategory-logo.png');
+    // const subcategoriesId1= await createSubcategory('PC Software', categoryid, '/img/subcategory-logo.png');
+    // const subcategoriesId2= await createSubcategory('PC News', categoryid, '/img/subcategory-logo.png');
+    // const subcategoriesId3= await createSubcategory('Console Hardware', categoryid2, '/img/subcategory-logo.png');
+    // const subcategoriesId4= await createSubcategory('Console Software', categoryid2, '/img/subcategory-logo.png');
+    // const subcategoriesId5= await createSubcategory('Console News', categoryid2, '/img/subcategory-logo.png');
     // const info=  {
     //     "id": "post1",
     //     'createdOn': new Date().toLocaleTimeString(),
@@ -171,3 +171,19 @@ catch(e){
     console.log(e);
 
 }
+
+ const post={
+        isLocked:false,
+        isHidden:false,
+        'Title': 'What is the best Gaming Mouse?',
+        'Content': 'Hey guys, I am not sure what the best gaming mouse is... any advice?',
+        'createdBy' : {
+            'ID' : 'WTr47SzR3jfCDlnKx6YGbksqO5L2',
+            'username':'VladTheVolgarian',
+        },
+        'CreatedOn': new Date().toDateString(),
+        Likes: [],
+        ReportsID: [],
+        'LatestReplyDate': null,
+}
+createPost(post, '-O3llvnnzZ05F2Ojznvw')

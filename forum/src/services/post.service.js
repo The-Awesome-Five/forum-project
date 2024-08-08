@@ -4,7 +4,7 @@ export const createPost = async (postInfo, subcategoriesId) => {
     const path = createPath('Posts',subcategoriesId );
     const postId = await createElement(postInfo, path);
 
-    const pathForUserUpdate = createPath('User', postInfo.createdBy.username);
+    const pathForUserUpdate = createPath('Users', postInfo.createdBy.ID, 'Posts');
     console.log('this is post: ' + postId)
     await createElement(postId, pathForUserUpdate);
 
@@ -72,4 +72,8 @@ export const removePostsByCategoryId = async (subcategory_id) => {
     }
 };
 
+
+export const getPostsBySubcategoryId = async (subcategoryId) => {
+    return getElement(`Posts/${subcategoryId}`)
+};
 //missing hiding and getting post funcs
