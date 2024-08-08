@@ -3,7 +3,7 @@
     display: grid;
     grid-template-areas:
     "logo title"
-    "empty links";
+    "logo links";
     grid-template-rows: 100px 1fr;
     grid-template-columns: 100px 1fr;
     background-color: rgb(57, 103, 149);
@@ -15,15 +15,23 @@
 }
 
 .category-logo {
-    grid-area: logo
+    grid-area: logo;
+    display: flex;
+    margin: auto;
 }
 
 .category-title {
-    grid-area: title
+    font-size: 1.1rem;
+    grid-area: title;
+}
+
+.category-title h2 {
+    margin:0;
 }
 
 .category-title p {
     color: lightblue;
+    margin: 0;
 }
 
 .category-subcategory {

@@ -9,7 +9,7 @@ export const Category = () => {
                 <img src="/img/category-logo-test.png" alt="logo"/>
             </div>
             <div className='category-title'>
-                <h3>PC Gaming</h3>
+                <h2>PC Gaming</h2>
                 <p>For all of your PC Gaming stuff</p>
             </div>
             <div className='category-subcategory'>
