@@ -13,7 +13,7 @@ import {getUserDataByUID} from './services/user.service.js';
 import {auth} from './firebase/config.js';
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
-
+import { Subcategory } from './components/Subcategory/Subcategory.jsx';
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -56,23 +56,27 @@ function App() {
     return (
 
         <>
-            <AppContext.Provider value={{...appState, setAppState}}>
-                <HeaderBar logout={logout}/>
-                <div>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        {!user && <Route path="/register" element={<Register/>}/>}
-                        {!user && <Route path="/login" element={<Login/>}/>}
-                        {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
+        <AppContext.Provider value={{...appState, setAppState}}>
+            <HeaderBar logout={logout}/>
+            <div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
+                    {!user && <Route path="/register" element={<Register />} />}
+                    {!user && <Route path="/login" element={<Login />} />}
+                    {user && <Route path="/login" element={<Navigate to="/" replace />} />}
 
-                        {/* <Route path="/latest" element={<Latest />} />
-      <Route path="/top" element={<Top />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/profile" element={<Profile />} /> */}
-                    </Routes>
-                </div>
-            </AppContext.Provider>
-        </>
+                    {/* Uncomment and add your other routes as necessary */}
+                    {/* 
+                    <Route path="/latest" element={<Latest />} />
+                    <Route path="/top" element={<Top />} />
+                    <Route path="/about" element={<About />} />
+                    <Route path="/profile" element={<Profile />} /> 
+                    */}
+                </Routes>
+            </div>
+        </AppContext.Provider>
+    </>
 
         // <>
         //   <h1>Testing</h1>
