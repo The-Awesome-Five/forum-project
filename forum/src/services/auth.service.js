@@ -1,6 +1,5 @@
-import * as Firebase from "./auth.service.js";
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from '../firebase/config.js';
-import { signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { auth } from '../firebase/config.js';
 
 export const registerUser = async (email, password) => {
     try {

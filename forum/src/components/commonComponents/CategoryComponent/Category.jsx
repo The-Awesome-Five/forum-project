@@ -10,12 +10,13 @@ export const Category = () => {
             </div>
             <div className='category-title'>
                 <h3>PC Gaming</h3>
-                <h3>For all of your PC Gaming stuff</h3>
+                <p>For all of your PC Gaming stuff</p>
             </div>
             <div className='category-subcategory'>
-                <Link to='/category/pc/hardware'> PC Hardware </Link>
-                <Link to='/category/pc/games'> PC Games </Link>
-                <Link to='/category/pc/news'> PC News </Link>
+                <Link to='/category/pc/hardware'> <img src="/img/subcategory-logo.png" alt="logo"/> PC Hardware
+                </Link>
+                <Link to='/category/pc/games'>  <img src="/img/subcategory-logo.png" alt="logo"/> PC Games </Link>
+                <Link to='/category/pc/news'> <img src="/img/subcategory-logo.png" alt="logo"/> PC News </Link>
             </div>
         </div>
     )

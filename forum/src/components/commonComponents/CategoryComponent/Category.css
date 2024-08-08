@@ -8,6 +8,10 @@
     grid-template-columns: 100px 1fr;
     background-color: rgb(57, 103, 149);
     color: white;
+    border: 2px solid white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 20px;
 }
 
 .category-logo {
@@ -18,6 +22,10 @@
     grid-area: title
 }
 
+.category-title p {
+    color: lightblue;
+}
+
 .category-subcategory {
     grid-area: links
 }
@@ -26,4 +34,13 @@
     padding: 20px;
     max-width: 50px;
     max-height: 50px;
+}
+
+.category-subcategory img {
+    max-width: 20px;
+    max-height: 20px;
+}
+
+.category-subcategory a {
+    color: white
 }
