@@ -4,23 +4,24 @@ import {editCategory} from "./category.service.js";
 
 export const getSubcategoriesByCategoryId = async (category_id) => {
 
-    return getElement(`Category/${category_id}/subcategory_ids`)
+    return getElement(`Subcategory/${category_id}`)
 
 }
 
-export const createSubcategory = async (name, category_id) => {
+export const createSubcategory = async (name, category_id, imgUrl) => {
 
     const subcategory = {
         name,
         isLocked: false,
-        isHidden: false
+        isHidden: false,
+        imgUrl
 
     }
 
     const id = await createElement(subcategory, `Subcategory/${category_id}`);
 
     console.log('Create Subcategory')
-    await editCategory(name, category_id, `subcategory_ids/${id}`)
+    await editCategory({id, name}, category_id, `subcategory_ids/${id}`)
 
     return id;
 }

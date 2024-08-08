@@ -1,24 +1,31 @@
 import {Link} from "react-router-dom";
 import './Category.css'
+import {useEffect, useState} from "react";
+import {getSubcategoriesByCategoryId} from "../../../services/subcategory.service.js";
 
-export const Category = () => {
+export const Category = ({category}) => {
+
+    const [subcategories, setSubcategories ] = useState([]);
+
+    useEffect(() => {
+        getSubcategoriesByCategoryId(category.id)
+            .then(data => setSubcategories(Object.values(data)))
+            .catch(e => alert(e))
+    }, []);
 
     return (
         <div className='category'>
             <div className="category-logo">
-                <img src="/img/category-logo-test.png" alt="logo"/>
+                <img src={category.imgUrl} alt="logo"/>
             </div>
             <div className='category-title'>
-                <h2>PC Gaming</h2>
-                <p>For all of your PC Gaming stuff</p>
+                <h2>{category.name}</h2>
+                <p>{category.description ? category.description : ''}</p>
             </div>
             <div className='category-subcategory'>
-                <Link to='/category/pc/hardware'> <img src="/img/subcategory-logo.png" alt="logo"/> PC Hardware</Link>
-                <Link to='/category/pc/games'> <img src="/img/subcategory-logo.png" alt="logo"/> PC Games </Link>
-                <Link to='/category/pc/news'> <img src="/img/subcategory-logo.png" alt="logo"/> PC News </Link>
-                <Link to='/category/pc/hardware'> <img src="/img/subcategory-logo.png" alt="logo"/> PC Hardware</Link>
-                <Link to='/category/pc/games'> <img src="/img/subcategory-logo.png" alt="logo"/> PC Games </Link>
-                <Link to='/category/pc/news'> <img src="/img/subcategory-logo.png" alt="logo"/> PC News </Link>
+                {subcategories && subcategories.map(subcategory => <Link key={subcategory.id} to={`/category/${category.id}/${subcategory.id}`}>
+                        <img src={subcategory.imgUrl} alt="logo"/> {subcategory.name}
+                </Link>)}
             </div>
         </div>
     )

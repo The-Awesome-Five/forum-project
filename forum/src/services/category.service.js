@@ -1,14 +1,23 @@
-import {createElement, updateElement, updateField} from "../firebase/firebase-funcs.js"
+import {createElement, getElement, updateElement, updateField} from "../firebase/firebase-funcs.js"
 import { createPath } from "../firebase/firebase-funcs.js";
 import {hideSubcategories} from "./subcategory.service.js";
 import {update} from "firebase/database";
 
-export const createCategory = async (name) => {
+export const getAllCategories = async () => {
+
+    const categories = await getElement('Category');
+
+    return Object.values(categories);
+}
+
+export const createCategory = async ({name, imgUrl, description}) => {
 
     const data = {
         name,
+        description,
         subcategories_ids: {},
-        isHidden: false
+        isHidden: false,
+        imgUrl
     }
 
     return createElement(data,'Category');
