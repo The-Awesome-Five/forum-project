@@ -33,6 +33,7 @@ Categories: {
     id: {
         name: string
         isHidden: False;
+        imgURL: string
     },
     ...
 }
@@ -44,6 +45,7 @@ Subcategories: {
                 isLocked:false
                 isHidden:false;
                 Name of the Subcategory: String,
+                imgURL: string
         
         },
             id: {
