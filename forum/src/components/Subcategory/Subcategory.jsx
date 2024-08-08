@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import {getPostsBySubcategoryId} from "../../services/post.service";
-
+import './Subcategory.css'
 
 export const Subcategory = () => {
     const { subcategoryId } = useParams();
@@ -40,6 +40,12 @@ export const Subcategory = () => {
                     posts.map(post => (
                         <div key={post.id} className='post-item'>
                             <Link to={`/post/${post.id}`}>{post.Title}</Link>
+                            <div className='post-details'>
+                                <span className='post-author'>{post.createdBy.username}</span>
+                                <span className='post-comments'>{post.Replies ? post.Replies : 0} replies</span>
+                                <span className='post-views'>{post.Likes ? post.Likes : 0} likes</span>
+                               
+                </div>
                         </div>
                     ))
                 ) : (
