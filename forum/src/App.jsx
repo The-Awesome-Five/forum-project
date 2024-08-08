@@ -13,7 +13,10 @@ import {getUserDataByUID} from './services/user.service.js';
 import {auth} from './firebase/config.js';
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
+import ProfileView from './views/ProfileView/Profile.jsx';
+import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
+
 import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
 function App() {
     const [elements, setElements] = useState({});
@@ -57,17 +60,19 @@ function App() {
     return (
 
         <>
-        <AppContext.Provider value={{...appState, setAppState}}>
-            <HeaderBar logout={logout}/>
-            <div>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
-                    <Route path="/create-post/:subcategoryId" element={<CreatePost />} />
+            <AppContext.Provider value={{...appState, setAppState}}>
+                <HeaderBar logout={logout}/>
+                <div>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
+                        <Route path="/create-post/:subcategoryId" element={<CreatePost />} />
 
-                    {!user && <Route path="/register" element={<Register />} />}
-                    {!user && <Route path="/login" element={<Login />} />}
-                    {user && <Route path="/login" element={<Navigate to="/" replace />} />}
+                    {!user && <Route path="/register" element={<Register/>}/>}
+                        {!user && <Route path="/login" element={<Login/>}/>}
+                        {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
+                        <Route path="/profile" element={<ProfileView />} />
+                        <Route path="/edit-profile" element={<EditProfileView />} />
 
                     {/* Uncomment and add your other routes as necessary */}
                     {/* 
