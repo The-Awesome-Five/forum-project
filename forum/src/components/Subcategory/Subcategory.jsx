@@ -1,18 +1,20 @@
 import {useEffect, useState} from "react";
-import {useParams, Link} from "react-router-dom";
+import {useParams, Link, useNavigate} from "react-router-dom";
 import {getPostsBySubcategoryId} from "../../services/post.service";
 import './Subcategory.css'
+import { CreatePost } from "../commonComponents/CreateForm/CreateForm";
 
 export const Subcategory = () => {
     const { subcategoryId } = useParams();
     const [posts, setPosts] = useState([]);
-   
+    const navigate = useNavigate();
     const [error, setError] = useState(null); 
 
     useEffect(() => {
       
         getPostsBySubcategoryId(subcategoryId)
             .then(data => {
+                console.log(data);
                 if (data === null || Object.keys(data).length === 0) {
                     setPosts([]); 
                 } else {
@@ -26,7 +28,9 @@ export const Subcategory = () => {
               
             });
     }, [subcategoryId]);
-
+    const handleCreatePost = () => {
+        navigate(`/create-post/${subcategoryId}`);
+      };
 
     if (error) {
         return <div>{error}</div>; 
@@ -34,6 +38,8 @@ export const Subcategory = () => {
 
     return (
         <div className='subcategory'>
+            <button onClick={handleCreatePost}>Make a Post</button>
+
             <h2>Posts in this Subcategory</h2>
             <div className='post-list'>
                 {posts.length > 0 ? (

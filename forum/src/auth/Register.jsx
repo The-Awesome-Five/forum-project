@@ -72,30 +72,35 @@ export default function Register() {
           value={user.username}
           onChange={updateUser('username')}
         />
+        <br/>
         <input
           type="text"
           placeholder="First Name"
           value={user.firstName}
           onChange={updateUser('firstName')}
         />
+         <br/>
         <input
           type="text"
           placeholder="Last Name"
           value={user.lastName}
           onChange={updateUser('lastName')}
         />
+         <br/>
         <input
           type="email"
           placeholder="Email"
           value={user.email}
           onChange={updateUser('email')}
         />
+         <br/>
         <input
           type="password"
           placeholder="Password"
           value={user.password}
           onChange={updateUser('password')}
         />
+         <br/>
         <button onClick={register}>Register</button>
       </div>
     );

@@ -14,6 +14,7 @@ import {auth} from './firebase/config.js';
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
+import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -62,6 +63,8 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
+                    <Route path="/create-post/:subcategoryId" element={<CreatePost />} />
+
                     {!user && <Route path="/register" element={<Register />} />}
                     {!user && <Route path="/login" element={<Login />} />}
                     {user && <Route path="/login" element={<Navigate to="/" replace />} />}

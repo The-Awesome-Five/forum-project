@@ -172,18 +172,18 @@ catch(e){
 
 }
 
- const post={
-        isLocked:false,
-        isHidden:false,
-        'Title': 'What is the best Gaming Mouse?',
-        'Content': 'Hey guys, I am not sure what the best gaming mouse is... any advice?',
-        'createdBy' : {
-            'ID' : 'WTr47SzR3jfCDlnKx6YGbksqO5L2',
-            'username':'VladTheVolgarian',
-        },
-        'CreatedOn': new Date().toDateString(),
-        Likes: [],
-        ReportsID: [],
-        'LatestReplyDate': null,
-}
-createPost(post, '-O3llvnnzZ05F2Ojznvw')
+//  const post={
+//         isLocked:false,
+//         isHidden:false,
+//         'Title': 'What is the best Gaming Mouse?',
+//         'Content': 'Hey guys, I am not sure what the best gaming mouse is... any advice?',
+//         'createdBy' : {
+//             'ID' : 'WTr47SzR3jfCDlnKx6YGbksqO5L2',
+//             'username':'VladTheVolgarian',
+//         },
+//         'CreatedOn': new Date().toDateString(),
+//         Likes: [],
+//         ReportsID: [],
+//         'LatestReplyDate': null,
+// }
+// createPost(post, '-O3llvnnzZ05F2Ojznvw')
