@@ -13,6 +13,8 @@ import {getUserDataByUID} from './services/user.service.js';
 import {auth} from './firebase/config.js';
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
+import ProfileView from './views/ProfileView/Profile.jsx';
+
 
 function App() {
     const [elements, setElements] = useState({});
@@ -64,6 +66,7 @@ function App() {
                         {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
+                        <Route path="/profile" element={<ProfileView />} />
 
                         {/* <Route path="/latest" element={<Latest />} />
       <Route path="/top" element={<Top />} />
