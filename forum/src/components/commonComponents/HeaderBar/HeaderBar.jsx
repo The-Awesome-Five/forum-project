@@ -27,7 +27,7 @@ const HeaderBar = ({logout}) => {
                 </div>
 
                 <div className="nav-links">
-                    <Link to="/latest">LATEST</Link>
+                    <Link to="/latest">LASTEST</Link>
                     <Link to="/top">TOP</Link>
                     <Link to="/about">ABOUT</Link>
                 </div>
@@ -37,17 +37,23 @@ const HeaderBar = ({logout}) => {
                         <img src="/img/profile-icon.png" alt="profile icon" />
                     </div>
                     <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-                        {!user &&
-                            <div className="reg-btn">
-                            <Link to="/register">REGISTER ▶️</Link>
-                        </div>}
-                        {!user &&
-                        <div className="log-btn">
-                            <Link to="/login">LOGIN       ▶️</Link>
-                        </div> }
-                        {user &&
-                            <button onClick={() => logout()}>Logout</button>
-                        }
+                    {!user ? (
+                            <>
+                                <div className="reg-btn">
+                                    <Link to="/register">REGISTER ▶️</Link>
+                                </div>
+                                <div className="log-btn">
+                                    <Link to="/login">LOGIN ▶️</Link>
+                                </div>
+                            </>
+                        ) : (
+                            <>
+                                <div className="profile-btn">
+                                    <Link to="/profile">PROFILE ▶️</Link>
+                                </div>
+                                <button onClick={() => logout()}>LOGOUT ▶️</button>
+                            </>
+                        )}
                     </div>
                 </div>
             </div>

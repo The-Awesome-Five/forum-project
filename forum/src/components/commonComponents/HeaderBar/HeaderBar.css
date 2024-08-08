@@ -31,7 +31,7 @@ div > .headerbar {
 }
 
 .nav-links a:hover {
-    color: aqua;
+    color: rgb(211, 211, 211);
     transform: scale(1.04);
 }
 
@@ -40,15 +40,13 @@ div > .headerbar {
     font-size: 20px;
     cursor: pointer;
 }
+.profile-icon:hover {
+  transform: scale(1.1);
+}
 
 .profile-icon > img {
     height: 30px;
 
-}
-
-.profile-icon > a > img:hover {
-    height: 30px;
-   
 }
 
 .dropdown {
@@ -76,17 +74,17 @@ div > .headerbar {
     transform: translateY(0);
   }
   
-  .dropdown-menu a {
+  /* .dropdown-menu a {
     display: block;
     padding: 0.5rem 0;
     color: #333;
     text-decoration: none;
     transition: background-color 150ms ease-in-out;
   }
-  
-  .dropdown-menu a:hover {
+   */
+  /* .dropdown-menu a:hover {
     background-color: #f0f0f0;
-  }
+  } */
 
   .header-wrapper {
     position: relative;
@@ -120,5 +118,24 @@ div > .headerbar {
     
   }
 
+  .dropdown-menu > div {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: black;
+  }
+  .dropdown-menu > div:hover {
+    border-color: #646cff;
+  }
+  .dropdown-menu > div:focus,
+  .dropdown-menu > div:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
 
   
