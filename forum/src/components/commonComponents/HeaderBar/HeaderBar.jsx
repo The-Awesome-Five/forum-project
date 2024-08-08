@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import './HeaderBar.css';
 import { Link, useNavigate } from "react-router-dom";
+import {useAuthState} from "react-firebase-hooks/auth";
+import {auth} from "../../../firebase/config.js";
 
-const HeaderBar = () => {
+const HeaderBar = ({logout}) => {
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -14,9 +16,11 @@ const HeaderBar = () => {
         setDropdownOpen(!dropdownOpen);
     };
 
+    const [user] = useAuthState(auth);
+
     return (
         <div className="header-wrapper">
-            
+
             <div className="headerbar">
                 <div className="logo" onClick={handleLogoClick}>
                     <img src="/img/GameHub-logo.png" alt="logo"/>
@@ -33,12 +37,17 @@ const HeaderBar = () => {
                         <img src="/img/profile-icon.png" alt="profile icon" />
                     </div>
                     <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-                        <div className="reg-btn">
+                        {!user &&
+                            <div className="reg-btn">
                             <Link to="/register">REGISTER ▶️</Link>
-                        </div>
+                        </div>}
+                        {!user &&
                         <div className="log-btn">
                             <Link to="/login">LOGIN       ▶️</Link>
-                        </div>
+                        </div> }
+                        {user &&
+                            <button onClick={() => logout()}>Logout</button>
+                        }
                     </div>
                 </div>
             </div>
