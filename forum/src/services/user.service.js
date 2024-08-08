@@ -1,5 +1,9 @@
 import { get, set, ref, query, equalTo, orderByChild } from 'firebase/database';
 import { db } from '../firebase/config';
+import { createPath, updateElement } from '../firebase/firebase-funcs';
+
+
+
 
 // Fetch user by ID
 export const getUserByID = async (id) => {
@@ -24,3 +28,14 @@ export const getUserDataByEmail = async (email) => {
   const snapshot = await get(query(ref(db, 'Users'), orderByChild('email'), equalTo(email)));
   return snapshot.val();
 };
+
+export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) => {
+  const info = {
+    subID: subcategory_id,
+  }
+  console.log(info);
+  console.log(userID);
+  console.log(postId);
+  const path = createPath('Users', userID, 'Posts', postId);
+  await updateElement(info, path);
+}

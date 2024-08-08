@@ -3,6 +3,8 @@ import { AppContext } from "../../../../state/app.context";
 import { useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../../../services/post.service";
 import { getUserByID } from "../../../services/user.service";
+import { updateUsersPostWithSubCat } from "../../../services/user.service";
+
 export const CreatePost = () =>  {
     const { userData } = useContext(AppContext); 
     const { subcategoryId } = useParams();
@@ -46,7 +48,8 @@ const [post, setPost] = useState({
         post.CreatedOn=new Date().toString();
         post.createdBy.ID= userData.uid
         post.createdBy.username= userData.username
-        await createPost(post, subcategoryId);
+        const postID= await createPost(post, subcategoryId);
+
         navigate('/');
     }
     catch(e){

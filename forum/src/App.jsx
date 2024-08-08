@@ -68,11 +68,11 @@ function App() {
                         <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
                         <Route path="/create-post/:subcategoryId" element={<CreatePost />} />
 
-                    {!user && <Route path="/register" element={<Register/>}/>}
+                        {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
                         <Route path="/profile" element={<ProfileView />} />
-                        <Route path="/edit-profile" element={<EditProfileView />} />
+                        <Route path="/edit-profile" element={<EditProfileView subcategoryId="exampleSubcategoryId" />} />
 
                     {/* Uncomment and add your other routes as necessary */}
                     {/* 

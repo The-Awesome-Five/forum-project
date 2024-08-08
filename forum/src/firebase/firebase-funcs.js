@@ -16,7 +16,7 @@ export const createElement = async (data, pathForCreating) => {
 
         }
         catch(e){
-            return e;
+            console.log(e);
         }
 
 }
@@ -63,6 +63,7 @@ export const createPath = (...elements) => {
 export const getElement =async (pathing) =>{
     try {
         const snapshot = await get(ref(db, `${pathing}`));
+        console.log(snapshot);
         return snapshot.val();
     } catch (e) {
         return 'Error occurred: ' + e;
@@ -83,6 +84,34 @@ export const DONOTTOUCHTHISFUNCTION = async () =>{
 
     await remove(ref(db));
 }
+
+export const getUserPosts = async (userId) => {
+    try {
+        const userPostsPath = createPath('Users', userId, 'Posts');
+        const postIds = await getElement(userPostsPath);
+        console.log(postIds);
+        if (!postIds) {
+            return [];
+        }
+
+        const postPromises = Object.values(postIds).map(async (postId) => {
+            console.log('this is subId ' + postId.subId);
+            console.log('this is iD ' + postId.id);
+            const postPath = createPath('Posts', postId.subId,postId.id);
+            console.log('path ' + postPath);
+            const post = await getElement(postPath);
+            console.log('this is a post:');
+            console.log(post);
+            return post ;
+        });
+        
+        
+        return  Promise.all( postPromises);
+    } catch (e) {
+        console.error('Failed to get user posts', e);
+        return [];
+    }
+};
 
 /*export const registerUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -154,4 +183,4 @@ export const getUserData = async (uid) => {
     return snapshot.val();
 };*/
 
-//DONOTTOUCHTHISFUNCTION();
+// DONOTTOUCHTHISFUNCTION();

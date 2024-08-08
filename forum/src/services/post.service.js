@@ -1,12 +1,14 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
+import { ref, get, query, orderByChild, equalTo } from "firebase/database";
+import { db } from "../firebase/config"; 
 
 export const createPost = async (postInfo, subcategoriesId) => {
     const path = createPath('Posts',subcategoriesId );
     const postId = await createElement(postInfo, path);
 
-    const pathForUserUpdate = createPath('Users', postInfo.createdBy.ID, 'Posts');
+    const pathForUserUpdate = createPath('Users', postInfo.createdBy.ID, 'Posts', postId);
     console.log('this is post: ' + postId)
-    await createElement(postId, pathForUserUpdate);
+    await updateElement({id: postId, subId: subcategoriesId}, pathForUserUpdate);
 
     return postId;
 };
@@ -77,3 +79,32 @@ export const getPostsBySubcategoryId = async (subcategoryId) => {
     return getElement(`Posts/${subcategoryId}`)
 };
 //missing hiding and getting post funcs
+
+
+export const getAllPosts = async () => {
+    try {
+        const subcategoriesSnapshot = await get(ref(db, `Posts`));
+        if (!subcategoriesSnapshot.exists()) {
+            console.log('Няма намерени подкатегории.');
+            return {};
+        }
+
+        const allPosts = {};
+        const subcategories = subcategoriesSnapshot.val();
+        
+        for (const subcategoryId in subcategories) {
+            const postsSnapshot = await get(ref(db, `Posts/${subcategoryId}`));
+            if (postsSnapshot.exists()) {
+                const posts = postsSnapshot.val();
+                for (const postId in posts) {
+                    allPosts[postId] = posts[postId];
+                }
+            }
+        }
+
+        return allPosts;
+    } catch (e) {
+        console.error('Неуспешно получаване на всички постове', e);
+        return e.message;
+    }
+};
