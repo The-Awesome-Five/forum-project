@@ -14,6 +14,7 @@ import {auth} from './firebase/config.js';
 import {useLocation, useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
+import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
                         <Route path="/profile" element={<ProfileView />} />
+                        <Route path="/edit-profile" element={<EditProfileView />} />
 
                     {/* Uncomment and add your other routes as necessary */}
                     {/* 
