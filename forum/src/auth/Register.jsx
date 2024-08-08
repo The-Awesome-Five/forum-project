@@ -55,7 +55,7 @@ export default function Register() {
         const credential = await registerUser(email, password);
         console.log('registerUserCalled');
         await createUserID(username, firstName, lastName, credential.user.uid, email);
-        setAppState({ user: credential.user, userData: null });
+        setAppState({ user: credential.user, userData: credential.user.uid });
         navigate('/');
       } catch (error) {
         console.error("Registration error:", error);

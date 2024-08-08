@@ -2,13 +2,14 @@ import { useContext, useState } from "react"
 import { AppContext } from '../../state/app.context';
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/auth.service";
+import { getUserByID } from "../services/user.service";
 
 export default function Login() {
   const [user, setUser] = useState({
     email: '',
     password: '',
   });
-  const { setAppState } = useContext(AppContext);
+  const { userData, setAppState } = useContext(AppContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,10 +28,13 @@ export default function Login() {
 
     try {
       const credentials = await loginUser(user.email, user.password);
+      const userInfo= await getUserByID(credentials.user.uid)
+      console.log(userInfo);
       setAppState({
         user: credentials.user,
-        userData: null,
+        userData: userInfo,
       });
+  
       console.log('Logging in Done!')
       navigate(location.state?.from.pathname ?? '/');
     } catch (error) {

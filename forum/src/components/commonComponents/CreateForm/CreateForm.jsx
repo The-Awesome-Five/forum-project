@@ -4,23 +4,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../../../services/post.service";
 import { getUserByID } from "../../../services/user.service";
 export const CreatePost = () =>  {
-    const { user } = useContext(AppContext); 
+    const { userData } = useContext(AppContext); 
     const { subcategoryId } = useParams();
-
-    const [poster, setPoster] = useState(null); // State to store user data
   
-    useEffect(() => {
-      const fetchUser = async () => {
-        try {
-          const result = await getUserByID(user.uid); // Fetch user data
-          setPoster(result); // Update state with the fetched data
-        } catch (err) {
-          console.log(err);
-        } 
-      };
-  
-      fetchUser(); // Call the async function
-    }, []); 
 const [post, setPost] = useState({
     createdBy: {
         username: '',
@@ -35,7 +21,6 @@ const [post, setPost] = useState({
   });
   
   const navigate = useNavigate();
-  console.log(poster)
   const updatePost = (prop) => (e) => {
      
       setPost((prevPost) => ({
@@ -59,8 +44,8 @@ const [post, setPost] = useState({
 
     try {
         post.CreatedOn=new Date().toString();
-        post.createdBy.ID= poster.uid
-        post.createdBy.username= poster.username
+        post.createdBy.ID= userData.uid
+        post.createdBy.username= userData.username
         await createPost(post, subcategoryId);
         navigate('/');
     }
