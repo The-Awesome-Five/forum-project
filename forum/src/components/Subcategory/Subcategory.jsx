@@ -14,7 +14,6 @@ export const Subcategory = () => {
       
         getPostsBySubcategoryId(subcategoryId)
             .then(data => {
-                console.log(data);
                 if (data === null || Object.keys(data).length === 0) {
                     setPosts([]); 
                 } else {
@@ -45,7 +44,7 @@ export const Subcategory = () => {
                 {posts.length > 0 ? (
                     posts.map(post => (
                         <div key={post.id} className='post-item'>
-                            <Link to={`/post/${post.id}`}>{post.Title}</Link>
+                            <Link to={`${post.id}`}>{post.Title}</Link>
                             <div className='post-details'>
                                 <span className='post-author'>{post.createdBy.username}</span>
                                 <span className='post-comments'>{post.Replies ? post.Replies : 0} replies</span>

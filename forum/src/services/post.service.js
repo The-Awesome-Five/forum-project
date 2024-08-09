@@ -7,7 +7,6 @@ export const createPost = async (postInfo, subcategoriesId) => {
     const postId = await createElement(postInfo, path);
 
     const pathForUserUpdate = createPath('Users', postInfo.createdBy.ID, 'Posts', postId);
-    console.log('this is post: ' + postId)
     await updateElement({id: postId, subId: subcategoriesId}, pathForUserUpdate);
 
     return postId;
@@ -80,6 +79,10 @@ export const getPostsBySubcategoryId = async (subcategoryId) => {
 };
 //missing hiding and getting post funcs
 
+export const getSinglePost= async (subcategoryId, postId) =>{
+    return getElement(`Posts/${subcategoryId}/${postId}`)
+
+}
 
 export const getAllPosts = async () => {
     try {

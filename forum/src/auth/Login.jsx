@@ -29,13 +29,12 @@ export default function Login() {
     try {
       const credentials = await loginUser(user.email, user.password);
       const userInfo= await getUserByID(credentials.user.uid)
-      console.log(userInfo);
+  
       setAppState({
         user: credentials.user,
         userData: userInfo,
       });
   
-      console.log('Logging in Done!')
       navigate(location.state?.from.pathname ?? '/');
     } catch (error) {
       alert(error.message);

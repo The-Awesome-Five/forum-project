@@ -15,7 +15,8 @@ export default function Register() {
     const navigate = useNavigate();
   
     const updateUser = (prop) => (e) => {
-        console.log(`Updating user: ${prop} = ${e.target.value}`);
+       
+  
       setUser((prevUser) => ({
         
         ...prevUser,
@@ -38,7 +39,6 @@ export default function Register() {
         return alert('Last name must be between 4 and 32 characters!');
       }
   
-      console.log("Registering user with:", user);
 
       try {
         const userFromDB = await getUserDataByUID(username);
@@ -51,9 +51,8 @@ export default function Register() {
           return alert(`Email {${email}} is already in use!`);
         }
   
-        console.log('beforeCall');
         const credential = await registerUser(email, password);
-        console.log('registerUserCalled');
+      
         await createUserID(username, firstName, lastName, credential.user.uid, email);
         setAppState({ user: credential.user, userData: credential.user.uid });
         navigate('/');

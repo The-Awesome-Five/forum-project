@@ -18,6 +18,7 @@ import EditProfileView from './components/commonComponents/EditProfileComponent/
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
 
 import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
+import PostDetail from './components/postViewComponents/posts.jsx';
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -67,6 +68,7 @@ function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
                         <Route path="/create-post/:subcategoryId" element={<CreatePost />} />
+                        <Route path="/category/:categoryId/:subcategoryId/:postId" element={<PostDetail />} />
 
                         {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
