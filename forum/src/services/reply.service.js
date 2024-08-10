@@ -8,9 +8,10 @@ export const createReply = async (info, postID, subcategoriesId) => {
     const pathForUpdate=  createPath('Posts', subcategoriesId, postID,)
     console.log(pathForUpdate);
     
-    await updateElement({'updatedOn':info.createdOn }, pathForUpdate);
-    const pathForUserUpdate= createPath('User', info.createdBy.username)
-    await createElement (id, pathForUserUpdate);
+    const test =await updateElement({'updatedOn':info.CreatedOn }, pathForUpdate);
+    console.log(test);
+    const pathForUserUpdate= createPath('Users', info.createdBy.ID, 'Replies', id)
+    await updateElement ({replyId: id, postId: postID}, pathForUserUpdate);
     return id;
 }
 

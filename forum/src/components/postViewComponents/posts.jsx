@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { dislikePost, getSinglePost, likePost } from '../../services/post.service';
 import './posts.css'
 import { AppContext  } from '../../../state/app.context';
-const PostDetail = () => {
+export const PostDetail = () => {
     const { postId } = useParams();
     const { subcategoryId } = useParams();
     const [post, setPost] = useState({});
@@ -68,13 +68,14 @@ const PostDetail = () => {
     
     <div id="post-body">{post.Content}</div>
     <div id="post-footer-separator"></div>
-    {post && post.likedBy && (
+    {post && post.likedBy && (<>
+    <div> Likes: {Object.keys(post.likedBy) ? Object.keys(post.likedBy).length : 0} </div>
     <button onClick={toggleLike}>
         {Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
     </button>
+    </>
 )} 
 </div>
     );
 };
 
-export default PostDetail;
