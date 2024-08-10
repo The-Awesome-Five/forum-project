@@ -31,7 +31,7 @@ export const getUserDataByEmail = async (email) => {
 
 export const updateUserAvatar = async (uid, avatarUrl) => {
   const userRef = ref(db, `Users/${uid}/avatarUrl`);
-  await set(userRef, { avatarUrl }, { merge: true });
+  await set(userRef, avatarUrl);
 };
 
 export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) => {

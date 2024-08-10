@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import {createElement, getElement} from "./firebase/firebase-funcs.js";
 import {Routes, Route} from 'react-router-dom';
-import HeaderBar from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
+import {HeaderBar} from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
 import {Category} from "./components/commonComponents/CategoryComponent/Category.jsx";
 import {Home} from "./views/HomeView/Home.jsx";
 import Register from './auth/Register.jsx';
