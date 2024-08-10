@@ -1,81 +1,79 @@
-
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { dislikePost, getSinglePost, likePost } from '../../services/post.service';
-import './posts.css'
-import { AppContext  } from '../../../state/app.context';
+import './posts.css';
+import { AppContext } from '../../../state/app.context';
+
 export const PostDetail = () => {
-    const { postId } = useParams();
-    const { subcategoryId } = useParams();
-    const [post, setPost] = useState({});
-    const [replies, setReplies] = useState([]);
-    const {userData} = useContext(AppContext)
+    const { postId, subcategoryId } = useParams();
+    const [post, setPost] = useState(null); // Initially set post to null
+    const { userData } = useContext(AppContext);
+
     useEffect(() => {
-        
-        getSinglePost(subcategoryId, postId)
-            .then(data => {
-                
-                console.log(userData.uid)
-                    setPost({
-                        likedBy: data.likedBy ?? {},
-                        ...data}); 
-           
-              
-            })
-            .catch(e => {
-                console.error('Error fetching posts:', e);
-              
-            });
-    }, [subcategoryId, postId]);
+        if (!userData) return; // Wait until userData is available
+
+        const fetchPost = async () => {
+            try {
+                const data = await getSinglePost(subcategoryId, postId);
+                setPost({
+                    likedBy: data.likedBy ?? {},
+                    ...data,
+                });
+            } catch (e) {
+                console.error('Error fetching post:', e);
+            }
+        };
+
+        fetchPost();
+    }, [subcategoryId, postId, userData]);
 
     const toggleLike = async () => {
-        console.log('triggered');
+        if (!userData || !post) return; // Ensure userData and post are available
+
         const isLiked = Object.keys(post.likedBy).includes(userData.uid);
-        console.log(isLiked);
+
         try {
-          if (!isLiked) {
-            console.log('liking')
-            await likePost(userData.uid, postId, subcategoryId);
-            setPost(prevPost => ({
-                ...prevPost,
-                likedBy: {
-                    ...prevPost.likedBy,
-                    [userData.uid]: true
-                }
-            }));
-          } else {
-            console.log('disliking')
-            await dislikePost(userData.uid, postId, subcategoryId);
-            const { [userData.uid]: _, ...newLikedBy } = post.likedBy;
-            setPost(prevPost => ({
-                ...prevPost,
-                likedBy: newLikedBy
-            }));
-          }
+            if (!isLiked) {
+                await likePost(userData.uid, postId, subcategoryId);
+                setPost(prevPost => ({
+                    ...prevPost,
+                    likedBy: {
+                        ...prevPost.likedBy,
+                        [userData.uid]: true,
+                    },
+                }));
+            } else {
+                await dislikePost(userData.uid, postId, subcategoryId);
+                const { [userData.uid]: _, ...newLikedBy } = post.likedBy;
+                setPost(prevPost => ({
+                    ...prevPost,
+                    likedBy: newLikedBy,
+                }));
+            }
         } catch (error) {
-          alert(error.message);
+            console.error('Error updating like status:', error);
+            alert(error.message);
         }
-      };
+    };
+
+    if (!userData || post === null) {
+        return <div>Loading...</div>; // Show loading until post and userData are ready
+    }
 
     return (
-<div id="post-container">
-    {console.log(post)}
-    <div id="post-header">
-        <h1 id="post-title">{post.Title}</h1>
-    </div>
-    
-    <div id="post-separator"></div>
-    
-    <div id="post-body">{post.Content}</div>
-    <div id="post-footer-separator"></div>
-    {post && post.likedBy && (<>
-    <div> Likes: {Object.keys(post.likedBy) ? Object.keys(post.likedBy).length : 0} </div>
-    <button onClick={toggleLike}>
-        {Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
-    </button>
-    </>
-)} 
-</div>
+        <div id="post-container">
+            <div id="post-header">
+                <h1 id="post-title">{post.Title}</h1>
+            </div>
+            <div id="post-separator"></div>
+            <div id="post-body">{post.Content}</div>
+            <div id="post-footer-separator"></div>
+            <>
+                <div>Likes: {Object.keys(post.likedBy).length}</div>
+                <button onClick={toggleLike}>
+                    {Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
+                </button>
+            </>
+        </div>
     );
 };
-

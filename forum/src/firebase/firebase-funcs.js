@@ -63,7 +63,7 @@ export const createPath = (...elements) => {
 export const getElement =async (pathing) =>{
     try {
         const snapshot = await get(ref(db, `${pathing}`));
-        console.log(snapshot);
+     
         return snapshot.val();
     } catch (e) {
         return 'Error occurred: ' + e;

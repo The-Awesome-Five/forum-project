@@ -6,6 +6,7 @@ export const CreateReplyForm = () =>  {
     const { userData } = useContext(AppContext); 
     const { subcategoryId } = useParams();
     const {postId} = useParams();
+    const {categoryId}= useParams();
 const [reply, setReply] = useState({
     createdBy: {
         username: '',
@@ -43,7 +44,7 @@ const [reply, setReply] = useState({
         reply.createdBy.username= userData.username
         const replyID= await createReply(reply,postId, subcategoryId);
 
-        navigate('/');
+        navigate(0);
     }
     catch(e){
         console.log(e);

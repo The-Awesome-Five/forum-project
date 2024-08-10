@@ -47,7 +47,7 @@ export const Subcategory = () => {
                             <Link to={`${post.id}`}>{post.Title}</Link>
                             <div className='post-details'>
                                 <span className='post-author'>{post.createdBy.username}</span>
-                                <span className='post-comments'>{post.Replies ? post.Replies : 0} replies</span>
+                                <span className='post-comments'>{post.Replies ? Object.values(post.Replies).length : 0} replies</span>
                                 <span className='post-views'>{post.likedBy ? Object.values(post.likedBy).length : 0} likes</span>
                                
                 </div>
