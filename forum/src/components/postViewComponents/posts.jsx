@@ -10,8 +10,6 @@ export const PostDetail = () => {
     const { userData } = useContext(AppContext);
 
     useEffect(() => {
-        if (!userData) return; // Wait until userData is available
-
         const fetchPost = async () => {
             try {
                 const data = await getSinglePost(subcategoryId, postId);
@@ -25,10 +23,13 @@ export const PostDetail = () => {
         };
 
         fetchPost();
-    }, [subcategoryId, postId, userData]);
+    }, [subcategoryId, postId]);
 
     const toggleLike = async () => {
-        if (!userData || !post) return; // Ensure userData and post are available
+        if (!userData || !post) {
+            alert("You need to be logged in to like or dislike a post.");
+            return; 
+        }
 
         const isLiked = Object.keys(post.likedBy).includes(userData.uid);
 
@@ -56,8 +57,8 @@ export const PostDetail = () => {
         }
     };
 
-    if (!userData || post === null) {
-        return <div>Loading...</div>; // Show loading until post and userData are ready
+    if (!post) {
+        return <div>Loading...</div>; // Show loading until the post is ready
     }
 
     return (
@@ -70,8 +71,8 @@ export const PostDetail = () => {
             <div id="post-footer-separator"></div>
             <>
                 <div>Likes: {Object.keys(post.likedBy).length}</div>
-                <button onClick={toggleLike}>
-                    {Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
+                <button onClick={toggleLike} disabled={!userData}>
+                    {userData && Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
                 </button>
             </>
         </div>

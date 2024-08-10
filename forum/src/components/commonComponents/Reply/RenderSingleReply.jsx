@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { dislikeReply, likeReply } from "../../../services/reply.service";
 import { AppContext } from "../../../../state/app.context";
 import { useParams } from "react-router-dom";
@@ -12,14 +12,14 @@ export const RenderSingleReply = ({ reply }) => {
     });
     const { postId } = useParams();
 
-    // Ensure the userData is available before rendering the component
-    if (!userData || !userData.uid) {
-        return null; // or return a loading state
-    }
-
     const toggleLike = async () => {
+        if (!userData || !userData.uid) {
+            alert("You need to be logged in to like or dislike a reply.");
+            return;
+        }
+
         const isLiked = Object.keys(replyState.likedBy).includes(userData.uid);
-      
+
         try {
             if (!isLiked) {
                 await likeReply(userData.uid, postId, replyState.id);
@@ -54,8 +54,8 @@ export const RenderSingleReply = ({ reply }) => {
             <div id="reply-footer-separator"></div>
             <div>
                 <div>Likes: {Object.keys(replyState.likedBy).length}</div>
-                <button onClick={toggleLike}>
-                    {Object.keys(replyState.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
+                <button onClick={toggleLike} disabled={!userData}>
+                    {userData && Object.keys(replyState.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
                 </button>
             </div>
         </div>
