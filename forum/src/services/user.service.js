@@ -2,9 +2,6 @@ import { get, set, ref, query, equalTo, orderByChild } from 'firebase/database';
 import { db } from '../firebase/config';
 import { createPath, updateElement } from '../firebase/firebase-funcs';
 
-
-
-
 // Fetch user by ID
 export const getUserByID = async (id) => {
   const snapshot = await get(ref(db, `Users/${id}`));
@@ -12,8 +9,8 @@ export const getUserByID = async (id) => {
 };
 
 // Create a new user record
-export const createUserID = async (username, firstName, lastName, uid, email, avatarUrl) => {
-  const user = { username, firstName, lastName, uid, email, avatarUrl, createdOn: new Date().toString() };
+export const createUserID = async (username, firstName, lastName, uid, email, avatarUrl, role='User') => {
+  const user = { username, firstName, lastName, uid, email, avatarUrl, role, createdOn: new Date().toString() };
   await set(ref(db, `Users/${uid}`), user);
 };
 
@@ -38,9 +35,11 @@ export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) =
   const info = {
     subID: subcategory_id,
   }
-  console.log(info);
-  console.log(userID);
-  console.log(postId);
   const path = createPath('Users', userID, 'Posts', postId);
   await updateElement(info, path);
+}
+
+export const changeUserRole = async (role, userId) => {
+
+  return set(ref(db), `Users/${userId}/role`, role);
 }

@@ -1,0 +1,23 @@
+.admin-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    margin: auto;
+}
+
+.admin-links a {
+    font-size: 28px;
+    border: 1px solid white;
+    margin: 10px;
+    text-decoration: none;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    background-color: rgb(57, 103, 149);
+    border-radius: 5px;
+}
+
+.admin-links a:hover {
+    color: rgb(211, 211, 211);
+    transform: scale(1.04);
+}

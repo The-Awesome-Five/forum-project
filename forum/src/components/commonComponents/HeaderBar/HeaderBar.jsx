@@ -1,15 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, {useContext, useState} from "react";
 import './HeaderBar.css';
 import { Link, useNavigate } from "react-router-dom";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../../firebase/config.js";
-import { getUserByID } from "../../../services/user.service.js";
+import {AppContext} from "../../../../state/app.context.js";
 
-export const HeaderBar = ({ logout }) => {
+const HeaderBar = ({logout}) => {
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const [user] = useAuthState(auth);
-    const [avatarUrl, setAvatarUrl] = useState(null);
 
     const handleLogoClick = () => {
         navigate('/');
@@ -19,24 +17,15 @@ export const HeaderBar = ({ logout }) => {
         setDropdownOpen(!dropdownOpen);
     };
 
-    // Fetch the user's avatar URL when the component mounts or when the user changes
-    useEffect(() => {
-        const fetchUserAvatar = async () => {
-            if (user) {
-                try {
-                    const userData = await getUserByID(user.uid);
-                    setAvatarUrl(userData.avatarUrl || null);
-                } catch (error) {
-                    console.error('Failed to load user avatar:', error);
-                }
-            }
-        };
+    const [user] = useAuthState(auth);
+    const {userData} = useContext(AppContext)
 
-        fetchUserAvatar();
-    }, [user]);
+    console.log('this is user: ')
+    console.log(userData)
 
     return (
         <div className="header-wrapper">
+
             <div className="headerbar">
                 <div className="logo" onClick={handleLogoClick}>
                     <img src="/img/GameHub-logo.png" alt="logo"/>
@@ -46,18 +35,17 @@ export const HeaderBar = ({ logout }) => {
                     <Link to="/latest">LASTEST</Link>
                     <Link to="/top">TOP</Link>
                     <Link to="/about">ABOUT</Link>
+                    {userData && userData.role === 'Admin' &&
+                        <Link to="/admin-menu">ADMIN MENU</Link>
+                    }
                 </div>
 
                 <div className="dropdown">
                     <div className="profile-icon" onClick={handleProfileClick} tabIndex="0">
-                        {user && avatarUrl ? (
-                            <img src={avatarUrl} alt="User Avatar" className="user-avatar" />
-                        ) : (
-                            <img src="/img/profile-icon.png" alt="profile icon" />
-                        )}
+                        <img src="/img/profile-icon.png" alt="profile icon" />
                     </div>
                     <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-                        {!user ? (
+                    {!user ? (
                             <>
                                 <div className="reg-btn">
                                     <Link to="/register">REGISTER ▶️</Link>
@@ -84,4 +72,4 @@ export const HeaderBar = ({ logout }) => {
     );
 }
 
-
+export default HeaderBar;

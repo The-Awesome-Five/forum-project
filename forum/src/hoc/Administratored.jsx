@@ -2,12 +2,12 @@ import {useContext} from "react";
 import {Navigate, useLocation} from "react-router-dom";
 import {AppContext} from "../../state/app.context.js";
 
-export default function Authenticated ({children}) {
+export default function Administrated ({children}) {
 
-    const { user } = useContext(AppContext);
+    const { userData } = useContext(AppContext);
     const location = useLocation();
 
-    if (!user) {
+    if (!userData || userData.role !== 'Admin') {
         return <Navigate replace to="/login" state={{ from: location }} />
     }
 

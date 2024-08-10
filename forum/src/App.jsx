@@ -1,8 +1,8 @@
-import {useEffect, useState} from 'react'
+import {useContext, useEffect, useState} from 'react'
 import './App.css'
 import {createElement, getElement} from "./firebase/firebase-funcs.js";
 import {Routes, Route} from 'react-router-dom';
-import {HeaderBar} from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
+import HeaderBar from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
 import {Category} from "./components/commonComponents/CategoryComponent/Category.jsx";
 import {Home} from "./views/HomeView/Home.jsx";
 import Register from './auth/Register.jsx';
@@ -16,10 +16,13 @@ import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
 import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
-import UsersTopics from './components/commonComponents/UsersTopics/UsersTopics.jsx';
+import UsersTopics from './components/commonComponents/UsersTopics/UsersTopic.jsx';
 import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
 
 import { PostView } from './views/PostView/PostView.jsx';
+import {AdminMenu} from "./views/AdminMenuView/AdminMenu.jsx";
+import Administrated from "./hoc/Administratored.jsx";
+import Authenticated from "./hoc/Authenticated";
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -74,9 +77,16 @@ function App() {
                         {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
-                        <Route path="/profile" element={<ProfileView />} />
-                        <Route path="/edit-profile" element={<EditProfileView/>} />
-                        <Route path="/users-topics" element={<UsersTopics/>} />
+
+                        <Route path="/admin-menu" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/category-management" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/subcategory-management" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/post-management" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/user-management" element={<Administrated><AdminMenu/></Administrated>} />
+
+                        <Route path="/profile" element={<Authenticated><ProfileView/></Authenticated>} />
+                        <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />
+                        <Route path="/user's-topics" element={<Authenticated><UsersTopics/></Authenticated>} />
                  {/* Uncomment and add your other routes as necessary */}
                     {/* 
                     <Route path="/latest" element={<Latest />} />
