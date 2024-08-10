@@ -1,6 +1,6 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import './HeaderBar.css';
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../../firebase/config.js";
 import {AppContext} from "../../../../state/app.context.js";
@@ -8,6 +8,8 @@ import {AppContext} from "../../../../state/app.context.js";
 const HeaderBar = ({logout}) => {
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [user] = useAuthState(auth);
+    const [avatarUrl, setAvatarUrl] = useState(null);
 
     const handleLogoClick = () => {
         navigate('/');
@@ -16,8 +18,21 @@ const HeaderBar = ({logout}) => {
     const handleProfileClick = () => {
         setDropdownOpen(!dropdownOpen);
     };
+    // Fetch the user's avatar URL when the component mounts or when the user changes
+    useEffect(() => {
+        const fetchUserAvatar = async () => {
+            if (user) {
+                try {
+                    const userData = await getUserByID(user.uid);
+                    setAvatarUrl(userData.avatarUrl || null);
+                } catch (error) {
+                    console.error('Failed to load user avatar:', error);
+                }
+            }
+        };
+        fetchUserAvatar();
+    }, [user]);
 
-    const [user] = useAuthState(auth);
     const {userData} = useContext(AppContext)
 
     console.log('this is user: ')
@@ -42,10 +57,14 @@ const HeaderBar = ({logout}) => {
 
                 <div className="dropdown">
                     <div className="profile-icon" onClick={handleProfileClick} tabIndex="0">
-                        <img src="/img/profile-icon.png" alt="profile icon" />
+                        {user && avatarUrl ? (
+                            <img src={avatarUrl} alt="User Avatar" className="user-avatar"/>
+                        ) : (
+                            <img src="/img/profile-icon.png" alt="profile icon"/>
+                        )}
                     </div>
                     <div className={`dropdown-menu ${dropdownOpen ? 'show' : ''}`}>
-                    {!user ? (
+                        {!user ? (
                             <>
                                 <div className="reg-btn">
                                     <Link to="/register">REGISTER ▶️</Link>
@@ -66,7 +85,7 @@ const HeaderBar = ({logout}) => {
                 </div>
             </div>
             <div className="banner">
-                <img src="img/banner.png" alt="Banner" />
+                <img src="img/banner.png" alt="Banner"/>
             </div>
         </div>
     );

@@ -16,7 +16,7 @@ import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
 import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
-import UsersTopics from './components/commonComponents/UsersTopics/UsersTopic.jsx';
+import UsersTopics from "./components/commonComponents/UsersTopics/UsersTopics.jsx";
 import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
 
 import { PostView } from './views/PostView/PostView.jsx';
