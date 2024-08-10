@@ -138,4 +138,10 @@ div > .headerbar {
     outline: 4px auto -webkit-focus-ring-color;
   }
 
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
   

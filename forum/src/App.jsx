@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import './App.css'
 import {createElement, getElement} from "./firebase/firebase-funcs.js";
 import {Routes, Route} from 'react-router-dom';
-import HeaderBar from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
+import {HeaderBar} from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
 import {Category} from "./components/commonComponents/CategoryComponent/Category.jsx";
 import {Home} from "./views/HomeView/Home.jsx";
 import Register from './auth/Register.jsx';
@@ -16,7 +16,7 @@ import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
 import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
-import UsersTopics from './components/commonComponents/UsersTopics/UsersTopic.jsx';
+import UsersTopics from './components/commonComponents/UsersTopics/UsersTopics.jsx';
 import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
 
 import { PostView } from './views/PostView/PostView.jsx';
@@ -76,7 +76,7 @@ function App() {
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
                         <Route path="/profile" element={<ProfileView />} />
                         <Route path="/edit-profile" element={<EditProfileView/>} />
-                        <Route path="/user's-topics" element={<UsersTopics/>} />
+                        <Route path="/users-topics" element={<UsersTopics/>} />
                  {/* Uncomment and add your other routes as necessary */}
                     {/* 
                     <Route path="/latest" element={<Latest />} />

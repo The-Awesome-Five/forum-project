@@ -1,18 +1,22 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../../state/app.context';
 import { getUserByID, updateUserAvatar } from '../../../services/user.service';
+import { useNavigate } from 'react-router-dom';
+
 
 const EditProfile = () => {
-    const {userData } = useContext(AppContext);
-    const [avatarUrl, setAvatarUrl] = useState('');
+    const {userData, setAppState } = useContext(AppContext);
+    const [userInfo, setUserInfo] = useState('');
     const [loading, setLoading] = useState(true);
+    
+
   
     useEffect(() => {
       const loadUserData = async () => {
         if (userData) {
           try {
             const userData = await getUserByID(userData.uid);
-            setAvatarUrl(userData.avatarUrl || '');
+            setUserInfo(userData.avatarUrl || '');
           } catch (error) {
             console.error('Failed to load user data:', error);
           }
@@ -24,13 +28,16 @@ const EditProfile = () => {
     }, []);
   
     const handleAvatarUrlChange = (e) => {
-      setAvatarUrl(e.target.value);
+      setUserInfo(e.target.value);
     };
   
     const saveChanges = async () => {
       try {
         if (userData) {
-          await updateUserAvatar(userData.uid, avatarUrl);
+          await updateUserAvatar(userData.uid, userInfo);
+          const newData = getUserByID(userData.uid)
+          setAppState({userData:newData})
+          window.location.reload();
           alert('Avatar URL updated successfully!');
         } else {
           alert('User not found or not logged in.');
@@ -50,7 +57,7 @@ const EditProfile = () => {
         <h2>Edit Profile</h2>
         <label>
           Avatar URL:
-          <input type="text" value={avatarUrl} onChange={handleAvatarUrlChange} />
+          <input type="text" value={userInfo} onChange={handleAvatarUrlChange} />
         </label>
         <br />
         <button onClick={saveChanges}>Save Changes</button>

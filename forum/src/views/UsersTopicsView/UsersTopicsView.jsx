@@ -1,5 +1,5 @@
 import React from "react";
-import UsersTopics from "../../components/commonComponents/UsersTopics/UsersTopic";
+import UsersTopics from "../../components/commonComponents/UsersTopics/UsersTopics";
 
 const UsersTopicsView = () => {
     
