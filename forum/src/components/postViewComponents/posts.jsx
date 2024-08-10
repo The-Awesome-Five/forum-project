@@ -17,7 +17,7 @@ const PostDetail = () => {
                 
                 console.log(userData.uid)
                     setPost({
-                        likedBy: Object.keys(data.likedBy ?? {}),
+                        likedBy: data.likedBy ?? {},
                         ...data}); 
            
               
@@ -36,9 +36,21 @@ const PostDetail = () => {
           if (!isLiked) {
             console.log('liking')
             await likePost(userData.uid, postId, subcategoryId);
+            setPost(prevPost => ({
+                ...prevPost,
+                likedBy: {
+                    ...prevPost.likedBy,
+                    [userData.uid]: true
+                }
+            }));
           } else {
             console.log('disliking')
             await dislikePost(userData.uid, postId, subcategoryId);
+            const { [userData.uid]: _, ...newLikedBy } = post.likedBy;
+            setPost(prevPost => ({
+                ...prevPost,
+                likedBy: newLikedBy
+            }));
           }
         } catch (error) {
           alert(error.message);
