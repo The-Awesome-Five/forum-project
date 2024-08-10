@@ -72,7 +72,7 @@ function App() {
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
-                        <Route path="/create-post/:subcategoryId" element={<CreatePost />} />
+                        <Route path="/create-post/:subcategoryId" element={<Authenticated><CreatePost /></Authenticated>} />
                         <Route path="/category/:categoryId/:subcategoryId/:postId" element={<PostView />} />
 
                         {!user && <Route path="/register" element={<Register/>}/>}

@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import {useContext, useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
 import { getReplies } from '../../services/reply.service.js';
 import { RenderSingleReply } from '../../components/commonComponents/Reply/RenderSingleReply.jsx';
 import { CreateReplyForm } from '../../components/commonComponents/CreateReplyForm/CreateReplyForm.jsx';
 import { PostDetail } from '../../components/postViewComponents/posts.jsx';
+import {AppContext} from "../../../state/app.context.js";
 
 export const PostView = () => {
     const { postId } = useParams();
     const [replies, setReplies] = useState([]);
+    const {user} = useContext(AppContext);
 
     useEffect(() => {
         const fetchReplies = async () => {
@@ -34,7 +36,7 @@ export const PostView = () => {
                     <p>No replies yet</p>
                 )}
             </div>
-            <CreateReplyForm postId={postId} />
+            {user && <CreateReplyForm postId={postId} />}
         </div>
     );
 };
