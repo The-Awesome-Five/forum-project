@@ -8,8 +8,10 @@ export default function Register() {
       username: '',
       firstName: '',
       lastName: '',
+      avatarUrl:'',
       email: '',
       password: '',
+
     });
     const { setAppState } = useContext(AppContext);
     const navigate = useNavigate();
@@ -25,7 +27,7 @@ export default function Register() {
     };
   
     const register = async () => {
-      const { username, firstName, lastName, email, password } = user;
+      const { username, firstName, lastName, email, password, avatarUrl } = user;
   
       if (!email || !password || !username || !firstName || !lastName) {
         return alert('All fields are required!');
@@ -53,7 +55,7 @@ export default function Register() {
   
         const credential = await registerUser(email, password);
       
-        await createUserID(username, firstName, lastName, credential.user.uid, email);
+        await createUserID(username, firstName, lastName, credential.user.uid, email, avatarUrl);
         setAppState({ user: credential.user, userData: credential.user.uid });
         navigate('/');
       } catch (error) {
@@ -100,6 +102,14 @@ export default function Register() {
           onChange={updateUser('password')}
         />
          <br/>
+        <input
+          type="text"
+          placeholder="Avatar URL"
+          value={user.avatarUrl}  
+           onChange={updateUser('avatarUrl')}
+        />
+          <br/>
+        
         <button onClick={register}>Register</button>
       </div>
     );

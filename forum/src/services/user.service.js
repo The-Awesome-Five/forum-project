@@ -12,8 +12,8 @@ export const getUserByID = async (id) => {
 };
 
 // Create a new user record
-export const createUserID = async (username, firstName, lastName, uid, email) => {
-  const user = { username, firstName, lastName, uid, email, createdOn: new Date().toString() };
+export const createUserID = async (username, firstName, lastName, uid, email, avatarUrl) => {
+  const user = { username, firstName, lastName, uid, email, avatarUrl, createdOn: new Date().toString() };
   await set(ref(db, `Users/${uid}`), user);
 };
 
@@ -27,6 +27,11 @@ export const getUserDataByUID = async (uid) => {
 export const getUserDataByEmail = async (email) => {
   const snapshot = await get(query(ref(db, 'Users'), orderByChild('email'), equalTo(email)));
   return snapshot.val();
+};
+
+export const updateUserAvatar = async (uid, avatarUrl) => {
+  const userRef = ref(db, `Users/${uid}/avatarUrl`);
+  await set(userRef, { avatarUrl }, { merge: true });
 };
 
 export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) => {
