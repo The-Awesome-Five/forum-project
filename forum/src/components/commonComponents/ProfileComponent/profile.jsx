@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './profile.css'
+import './Profile.css'
 
 const Profile = () => {
 
@@ -15,7 +15,7 @@ const Profile = () => {
             <img src="" alt="badge" />
         </div>
         <div class="profile-navigation">
-            <a href="#topics">Topics</a>
+         <Link to="/user's-topics">Yours Topics</Link>
             <Link to='/edit-profile'>Edit Profile</Link>
         </div>
         <div class="profile-section">

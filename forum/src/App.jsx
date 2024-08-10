@@ -16,7 +16,7 @@ import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
 import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
-
+import UsersTopics from './components/commonComponents/UsersTopics/UsersTopic.jsx';
 import { CreatePost } from './components/commonComponents/CreateForm/CreateForm.jsx';
 import PostDetail from './components/postViewComponents/posts.jsx';
 function App() {
@@ -74,9 +74,9 @@ function App() {
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
                         <Route path="/profile" element={<ProfileView />} />
-                        <Route path="/edit-profile" element={<EditProfileView subcategoryId="exampleSubcategoryId" />} />
-
-                    {/* Uncomment and add your other routes as necessary */}
+                        <Route path="/edit-profile" element={<EditProfileView/>} />
+                        <Route path="/user's-topics" element={<UsersTopics/>} />
+                 {/* Uncomment and add your other routes as necessary */}
                     {/* 
                     <Route path="/latest" element={<Latest />} />
                     <Route path="/top" element={<Top />} />
