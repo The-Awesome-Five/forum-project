@@ -31,6 +31,7 @@ export const AddCategory = () => {
         }
 
         try {
+
             await createCategory(category);
 
             navigate('/');
@@ -56,11 +57,11 @@ export const AddCategory = () => {
                 rows="5"
             />
             <br/>
-            <textarea
-                placeholder="Image URL"
+            <input
+                type="text"
+                placeholder="Category Image URL"
                 value={category.imgUrl}
                 onChange={updateCategory('imgUrl')}
-                rows="5"
             />
             <br/>
             <button onClick={createCategoryHandler}>Create</button>

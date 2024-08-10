@@ -23,6 +23,7 @@ import { PostView } from './views/PostView/PostView.jsx';
 import {AdminMenu} from "./views/AdminMenuView/AdminMenu.jsx";
 import Administrated from "./hoc/Administratored.jsx";
 import Authenticated from "./hoc/Authenticated";
+import {AddCategory} from "./components/adminComponents/AddCategoryComponent/AddCategory";
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -79,14 +80,14 @@ function App() {
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
 
                         <Route path="/admin-menu" element={<Administrated><AdminMenu/></Administrated>} />
-                        <Route path="/category-management" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/category-management" element={<Administrated><AddCategory/></Administrated>} />
                         <Route path="/subcategory-management" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/post-management" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/user-management" element={<Administrated><AdminMenu/></Administrated>} />
 
                         <Route path="/profile" element={<Authenticated><ProfileView/></Authenticated>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />
-                        <Route path="/user's-topics" element={<Authenticated><UsersTopics/></Authenticated>} />
+                        <Route path="/users-topics" element={<Authenticated><UsersTopics/></Authenticated>} />
                  {/* Uncomment and add your other routes as necessary */}
                     {/* 
                     <Route path="/latest" element={<Latest />} />

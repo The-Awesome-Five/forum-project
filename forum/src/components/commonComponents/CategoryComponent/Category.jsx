@@ -9,9 +9,10 @@ export const Category = ({category}) => {
 
     useEffect(() => {
         getSubcategoriesByCategoryId(category.id)
-            .then(data => setSubcategories(Object.values(data)))
+            .then(data => data ? setSubcategories(Object.values(data)) : '')
             .catch(e => alert(e))
     }, []);
+
 
     return (
         <div className='category'>
