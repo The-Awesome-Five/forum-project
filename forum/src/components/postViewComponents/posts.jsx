@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { dislikePost, getSinglePost, likePost } from '../../services/post.service';
 import './posts.css'
 import { AppContext  } from '../../../state/app.context';
-const PostDetail = () => {
+export const PostDetail = () => {
     const { postId } = useParams();
     const { subcategoryId } = useParams();
     const [post, setPost] = useState({});
@@ -77,4 +77,3 @@ const PostDetail = () => {
     );
 };
 
-export default PostDetail;
