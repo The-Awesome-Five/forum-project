@@ -1,22 +1,24 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../../state/app.context';
-import { getUserByID, updateUserAvatar } from '../../../services/user.service';
+import { getUserByID, updateUserAvatar, updateUserFirstName, updateUserLastName } from '../../../services/user.service';
 import { useNavigate } from 'react-router-dom';
 
 
 const EditProfile = () => {
-    const {userData, setAppState } = useContext(AppContext);
-    const [userInfo, setUserInfo] = useState('');
+    const { userData, setAppState } = useContext(AppContext);
+    const [avatarUrl, setAvatarUrl] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [loading, setLoading] = useState(true);
-    
-
   
     useEffect(() => {
       const loadUserData = async () => {
         if (userData) {
           try {
-            const userData = await getUserByID(userData.uid);
-            setUserInfo(userData.avatarUrl || '');
+            const userDataFromDB = await getUserByID(userData.uid);
+            setAvatarUrl(userDataFromDB.avatarUrl || '');
+            setFirstName(userDataFromDB.firstName || '');
+            setLastName(userDataFromDB.lastName || '');
           } catch (error) {
             console.error('Failed to load user data:', error);
           }
@@ -25,26 +27,38 @@ const EditProfile = () => {
       };
   
       loadUserData();
-    }, []);
+    }, [userData]);
   
     const handleAvatarUrlChange = (e) => {
-      setUserInfo(e.target.value);
+      setAvatarUrl(e.target.value);
+    };
+  
+    const handleFirstNameChange = (e) => {
+      setFirstName(e.target.value);
+    };
+  
+    const handleLastNameChange = (e) => {
+      setLastName(e.target.value);
     };
   
     const saveChanges = async () => {
       try {
         if (userData) {
-          await updateUserAvatar(userData.uid, userInfo);
-          const newData = getUserByID(userData.uid)
-          setAppState({userData:newData})
+          await updateUserAvatar(userData.uid, avatarUrl);
+          await updateUserFirstName(userData.uid, firstName);
+          await updateUserLastName(userData.uid, lastName);
+  
+          const updatedUserData = await getUserByID(userData.uid);
+          setAppState({ userData: updatedUserData });
+  
           window.location.reload();
-          alert('Avatar URL updated successfully!');
+          alert('Profile updated successfully!');
         } else {
           alert('User not found or not logged in.');
         }
       } catch (error) {
-        console.error('Failed to update avatar URL:', error);
-        alert('Failed to update avatar URL.');
+        console.error('Failed to update profile:', error);
+        alert('Failed to update profile.');
       }
     };
   
@@ -57,7 +71,17 @@ const EditProfile = () => {
         <h2>Edit Profile</h2>
         <label>
           Avatar URL:
-          <input type="text" value={userInfo} onChange={handleAvatarUrlChange} />
+          <input type="text" value={avatarUrl} onChange={handleAvatarUrlChange} />
+        </label>
+        <br />
+        <label>
+          First Name:
+          <input type="text" value={firstName} onChange={handleFirstNameChange} />
+        </label>
+        <br />
+        <label>
+          Last Name:
+          <input type="text" value={lastName} onChange={handleLastNameChange} />
         </label>
         <br />
         <button onClick={saveChanges}>Save Changes</button>

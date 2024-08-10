@@ -31,6 +31,20 @@ export const updateUserAvatar = async (uid, avatarUrl) => {
   await set(userRef, avatarUrl);
 };
 
+export const updateUserFirstName = async (uid, firstName) => {
+  const updatePath = `Users/${uid}`
+  const data = { firstName: firstName};
+  const result = await updateElement(data, updatePath)
+  return result;
+}
+
+export const updateUserLastName = async (uid, lastName) => {
+  const updatePath = `Users/${uid}`
+  const data = { lastName: lastName};
+  const result = await updateElement(data, updatePath)
+  return result;
+}
+
 export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) => {
   const info = {
     subID: subcategory_id,
