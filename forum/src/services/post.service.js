@@ -1,5 +1,5 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
-import { ref, get, query, orderByChild, equalTo } from "firebase/database";
+import { ref, get, query, orderByChild, equalTo, update } from "firebase/database";
 import { db } from "../firebase/config"; 
 
 export const createPost = async (postInfo, subcategoriesId) => {
@@ -111,3 +111,22 @@ export const getAllPosts = async () => {
         return e.message;
     }
 };
+
+
+export const likePost = (uid, postId, subcategoriesId) => {
+    const updateObject = {
+        [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: true,
+        [`Users/${uid}/likedPosts/${uid}`]: true,
+    };
+  
+    return update(ref(db), updateObject);
+  };
+  
+  export const dislikePost = (uid, postId, subcategoriesId) => {
+    const updateObject = {
+      [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: null,
+      [`Users/${uid}/likedPosts/${uid}`]: null,
+    };
+  
+    return update(ref(db), updateObject);
+  };

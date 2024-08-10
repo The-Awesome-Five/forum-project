@@ -19,6 +19,9 @@ const [post, setPost] = useState({
     CreatedOn: '',
     isHidden: false,
     isLocked: false,
+    likedBy: {
+      temp: null,
+    },
 
   });
   
