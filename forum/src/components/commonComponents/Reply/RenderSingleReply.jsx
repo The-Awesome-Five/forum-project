@@ -54,7 +54,7 @@ export const RenderSingleReply = ({ reply }) => {
 
     const handleSave = async () => {
         try {
-            await updateReply(replyState.id, { Content: editedContent });
+            await updateReply({ Content: editedContent }, postId, replyState.id );
             setReply(prevReply => ({
                 ...prevReply,
                 Content: editedContent
