@@ -47,22 +47,3 @@
     align-items: center;
     justify-content: space-between;
 }
-
-button {
-    background-color: #4CAF50; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-button:disabled {
-    background-color: #888;
-    cursor: not-allowed;
-}

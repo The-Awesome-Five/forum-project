@@ -35,8 +35,9 @@ export const AddCategory = () => {
 
             await createCategory(category);
 
-            navigate('/');
+            navigate('/category-management');
         } catch (e) {
+            alert(e)
         }
     }
 

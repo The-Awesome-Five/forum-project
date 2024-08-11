@@ -51,13 +51,3 @@
     text-align: center;
     margin: 10px 50px;
 }
-
-.add-subcategory-save-button {
-    margin: 10px auto;
-    background-color: #56527d;
-}
-
-.add-subcategory-save-button:hover {
-    margin: 10px auto;
-    background-color: #56527d;
-}

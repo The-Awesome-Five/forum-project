@@ -19,6 +19,27 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
 
+button {
+  margin: 10px auto;
+  background-color: #56527d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  margin: 10px auto;
+  background-color: black;
+}
+
+button:disabled {
+  background-color: #888;
+  cursor: not-allowed;
+}
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
