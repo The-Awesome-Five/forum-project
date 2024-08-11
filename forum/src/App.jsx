@@ -24,6 +24,7 @@ import {AdminMenu} from "./views/AdminMenuView/AdminMenu.jsx";
 import Administrated from "./hoc/Administratored.jsx";
 import Authenticated from "./hoc/Authenticated";
 import {AddCategory} from "./components/adminComponents/AddCategoryComponent/AddCategory";
+import {AddSubcategory} from "./components/adminComponents/AddSubcategoryComponent/AddSubcategory.jsx";
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -64,11 +65,10 @@ function App() {
     };
 
     return (
-
         <>
             <AppContext.Provider value={{...appState, setAppState}}>
                 <HeaderBar logout={logout}/>
-                <div>
+                <div className="app">
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
@@ -81,7 +81,7 @@ function App() {
 
                         <Route path="/admin-menu" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/category-management" element={<Administrated><AddCategory/></Administrated>} />
-                        <Route path="/subcategory-management" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/subcategory-management" element={<Administrated><AddSubcategory/></Administrated>} />
                         <Route path="/post-management" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/user-management" element={<Administrated><AdminMenu/></Administrated>} />
 

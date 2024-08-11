@@ -47,7 +47,6 @@ const [reply, setReply] = useState({
         navigate(0);
     }
     catch(e){
-        console.log(e);
     }
   }
 

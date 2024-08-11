@@ -28,18 +28,14 @@ import { createReply } from "../services/reply.service.js";
 //
 //     // First handle async calls and capture results
 //     result = await createElement('admin', 'Roles');
-//     console.log(result);
 //
 //     createdPath = createPath('Roles', result);
 //
 //     element = await getElement(createdPath);
-//     console.log(element);
 //
 //     editResult = await updateElement('moderator', createdPath);
-//     console.log(editResult);
 //
 //     deleteResult = await removeElement(createdPath);
-//     console.log(deleteResult);
 //
 //     // Ensure all promises are wrapped correctly
 //     const promises = [
@@ -53,7 +49,6 @@ import { createReply } from "../services/reply.service.js";
 // }
 //
 // testingFunc().then(() => {
-//     console.log("All operations completed");
 // }).catch((error) => {
 //     console.error("An error occurred:", error);
 // });
@@ -75,7 +70,6 @@ import { createReply } from "../services/reply.service.js";
 //     await hideSubcategories(id);
 
 // } catch (e) {
-//     console.log(e)
 // }
 
 
@@ -106,7 +100,6 @@ const pathing= ['post', '-O3DZD7sTYnubHGSaxHM'];
 /!*const info='Big Test';
 let result= createPath(pathing);
 // updateElement(info,result);
-console.log( await getElement(result))*!/*/
 
 
 try {
@@ -162,13 +155,11 @@ try {
     // const replyid= await createReply(info,postId,subcategoriesId);
     //
     // const categories = await getAllCategories();
-    // console.log(categories);
 
 
     // deleteSubcategory(categoryid, subcategoriesId);
 }
 catch(e){
-    console.log(e);
 
 }
 

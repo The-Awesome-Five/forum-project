@@ -16,7 +16,6 @@ export const createElement = async (data, pathForCreating) => {
 
         }
         catch(e){
-            console.log(e);
         }
 
 }
@@ -46,7 +45,6 @@ export const updateField = async (data, pathForUpdate) => {
         return 'Element edited successfully!'
     }
     catch(e){
-        console.log(e);
         return e;
     }
 
@@ -89,19 +87,13 @@ export const getUserPosts = async (userId) => {
     try {
         const userPostsPath = createPath('Users', userId, 'Posts');
         const postIds = await getElement(userPostsPath);
-        console.log(postIds);
         if (!postIds) {
             return [];
         }
 
         const postPromises = Object.values(postIds).map(async (postId) => {
-            console.log('this is subId ' + postId.subId);
-            console.log('this is iD ' + postId.id);
             const postPath = createPath('Posts', postId.subId,postId.id);
-            console.log('path ' + postPath);
             const post = await getElement(postPath);
-            console.log('this is a post:');
-            console.log(post);
             return post ;
         });
         

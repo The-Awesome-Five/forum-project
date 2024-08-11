@@ -56,7 +56,6 @@ const [post, setPost] = useState({
         navigate('/');
     }
     catch(e){
-        console.log(e);
     }
   }
 

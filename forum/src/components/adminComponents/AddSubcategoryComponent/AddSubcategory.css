@@ -1,0 +1,58 @@
+.add-subcategory-container {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.dropdown-menu-subcategory-list {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-y: auto;
+    background-color: black;
+    z-index: 1000;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.dropdown-menu-list {
+    width: 100%;
+    padding: 8px;
+}
+
+.dropdown-menu-list-item {
+    cursor: pointer;
+    background-color: #56527d;
+}
+
+.dropdown-menu-input {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.add-subcategory-dropdown-menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.add-subcategory-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.add-subcategory-save-button {
+    margin: 10px auto;
+    background-color: #56527d;
+}
+
+.add-subcategory-save-button:hover {
+    margin: 10px auto;
+    background-color: #56527d;
+}

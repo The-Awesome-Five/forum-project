@@ -20,7 +20,6 @@ export const createSubcategory = async (name, category_id, imgUrl) => {
 
     const id = await createElement(subcategory, `Subcategory/${category_id}`);
 
-    console.log('Create Subcategory')
     await editCategory({id, name}, category_id, `subcategory_ids/${id}`)
 
     return id;

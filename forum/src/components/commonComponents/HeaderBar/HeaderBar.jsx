@@ -36,8 +36,6 @@ const HeaderBar = ({logout}) => {
 
     const {userData} = useContext(AppContext)
 
-    console.log('this is user: ')
-    console.log(userData)
 
     return (
         <div className="header-wrapper">

@@ -10,8 +10,6 @@ const UsersTopics = () => {
         // const fetchUserPosts = async () => {
         //     if (user && userData) {
         //         const userPosts = await getUserPosts(user.uid);
-        //         console.log(userPosts);
-        //         console.log('Fetched user posts:', userPosts);
         //         setPosts(userPosts);
         //     }
         // };
@@ -22,7 +20,6 @@ const UsersTopics = () => {
             getUserPosts(user.uid)
             .then(data => data)
             .then(posts => setPosts(posts))
-            .catch(e => console.log(e))
         }
     }, [user, userData]);
 

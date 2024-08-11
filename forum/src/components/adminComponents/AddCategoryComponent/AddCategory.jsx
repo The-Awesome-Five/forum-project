@@ -36,7 +36,6 @@ export const AddCategory = () => {
 
             navigate('/');
         } catch (e) {
-            console.log(e);
         }
     }
 

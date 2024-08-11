@@ -10,7 +10,6 @@ export const CategoryView = () => {
     useEffect(() => {
         getAllCategories()
             .then(data => setCategories(data))
-            .catch(e => console.log(e))
     }, []);
 
     return (

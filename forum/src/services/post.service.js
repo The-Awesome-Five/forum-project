@@ -51,7 +51,6 @@ export const lockPosts = async (subcategory_id) => {
         
         await Promise.all(postsToUpdate.map(postId => updatePost({ isLocked: true }, subcategory_id, postId)));
 
-        console.log( 'Posts locked successfully!');
     } catch (e) {
         console.error('Failed to lock posts', e);
         return e.message;
@@ -88,7 +87,6 @@ export const getAllPosts = async () => {
     try {
         const subcategoriesSnapshot = await get(ref(db, `Posts`));
         if (!subcategoriesSnapshot.exists()) {
-            console.log('Няма намерени подкатегории.');
             return {};
         }
 
