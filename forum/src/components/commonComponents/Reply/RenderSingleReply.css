@@ -1,12 +1,13 @@
 #reply-container {
-    background-color: #3e315e80; 
+    background-color: rgba(255, 255, 255, 0.1); 
     padding: 15px;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-bottom: 10px; 
-    border: 1px solid #4A4A4A;
-    max-width: 800px;
+    max-width: 1300px;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    text-align: left;
 }
 
 #reply-header {
