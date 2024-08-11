@@ -8,6 +8,19 @@ export const AdminCategoryView = () => {
     const [createMenuVisible, setCreateMenuVisible] = useState(false);
     const [categories, setCategories] = useState([]);
 
+    const categoryHeader = {
+        name: 'Name',
+        description: 'Description',
+        imgUrl: 'Image URL',
+        subcategory_ids: {
+            123456: {
+                id: 123456,
+                name: "Subcategories"
+            },
+        },
+        isHeader: true
+    }
+
     useEffect(() => {
         getAllCategories()
             .then(data => setCategories(data))
@@ -22,6 +35,7 @@ export const AdminCategoryView = () => {
                     <button type="button" onClick={() => setCreateMenuVisible(false)}>Close</button>
                 </div>
                 : <button type="button" onClick={() => setCreateMenuVisible(true)}>Create Category</button>}
+            <AdminCategoryItem category={categoryHeader}/>
             {categories && categories.map(category => <AdminCategoryItem key={category.id} category={category}/>)}
         </div>
     )

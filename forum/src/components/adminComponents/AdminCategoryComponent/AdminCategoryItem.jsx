@@ -3,16 +3,19 @@ import './AdminCategoryItem.css'
 export const AdminCategoryItem = ({category}) => {
 
     return (
-        <ul className="admin-category-item">
+        <ul className={category.isHeader ? "admin-category-item-header" : "admin-category-item"}>
+            <li className="admin-category-item-image">{category.isHeader ? "Category Image" : <img src={category.imgUrl} alt="category-imgUrl"/>}</li>
             <li>{category.name}</li>
             <li>{category.description}</li>
             <ul>
                 {Object.values(category.subcategory_ids).map(subcategory => <li key={subcategory.id}>{subcategory.name}</li>)}
             </ul>
-            <div className="admin-category-item-buttons">
-            <button>Edit</button>
-            <button>Delete</button>
-            </div>
+            {category.isHeader ? "Buttons" :
+                <div className="admin-category-item-buttons">
+                    <button>Edit</button>
+                    <button>Delete</button>
+                </div>
+            }
         </ul>
     )
 }
