@@ -1,0 +1,18 @@
+.add-category-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+
+.add-category-save-button {
+    margin: 10px auto;
+    background-color: #56527d;
+}
+
+.add-category-save-button:hover {
+    margin: 10px auto;
+    background-color: #56527d;
+}
