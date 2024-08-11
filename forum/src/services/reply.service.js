@@ -25,16 +25,17 @@ export const updateReply= async (info, postID, replyID) => {
     await updateElement (info, path);
 
 }
-export const deleteReply = async (postID, replyID, subcategoryID, uid) => {
+export const deleteReply = async (postID, replyID, subcategoryID) => {
     try {
  
         const replyPath = createPath('Reply', postID, replyID);
+        const reply=  await getElement(replyPath);
         await removeElement(replyPath);
-
+        console.log(reply);
 
         const updateObject = {
             [`Posts/${subcategoryID}/${postID}/Replies/${replyID}`]: null,
-            [`Users/${uid}/Replies/${replyID}`]: null,
+            [`Users/${reply.createdBy.ID}/Replies/${replyID}`]: null,
           };
            update(ref(db), updateObject);
 

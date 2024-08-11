@@ -149,7 +149,7 @@ export const likePost = (uid, postId, subcategoriesId) => {
   };
 
 
-  export const deletePost = async (subcategoryId, postId, uid) => {
+  export const deletePost = async (subcategoryId, postId) => {
     try {
         const postRef = ref(db, `Posts/${subcategoryId}/${postId}`);
 
@@ -163,7 +163,7 @@ export const likePost = (uid, postId, subcategoriesId) => {
         const { likedBy, Replies } = postData;
         
         const updateObject = { [`Posts/${subcategoryId}/${postId}`]: null,
-                                [`Users/${uid}/Posts/${postId}`]: null,
+                                [`Users/${postData.createdBy.ID}/Posts/${postId}`]: null,
                             };
 
    

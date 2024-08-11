@@ -82,7 +82,7 @@ export const PostDetail = () => {
 
     const handleDelete = async () => {
         try {
-            await deletePost(subcategoryId, postId, userData.uid);
+            await deletePost(subcategoryId, postId);
             navigate('/')
         } catch (error) {
             console.error('Error deleting post:', error);
@@ -120,7 +120,7 @@ export const PostDetail = () => {
                 <button onClick={toggleLike} disabled={!userData}>
                     {userData && Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
                 </button>
-                {userData && post.createdBy.ID === userData.uid && (
+                {userData && (post.createdBy.ID === userData.uid || userData.role === "Admin") && (
                     <>
                         <button onClick={handleEdit}>Edit</button>
                         <button onClick={handleDelete}>Delete</button>

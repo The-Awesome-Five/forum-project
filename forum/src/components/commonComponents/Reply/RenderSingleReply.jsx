@@ -1,4 +1,3 @@
-
 import { useContext, useState } from "react";
 import { dislikeReply, likeReply, updateReply, deleteReply } from "../../../services/reply.service";
 import { AppContext } from "../../../../state/app.context";
@@ -46,7 +45,7 @@ export const RenderSingleReply = ({ reply, subcategoryId }) => {
             alert(error.message);
         }
     };
-
+    console.log(userData)
     const handleEdit = () => {
         if (userData && userData.uid === replyState.createdBy.ID) {
             setIsEditing(true);
@@ -69,7 +68,7 @@ export const RenderSingleReply = ({ reply, subcategoryId }) => {
 
     const handleDelete = async () => {
         try {
-            await deleteReply(postId, replyState.id, subcategoryId, userData.uid);
+            await deleteReply(postId, replyState.id, subcategoryId);
             window.location.reload(); // Reload the page after deletion
         } catch (error) {
             console.error("Error deleting reply:", error);
@@ -102,7 +101,7 @@ export const RenderSingleReply = ({ reply, subcategoryId }) => {
                 <button onClick={toggleLike} disabled={!userData}>
                     {userData && Object.keys(replyState.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
                 </button>
-                {userData && replyState.createdBy.ID === userData.uid && (
+                {(userData && (replyState.createdBy.ID === userData.uid || userData.role === "Admin")) && (
                     <>
                         <button onClick={handleEdit}>Edit</button>
                         <button onClick={handleDelete}>Delete</button>
