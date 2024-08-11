@@ -8,7 +8,6 @@ export const AddSubcategory = () => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
     const [category, setCategory] = useState({})
-    const [options] = useState([categories]);
     const [isDropdownVisible, setDropdownVisible] = useState(false);
 
     const navigate = useNavigate();
@@ -16,7 +15,6 @@ export const AddSubcategory = () => {
     useEffect(() => {
         getAllCategories()
             .then(data => {
-                console.log(data)
                 return setCategories(data)
             })
             .catch(e => alert(e));
@@ -26,11 +24,12 @@ export const AddSubcategory = () => {
     const updateSubcategory = (prop) => (e) => {
 
         if (prop === 'category') {
-            setDropdownVisible(true);
-            setCategory(categories.filter(category => category.name === e.target.value))
-        } else {
             setDropdownVisible(false);
+            setCategory(categories.filter(category => category.name === e.target.value))
         }
+
+        console.log(e.target.value)
+
         setSubcategory((prevSubcategory) => ({
 
             ...prevSubcategory,
@@ -38,8 +37,13 @@ export const AddSubcategory = () => {
         }));
     };
 
-    const handleBlur = () => {
-        setDropdownVisible(false);
+    const handleBlur = (e) => {
+
+        if (e.relatedTarget && e.relatedTarget.className === "dropdown-menu-subcategory-list") {
+            return
+        } else {
+            setDropdownVisible(false)
+        }
     }
 
     const createSubcategoryHandler = async () => {
@@ -55,7 +59,7 @@ export const AddSubcategory = () => {
 
         try {
 
-            await createSubcategory({name, imgUrl, category});
+            await createSubcategory({name, imgUrl, categoryId:category});
 
             navigate('/');
         } catch (e) {
@@ -68,37 +72,38 @@ export const AddSubcategory = () => {
             <div className="add-subcategory-form">
                 <h2>Add Subcategory</h2>
                 <div className="form-group">
-                    <label>Image URL:</label>
-                    <input type="text" value={subcategory.imgUrl} onChange={updateSubcategory('imgUrl')}/>
-                </div>
-                <div className="form-group">
                     <label>Name:</label>
                     <input type="text" value={subcategory.name} onChange={updateSubcategory('name')}/>
                 </div>
-                <div className="add-subcategory-dropdown-menu">
+                <div className="form-group">
+                    <label>Image URL:</label>
+                    <input type="text" value={subcategory.imgUrl} onChange={updateSubcategory('imgUrl')}/>
+                </div>
+                <div className="form-group" onBlur={handleBlur}>
+                    <label>Select Category:</label>
                     <input
                         type="text"
                         value={category.name}
-                        onChange={updateSubcategory('category')}
                         onFocus={() => setDropdownVisible(true)}
                         className="dropdown-menu-input"
-                        onBlur={handleBlur}
                     />
+
                     {isDropdownVisible && (
-                        <ul className='dropdown-menu-subcategory-list'>
+                        <select
+                            onChange={updateSubcategory('category')}
+                            size={categories.length}
+                            className="dropdown-menu-subcategory-list"
+                            onBlur={() => setDropdownVisible(false)}
+                        >
                             {categories.map((option, index) => (
-                                <li
-                                    key={index}
-                                    onClick={() => updateSubcategory('category')}
-                                    className="dropdown-menu-list-item"
-                                >
+                                <option key={index} value={option.name} className="dropdown-menu-list-item">
                                     {option.name}
-                                </li>
+                                </option>
                             ))}
-                            {options.length === 0 && (
-                                <li className="dropdown-menu-list-item">No options found</li>
+                            {categories.length === 0 && (
+                                <option className="dropdown-menu-list-item">No categories found</option>
                             )}
-                        </ul>
+                        </select>
                     )}
                 </div>
                 <button className="add-subcategory-save-button" onClick={createSubcategoryHandler}>Save Changes</button>

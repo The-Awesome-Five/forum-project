@@ -5,6 +5,9 @@
 }
 
 .dropdown-menu-subcategory-list {
+    font-size: 16px;
+    color: white;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
     overflow-y: auto;
@@ -35,7 +38,7 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    margin: auto;
+    margin: 10px 50px;
 }
 
 .add-subcategory-form {
