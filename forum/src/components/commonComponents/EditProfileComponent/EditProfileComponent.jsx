@@ -74,26 +74,28 @@ const EditProfile = () => {
     }
   
     return (
-      <div className="edit-profile-container">
-        <h2>Edit Profile</h2>
-        <div className="form-group">
-          <label>Avatar URL:</label>
-          <input type="text" value={avatarUrl} onChange={handleAvatarUrlChange} />
+        <div className='edit-profile-wraper'>
+            <div className="edit-profile-container">
+                <h2>Edit Profile</h2>
+                <div className="form-group">
+                <label>Avatar URL:</label>
+                <input type="text" value={avatarUrl} onChange={handleAvatarUrlChange} />
+                </div>
+                <div className="form-group">
+                <label>First Name:</label>
+                <input type="text" value={firstName} onChange={handleFirstNameChange} />
+                </div>
+                <div className="form-group">
+                <label>Last Name:</label>
+                <input type="text" value={lastName} onChange={handleLastNameChange} />
+                </div>
+                <div className="form-group">
+                <label>Custom Information:</label>
+                <textarea value={info} onChange={handleInfoChange} />
+                </div>
+                <button className="save-button" onClick={saveChanges}>Save Changes</button>
+            </div>
         </div>
-        <div className="form-group">
-          <label>First Name:</label>
-          <input type="text" value={firstName} onChange={handleFirstNameChange} />
-        </div>
-        <div className="form-group">
-          <label>Last Name:</label>
-          <input type="text" value={lastName} onChange={handleLastNameChange} />
-        </div>
-        <div className="form-group">
-          <label>Custom Information:</label>
-          <textarea value={info} onChange={handleInfoChange} />
-        </div>
-        <button className="save-button" onClick={saveChanges}>Save Changes</button>
-      </div>
     );
   };
   
