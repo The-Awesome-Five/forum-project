@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
-import {createCategory, getAllCategories} from "../../../services/category.service.js";
+import {getAllCategories} from "../../../services/category.service.js";
 import {createSubcategory} from "../../../services/subcategory.service.js";
-import "./AddSubcategory.css"
 
-export const AddSubcategory = () => {
+export const EditSubcategoryComponent = () => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('')

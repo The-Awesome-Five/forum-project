@@ -1,0 +1,36 @@
+.admin-category-item {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: right;
+}
+
+.admin-category-item-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    list-style: right;
+}
+
+.admin-category-item-header li {
+    list-style: none;
+}
+
+.admin-category-item-header a {
+    text-decoration: none;
+}
+
+.admin-category-item-image {
+    list-style: none;
+}
+
+.admin-category-item li {
+    text-align: left;
+}
+
+.admin-category-item-buttons {
+    text-align: left;
+}

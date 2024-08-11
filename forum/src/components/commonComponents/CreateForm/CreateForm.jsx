@@ -61,7 +61,7 @@ const [post, setPost] = useState({
 
 return (
   <div>
-        <h2>Register</h2>
+        <h2>Create A Post</h2>
         <input
           type="text"
           placeholder="Title"

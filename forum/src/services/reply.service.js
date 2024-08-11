@@ -36,7 +36,6 @@ export const deleteReply = async (postID, replyID, subcategoryID, uid) => {
             [`Posts/${subcategoryID}/${postID}/Replies/${replyID}`]: null,
             [`Users/${uid}/Replies/${replyID}`]: null,
           };
-        console.log(updateObject)
            update(ref(db), updateObject);
 
     } catch (error) {

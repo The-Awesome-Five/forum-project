@@ -1,6 +1,7 @@
-import {useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import {createCategory} from "../../../services/category.service.js";
+import './AddCategory.css'
 
 export const AddCategory = () => {
     const [category, setCategory] = useState({})
@@ -34,36 +35,46 @@ export const AddCategory = () => {
 
             await createCategory(category);
 
-            navigate('/');
+            navigate('/category-management');
         } catch (e) {
+            alert(e)
         }
     }
 
     return (
-        <div>
-            <h2>Create Category</h2>
+        <div className="add-category-form">
+            <h2>Add Category</h2>
+            <div className="form-group">
+                <label>Name:</label>
             <input
+                className='add-category-name'
                 type="text"
-                placeholder="Name"
                 value={category.name}
                 onChange={updateCategory('name')}
             />
             <br/>
-            <textarea
-                placeholder="Description"
+            </div>
+            <div className="form-group">
+                <label>Description:</label>
+                <textarea
+                className='add-category-description'
                 value={category.description}
                 onChange={updateCategory('description')}
                 rows="5"
             />
+            </div>
             <br/>
-            <input
+            <div className="form-group">
+                <label>Image URL:</label>
+                <input
+                className='add-category-imgurl'
                 type="text"
-                placeholder="Category Image URL"
                 value={category.imgUrl}
                 onChange={updateCategory('imgUrl')}
             />
             <br/>
-            <button onClick={createCategoryHandler}>Create</button>
+            </div>
+            <button className="add-category-save-button" onClick={createCategoryHandler}>Create Category</button>
         </div>
     )
 }
