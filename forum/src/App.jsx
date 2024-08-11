@@ -25,6 +25,7 @@ import Administrated from "./hoc/Administratored.jsx";
 import Authenticated from "./hoc/Authenticated";
 import {AddCategory} from "./components/adminComponents/AddCategoryComponent/AddCategory";
 import {AddSubcategory} from "./components/adminComponents/AddSubcategoryComponent/AddSubcategory.jsx";
+import {AdminCategoryView} from "./views/AdminMenuView/AdminCategoryView/AdminCategoryView.jsx";
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -80,7 +81,7 @@ function App() {
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
 
                         <Route path="/admin-menu" element={<Administrated><AdminMenu/></Administrated>} />
-                        <Route path="/category-management" element={<Administrated><AddCategory/></Administrated>} />
+                        <Route path="/category-management" element={<Administrated><AdminCategoryView/></Administrated>} />
                         <Route path="/subcategory-management" element={<Administrated><AddSubcategory/></Administrated>} />
                         <Route path="/post-management" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/user-management" element={<Administrated><AdminMenu/></Administrated>} />
