@@ -8,6 +8,13 @@ export const getSubcategoriesByCategoryId = async (category_id) => {
 
 }
 
+export const getAllSubcategories = async () => {
+
+        const subcategories = await getElement('Subcategory');
+
+        return Object.values(subcategories);
+}
+
 export const createSubcategory = async (name, imgUrl, category_id) => {
 
     const subcategory = {

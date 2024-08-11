@@ -60,6 +60,18 @@ export const getCategoryIdBySubcategoryId = async (subcategory_id) => {
     }
 }
 
+export const getCategoryNameBySubcategoryId = async (subcategory_id) => {
+
+    try {
+        const categories = await getElement('Category');
+        const category = Object.values(categories).find(category => category.subcategory_ids[subcategory_id]);
+        return category.name;
+    } catch (e) {
+        console.error('Failed to get category id by subcategory id', e);
+        return e.message;
+    }
+}
+
 /// Category, Subcategory Pages - isHidden && !isAdmin = hidden
 
 // administrator - reports, user management, create, edit and delete categories, create, edit and delete subcategories, lock, delete and hide posts, hide and delete replies
