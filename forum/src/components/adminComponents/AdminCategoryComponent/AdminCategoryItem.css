@@ -19,10 +19,18 @@
     list-style: none;
 }
 
+.admin-category-item-header a {
+    text-decoration: none;
+}
+
 .admin-category-item-image {
     list-style: none;
 }
 
 .admin-category-item li {
+    text-align: left;
+}
+
+.admin-category-item-buttons {
     text-align: left;
 }
