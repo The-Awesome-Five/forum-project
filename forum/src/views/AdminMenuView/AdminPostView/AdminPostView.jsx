@@ -9,7 +9,7 @@ export const AdminPostView = () => {
     const postHeader = {
         Title: 'Title',
         Content: 'Content',
-        createdOn: 'Created On',
+        CreatedOn: 'Created On',
         subcategory: 'Subcategory',
         isHeader: true
     }
