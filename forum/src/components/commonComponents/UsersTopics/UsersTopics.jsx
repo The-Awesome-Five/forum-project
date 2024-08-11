@@ -1,25 +1,34 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { getUserPosts } from '../../../firebase/firebase-funcs.js';
 import { AppContext } from '../../../../state/app.context.js';
+import { getSubcategoriesByPostId } from '../../../services/post.service.js';
+import { getCategoryIdBySubcategoryId } from '../../../services/category.service.js';
 
 const UsersTopics = () => {
     const { user, userData } = useContext(AppContext);
     const [posts, setPosts] = useState([]);
+    const [links, setLinks] = useState([]);
 
     useEffect(() => {
-        // const fetchUserPosts = async () => {
-        //     if (user && userData) {
-        //         const userPosts = await getUserPosts(user.uid);
-        //         setPosts(userPosts);
-        //     }
-        // };
-
-        // fetchUserPosts();
-
         if (user && userData) {
             getUserPosts(user.uid)
-            .then(data => data)
-            .then(posts => setPosts(posts))
+                .then(async (posts) => {
+                    setPosts(posts);
+                    const linksData = await Promise.all(
+                        posts.map(async (post) => {
+                            const subcategoryId = await getSubcategoriesByPostId(post.id);
+                            const categoryId = await getCategoryIdBySubcategoryId(subcategoryId);
+                            return {
+                                id: post.id,
+                                link: `/category/${categoryId}/${subcategoryId}/${post.id}`,
+                                title: post.Title || 'No Title',
+                            };
+                        })
+                    );
+                    setLinks(linksData);
+                })
+                .catch((error) => console.error("Failed to fetch posts or links", error));
         }
     }, [user, userData]);
 
@@ -35,10 +44,12 @@ const UsersTopics = () => {
                 <p>No posts available.</p>
             ) : (
                 <ul>
-                    {posts.map((post, index) => (
-                        <>
-                        <li key={post.id || index}>{post.Title || 'No Title'}</li>
-                        </>
+                    {links.map((linkData) => (
+                        <li key={linkData.id}>
+                            <Link to={linkData.link}>
+                                {linkData.title}
+                            </Link>
+                        </li>
                     ))}
                 </ul>
             )}

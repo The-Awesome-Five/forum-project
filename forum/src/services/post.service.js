@@ -1,5 +1,5 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
-import { ref, get, query, orderByChild, equalTo, update } from "firebase/database";
+import { ref, get, query, orderByChild, equalTo, update, OnDisconnect } from "firebase/database";
 import { db } from "../firebase/config"; 
 import { deleteReply } from "./reply.service.js";
 
@@ -41,6 +41,24 @@ export const hidePosts = async (subcategory_id) => {
         return e.message;
     }
 };
+
+export const getSubcategoriesByPostId = async(post_id) => {
+    try{
+        const posts = await getElement('Posts');
+        const subcategories = Object.keys(posts)
+       for(let key in posts) {
+        let obj = posts[key]
+            for(let val in obj) {
+                if(val === post_id) {
+                    return key;
+                }
+            }
+       }
+    }catch (e){
+        console.error('Failed to fetch subcategory!', e);
+        return e.message;
+    }
+}
 
 export const lockPosts = async (subcategory_id) => {
     try {
