@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams, } from 'react-router-dom';
-import { getSinglePost, likePost, dislikePost, updatePost, deletePost } from '../../services/post.service';
+import { useNavigate, useParams } from 'react-router-dom';
+import { likePost, dislikePost, updatePost, deletePost } from '../../services/post.service';
+import { getUserAvatar } from '../../services/user.service';
 import { AppContext } from '../../../state/app.context';
-import './posts.css'
+import './posts.css';
+
 export const PostDetail = () => {
     const { postId, subcategoryId } = useParams();
     const [post, setPost] = useState(null);
@@ -10,11 +12,13 @@ export const PostDetail = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState('');
     const navigate = useNavigate();
+    
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const data = await getSinglePost(subcategoryId, postId);
+                const data = await getUserAvatar(subcategoryId, postId);
+                console.log('Fetched post data:', data);  // Логваме данните, които получаваме
                 setPost({
                     likedBy: data.likedBy ?? {},
                     ...data,
@@ -24,9 +28,10 @@ export const PostDetail = () => {
                 console.error('Error fetching post:', e);
             }
         };
-
+    
         fetchPost();
     }, [subcategoryId, postId]);
+    
 
     const toggleLike = async () => {
         if (!userData || !post) {
@@ -97,6 +102,12 @@ export const PostDetail = () => {
     return (
         <div id="post-container">
             <div id="post-header">
+                <img 
+                    src={post.createdBy.avatarUrl || 'default-avatar.png'} 
+                    alt="User Avatar" 
+                    id="post-avatar"
+                    style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
+                />
                 <h1 id="post-title">{post.Title}</h1>
             </div>
             <div id="post-separator"></div>
@@ -113,7 +124,7 @@ export const PostDetail = () => {
             ) : (
                 <div id="post-body">{post.Content}</div>
             )}
-
+    
             <div id="post-footer-separator"></div>
             <>
                 <div>Likes: {Object.keys(post.likedBy).length}</div>

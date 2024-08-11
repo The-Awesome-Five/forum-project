@@ -1,6 +1,7 @@
 import { get, set, ref, query, equalTo, orderByChild } from 'firebase/database';
 import { db } from '../firebase/config';
-import { createPath, updateElement } from '../firebase/firebase-funcs';
+import { createPath, updateElement, getElement } from '../firebase/firebase-funcs';
+import { useEffect } from 'react';
 
 // Fetch user by ID
 export const getUserByID = async (id) => {
@@ -29,6 +30,23 @@ export const getUserDataByEmail = async (email) => {
 export const updateUserAvatar = async (uid, avatarUrl) => {
   const userRef = ref(db, `Users/${uid}/avatarUrl`);
   await set(userRef, avatarUrl);
+};
+
+
+export const getUserAvatar = async (subcategoryId, postId) => {
+  const post = await getElement(`Posts/${subcategoryId}/${postId}`);
+  if (!post) return null;
+
+  const user = await getElement(`Users/${post.createdBy.ID}`);
+  return {
+      ...post,
+      createdBy: {
+          ...post.createdBy,
+          avatarUrl: user.avatarUrl,  // Увери се, че вземаш avatarUrl от профила на потребителя
+          firstName: user.firstName,   // Ако е нужно, вземи и други данни
+          lastName: user.lastName,
+      },
+  };
 };
 
 export const updateUserFirstName = async (uid, firstName) => {
