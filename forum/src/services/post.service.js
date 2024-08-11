@@ -1,7 +1,7 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
 import { ref, get, query, orderByChild, equalTo, update } from "firebase/database";
 import { db } from "../firebase/config"; 
-import { deleteReply } from "./reply.service.js";
+import { deleteReply, getReplies } from "./reply.service.js";
 
 export const createPost = async (postInfo, subcategoriesId) => {
     const path = createPath('Posts',subcategoriesId );
@@ -143,7 +143,7 @@ export const likePost = (uid, postId, subcategoriesId) => {
         }
 
         const { likedBy, Replies } = postData;
-
+        
         const updateObject = { [`Posts/${subcategoryId}/${postId}`]: null,
                                 [`Users/${uid}/Posts/${postId}`]: null,
                             };
@@ -156,10 +156,12 @@ export const likePost = (uid, postId, subcategoriesId) => {
             });
         }
 
-  
+        const replies= await  getReplies(postId);
         if (Replies) {
-            const replyDeletionPromises = Object.keys(Replies).map(replyId => {
-                const createdByUid = Replies[replyId].createdBy.ID; 
+            const replyDeletionPromises = Object.keys(replies).map(replyId => {
+               
+                const createdByUid = replies[replyId].createdBy.ID; 
+                getReplies(postId)
                 return deleteReply(postId, replyId, subcategoryId, createdByUid);
             });
             await Promise.all(replyDeletionPromises);

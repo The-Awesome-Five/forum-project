@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams, } from 'react-router-dom';
 import { getSinglePost, likePost, dislikePost, updatePost, deletePost } from '../../services/post.service';
 import { AppContext } from '../../../state/app.context';
-
+import './posts.css'
 export const PostDetail = () => {
     const { postId, subcategoryId } = useParams();
     const [post, setPost] = useState(null);
