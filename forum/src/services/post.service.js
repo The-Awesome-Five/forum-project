@@ -1,6 +1,7 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
 import { ref, get, query, orderByChild, equalTo, update } from "firebase/database";
 import { db } from "../firebase/config"; 
+import { deleteReply } from "./reply.service.js";
 
 export const createPost = async (postInfo, subcategoriesId) => {
     const path = createPath('Posts',subcategoriesId );
@@ -18,10 +19,10 @@ export const updatePost = async (postInfo, subcategory_id, postId) => {
     await updateElement(postInfo, path);
 };
 
-export const deletePost = async (subcategoryId, postId) => {
-    const path = createPath('Posts', subcategoryId, postId);
-    await removeElement(path);
-};
+// export const deletePost = async (subcategoryId, postId) => {
+//     const path = createPath('Posts', subcategoryId, postId);
+//     await removeElement(path);
+// };
 
 // added by Doni
 
@@ -128,3 +129,48 @@ export const likePost = (uid, postId, subcategoriesId) => {
   
     return update(ref(db), updateObject);
   };
+
+
+  export const deletePost = async (subcategoryId, postId, uid) => {
+    try {
+        const postRef = ref(db, `Posts/${subcategoryId}/${postId}`);
+
+        const postSnapshot = await get(postRef);
+        const postData = postSnapshot.val();
+
+        if (!postData) {
+            throw new Error('Post not found');
+        }
+
+        const { likedBy, Replies } = postData;
+
+        const updateObject = { [`Posts/${subcategoryId}/${postId}`]: null,
+                                [`Users/${uid}/Posts/${postId}`]: null,
+                            };
+
+   
+
+        if (likedBy) {
+            Object.keys(likedBy).forEach(uid => {
+                updateObject[`Users/${uid}/likedPosts/${postId}`] = null;
+            });
+        }
+
+  
+        if (Replies) {
+            const replyDeletionPromises = Object.keys(Replies).map(replyId => {
+                const createdByUid = Replies[replyId].createdBy.ID; 
+                return deleteReply(postId, replyId, subcategoryId, createdByUid);
+            });
+            await Promise.all(replyDeletionPromises);
+        }
+
+      
+        await update(ref(db), updateObject);
+
+        console.log('Post and associated data deleted successfully');
+    } catch (error) {
+        console.error('Error deleting post:', error);
+        throw new Error('Failed to delete post');
+    }
+};

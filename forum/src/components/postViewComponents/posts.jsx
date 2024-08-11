@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { dislikePost, getSinglePost, likePost, updatePost } from '../../services/post.service';
-import './posts.css';
+import { useNavigate, useParams, } from 'react-router-dom';
+import { getSinglePost, likePost, dislikePost, updatePost, deletePost } from '../../services/post.service';
 import { AppContext } from '../../../state/app.context';
 
 export const PostDetail = () => {
     const { postId, subcategoryId } = useParams();
-    const [post, setPost] = useState(null); // Initially set post to null
+    const [post, setPost] = useState(null);
     const { userData } = useContext(AppContext);
-    const [isEditing, setIsEditing] = useState(false); // Track if the user is editing
-    const [editedContent, setEditedContent] = useState(''); // Hold the edited content
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState('');
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -19,7 +19,7 @@ export const PostDetail = () => {
                     likedBy: data.likedBy ?? {},
                     ...data,
                 });
-                setEditedContent(data.Content); // Initialize edited content
+                setEditedContent(data.Content);
             } catch (e) {
                 console.error('Error fetching post:', e);
             }
@@ -31,7 +31,7 @@ export const PostDetail = () => {
     const toggleLike = async () => {
         if (!userData || !post) {
             alert("You need to be logged in to like or dislike a post.");
-            return; 
+            return;
         }
 
         const isLiked = Object.keys(post.likedBy).includes(userData.uid);
@@ -68,7 +68,7 @@ export const PostDetail = () => {
 
     const handleSave = async () => {
         try {
-            await updatePost(  { Content: editedContent }, subcategoryId, postId);
+            await updatePost({ Content: editedContent }, subcategoryId, postId);
             setPost(prevPost => ({
                 ...prevPost,
                 Content: editedContent
@@ -80,8 +80,18 @@ export const PostDetail = () => {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await deletePost(subcategoryId, postId, userData.uid);
+            navigate('/')
+        } catch (error) {
+            console.error('Error deleting post:', error);
+            alert(error.message);
+        }
+    };
+
     if (!post) {
-        return <div>Loading...</div>; // Show loading until the post is ready
+        return <div>Loading...</div>;
     }
 
     return (
@@ -111,7 +121,10 @@ export const PostDetail = () => {
                     {userData && Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
                 </button>
                 {userData && post.createdBy.ID === userData.uid && (
-                    <button onClick={handleEdit}>Edit</button>
+                    <>
+                        <button onClick={handleEdit}>Edit</button>
+                        <button onClick={handleDelete}>Delete</button>
+                    </>
                 )}
             </>
         </div>

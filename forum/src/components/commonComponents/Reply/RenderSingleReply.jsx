@@ -1,10 +1,11 @@
+
 import { useContext, useState } from "react";
-import { dislikeReply, likeReply, updateReply } from "../../../services/reply.service";
+import { dislikeReply, likeReply, updateReply, deleteReply } from "../../../services/reply.service";
 import { AppContext } from "../../../../state/app.context";
 import { useParams } from "react-router-dom";
 import './RenderSingleReply.css';
 
-export const RenderSingleReply = ({ reply }) => {
+export const RenderSingleReply = ({ reply, subcategoryId }) => {
     const { userData } = useContext(AppContext);
     const [replyState, setReply] = useState({
         ...reply,
@@ -66,6 +67,16 @@ export const RenderSingleReply = ({ reply }) => {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await deleteReply(postId, replyState.id, subcategoryId, userData.uid);
+            window.location.reload(); // Reload the page after deletion
+        } catch (error) {
+            console.error("Error deleting reply:", error);
+            alert(error.message);
+        }
+    };
+
     return (
         <div id="reply-container">
             <div id="reply-header">
@@ -92,7 +103,10 @@ export const RenderSingleReply = ({ reply }) => {
                     {userData && Object.keys(replyState.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
                 </button>
                 {userData && replyState.createdBy.ID === userData.uid && (
-                    <button onClick={handleEdit}>Edit</button>
+                    <>
+                        <button onClick={handleEdit}>Edit</button>
+                        <button onClick={handleDelete}>Delete</button>
+                    </>
                 )}
             </div>
         </div>

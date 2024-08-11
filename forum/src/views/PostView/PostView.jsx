@@ -10,7 +10,7 @@ export const PostView = () => {
     const { postId } = useParams();
     const [replies, setReplies] = useState([]);
     const {user} = useContext(AppContext);
-
+    const {subcategoryId}= useParams()
     useEffect(() => {
         const fetchReplies = async () => {
             try {
@@ -30,7 +30,7 @@ export const PostView = () => {
             <div>
                 {replies.length > 0 ? (
                     replies.map((reply) => (
-                        <RenderSingleReply key={reply.id} reply={reply} />
+                        <RenderSingleReply key={reply.id} reply={reply}  subcategoryId={subcategoryId}/>
                     ))
                 ) : (
                     <p>No replies yet</p>

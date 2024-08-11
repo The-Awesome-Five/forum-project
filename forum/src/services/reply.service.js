@@ -25,13 +25,25 @@ export const updateReply= async (info, postID, replyID) => {
     await updateElement (info, path);
 
 }
+export const deleteReply = async (postID, replyID, subcategoryID, uid) => {
+    try {
+ 
+        const replyPath = createPath('Reply', postID, replyID);
+        await removeElement(replyPath);
 
-export const deleteReply = async(postID, replyID) =>{
 
-    const path = createPath('Reply', postID, replyID);
-    await removeElement(path);
+        const updateObject = {
+            [`Posts/${subcategoryID}/${postID}/Replies/${replyID}`]: null,
+            [`Users/${uid}/Replies/${replyID}`]: null,
+          };
+        console.log(updateObject)
+           update(ref(db), updateObject);
+
+    } catch (error) {
+        console.error('Error deleting reply:', error);
+        throw new Error('Failed to delete reply');
+    }
 }
-
 
 export const getReplies = async (postID) => {
     return getElement(`Reply/${postID}`)
