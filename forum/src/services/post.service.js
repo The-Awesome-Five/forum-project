@@ -168,7 +168,6 @@ export const likePost = (uid, postId, subcategoriesId) => {
       
         await update(ref(db), updateObject);
 
-        console.log('Post and associated data deleted successfully');
     } catch (error) {
         console.error('Error deleting post:', error);
         throw new Error('Failed to delete post');

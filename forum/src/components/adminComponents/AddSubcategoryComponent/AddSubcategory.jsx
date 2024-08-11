@@ -7,7 +7,6 @@ import "./AddSubcategory.css"
 export const AddSubcategory = () => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
-    const [category, setCategory] = useState({})
     const [isDropdownVisible, setDropdownVisible] = useState(false);
 
     const navigate = useNavigate();
@@ -18,23 +17,24 @@ export const AddSubcategory = () => {
                 return setCategories(data)
             })
             .catch(e => alert(e));
-    }, [])
+    }, [categories])
 
 
     const updateSubcategory = (prop) => (e) => {
 
+        const propValue = e.target.value;
+        let category;
+
         if (prop === 'category') {
             setDropdownVisible(false);
-            setCategory(categories.filter(category => category.name === e.target.value))
+            category = categories.filter(cat => cat.name === propValue)[0].id;
         }
 
-        console.log(e.target.value)
-
         setSubcategory((prevSubcategory) => ({
-
             ...prevSubcategory,
-            [prop]: prop === 'category' ? category.id : e.target.value
+            [prop]: prop === 'category' ? category : e.target.value
         }));
+
     };
 
     const handleBlur = (e) => {
@@ -59,7 +59,7 @@ export const AddSubcategory = () => {
 
         try {
 
-            await createSubcategory({name, imgUrl, categoryId:category});
+            await createSubcategory(name, imgUrl, category);
 
             navigate('/');
         } catch (e) {
@@ -83,7 +83,6 @@ export const AddSubcategory = () => {
                     <label>Select Category:</label>
                     <input
                         type="text"
-                        value={category.name}
                         onFocus={() => setDropdownVisible(true)}
                         className="dropdown-menu-input"
                     />

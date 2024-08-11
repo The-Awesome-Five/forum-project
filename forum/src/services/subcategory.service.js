@@ -8,7 +8,7 @@ export const getSubcategoriesByCategoryId = async (category_id) => {
 
 }
 
-export const createSubcategory = async (name, category_id, imgUrl) => {
+export const createSubcategory = async (name, imgUrl, category_id) => {
 
     const subcategory = {
         name,
@@ -17,6 +17,8 @@ export const createSubcategory = async (name, category_id, imgUrl) => {
         imgUrl
 
     }
+
+    console.log(subcategory)
 
     const id = await createElement(subcategory, `Subcategory/${category_id}`);
 
