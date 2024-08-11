@@ -7,6 +7,7 @@ import "./AddSubcategory.css"
 export const AddSubcategory = () => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
+    const [selectedCategory, setSelectedCategory] = useState('')
     const [isDropdownVisible, setDropdownVisible] = useState(false);
 
     const navigate = useNavigate();
@@ -27,12 +28,13 @@ export const AddSubcategory = () => {
 
         if (prop === 'category') {
             setDropdownVisible(false);
-            category = categories.filter(cat => cat.name === propValue)[0].id;
+            category = categories.filter(cat => cat.name === propValue)[0];
+            setSelectedCategory(category.name)
         }
 
         setSubcategory((prevSubcategory) => ({
             ...prevSubcategory,
-            [prop]: prop === 'category' ? category : e.target.value
+            [prop]: prop === 'category' ? category.id : e.target.value
         }));
 
     };
@@ -85,6 +87,7 @@ export const AddSubcategory = () => {
                         type="text"
                         onFocus={() => setDropdownVisible(true)}
                         className="dropdown-menu-input"
+                        value={selectedCategory || ''}
                     />
 
                     {isDropdownVisible && (
