@@ -4,13 +4,11 @@ import { AppContext } from '../../../../state/app.context';
 import './profile.css';
 
 const Profile = () => {
-    const { userData } = useContext(AppContext); // Извличане на потребителските данни от контекста
+    const { userData } = useContext(AppContext); 
     const [profileData, setProfileData] = useState(null);
 
     useEffect(() => {
         if (userData) {
-            // Симулиране на зареждане на данни, ако е необходимо
-            // Например, ако се зареждат допълнителни данни от API
             setProfileData(userData);
         }
     }, [userData]);
@@ -31,7 +29,7 @@ const Profile = () => {
                 <img src={profileData.badgeUrl} alt="badge" />
             </div>
             <div className="profile-navigation">
-                <Link to="/user's-topics">Your Topics</Link>
+                <Link to="/users-topics">Your Topics</Link>
                 <Link to='/edit-profile'>Edit Profile</Link>
             </div>
             <div className="profile-section">

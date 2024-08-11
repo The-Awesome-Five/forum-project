@@ -1,45 +1,78 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #D3D3D3
+}
+
 .profile-container {
     width: 96.5%;
     margin: 0 auto;
     border: 1px solid #ccc;
     padding: 20px;
-    color:white
+    background: rgba(0, 0, 0, 0.5); /* Полупрозрачен черен фон за контейнера */
+    border-radius: 10px; /* Закръглени ъгли за по-елегантен вид */
 }
+
 .profile-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .profile-header img {
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
+    border-radius: 20px;
+    width: 150px;
+    height: 150px;
 }
+
 .profile-info {
     flex-grow: 1;
     margin-left: 20px;
     text-align: left;
 }
+
 .profile-info h2 {
     margin: 0;
 }
+
 .profile-navigation {
     margin: 20px 0;
     display: flex;
     justify-content: space-around;
     border-bottom: 1px solid #ccc;
 }
+
 .profile-navigation a {
     text-decoration: none;
-    color: white;
+    color: #D3D3D3;
     padding: 10px;
+    transition: color 0.3s ease;
+    background-color: #24243e;
+    margin-bottom: 10px;
+    border-radius: 10px;
 }
+
+.profile-navigation a:hover {
+    color: white; /* Лек ефект при посочване */
+    background-color:  #2f2f52;
+    box-shadow: 0 0 10px #0f0c29; /* Добавяне на синя сянка около елемента */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
 .profile-section {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     padding: 10px;
+    background: rgba(255, 255, 255, 0.1); /* Леко прозрачен бял фон за секциите */
+    border-radius: 10px;
 }
+
 .profile-section h3 {
     margin: 0 0 10px 0;
 }

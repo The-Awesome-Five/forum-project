@@ -45,6 +45,13 @@ export const updateUserLastName = async (uid, lastName) => {
   return result;
 }
 
+export const updateCustomInfo = async (uid, info) => {
+  const updatePath = `Users/${uid}`
+  const data = { customInfo: info};
+  const result = await updateElement(data, updatePath)
+  return result;
+}
+
 export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) => {
   const info = {
     subID: subcategory_id,

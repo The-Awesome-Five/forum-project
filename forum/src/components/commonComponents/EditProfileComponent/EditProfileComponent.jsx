@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../../state/app.context';
-import { getUserByID, updateUserAvatar, updateUserFirstName, updateUserLastName } from '../../../services/user.service';
+import { getUserByID, updateUserAvatar, updateUserFirstName, updateUserLastName, updateCustomInfo } from '../../../services/user.service';
 import { useNavigate } from 'react-router-dom';
-
+import './EditProfileComponent.css'; // Импорт на CSS
 
 const EditProfile = () => {
     const { userData, setAppState } = useContext(AppContext);
     const [avatarUrl, setAvatarUrl] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [info, setInfo] = useState('');
     const [loading, setLoading] = useState(true);
   
     useEffect(() => {
@@ -19,6 +20,7 @@ const EditProfile = () => {
             setAvatarUrl(userDataFromDB.avatarUrl || '');
             setFirstName(userDataFromDB.firstName || '');
             setLastName(userDataFromDB.lastName || '');
+            setInfo(userDataFromDB.info || '');
           } catch (error) {
             console.error('Failed to load user data:', error);
           }
@@ -40,6 +42,11 @@ const EditProfile = () => {
     const handleLastNameChange = (e) => {
       setLastName(e.target.value);
     };
+
+    const handleInfoChange = (e) => {
+        setInfo(e.target.value);
+      };
+    
   
     const saveChanges = async () => {
       try {
@@ -47,7 +54,7 @@ const EditProfile = () => {
           await updateUserAvatar(userData.uid, avatarUrl);
           await updateUserFirstName(userData.uid, firstName);
           await updateUserLastName(userData.uid, lastName);
-  
+          await updateCustomInfo(userData.uid, info);
           const updatedUserData = await getUserByID(userData.uid);
           setAppState({ userData: updatedUserData });
   
@@ -67,24 +74,25 @@ const EditProfile = () => {
     }
   
     return (
-      <div>
+      <div className="edit-profile-container">
         <h2>Edit Profile</h2>
-        <label>
-          Avatar URL:
+        <div className="form-group">
+          <label>Avatar URL:</label>
           <input type="text" value={avatarUrl} onChange={handleAvatarUrlChange} />
-        </label>
-        <br />
-        <label>
-          First Name:
+        </div>
+        <div className="form-group">
+          <label>First Name:</label>
           <input type="text" value={firstName} onChange={handleFirstNameChange} />
-        </label>
-        <br />
-        <label>
-          Last Name:
+        </div>
+        <div className="form-group">
+          <label>Last Name:</label>
           <input type="text" value={lastName} onChange={handleLastNameChange} />
-        </label>
-        <br />
-        <button onClick={saveChanges}>Save Changes</button>
+        </div>
+        <div className="form-group">
+          <label>Custom Information:</label>
+          <textarea value={info} onChange={handleInfoChange} />
+        </div>
+        <button className="save-button" onClick={saveChanges}>Save Changes</button>
       </div>
     );
   };
