@@ -63,12 +63,16 @@ body {
     border: none;
     border-radius: 5px;
     background-color: #2f2f52;
-    color: white;
+    color: #D3D3D3;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
   }
   
   .save-button:hover {
-    background-color: #1e1e40;
+    color: white; 
+    background-color:  #2f2f52;
+    box-shadow: 0 0 10px #0f0c29; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
+

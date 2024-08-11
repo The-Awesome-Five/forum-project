@@ -3,19 +3,18 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     height: 100vh;
-    background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
     background-repeat: no-repeat;
     background-attachment: fixed;
     color: #D3D3D3
 }
 
 .profile-container {
-    width: 96.5%;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5); /* Полупрозрачен черен фон за контейнера */
-    border-radius: 10px; /* Закръглени ъгли за по-елегантен вид */
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 10px;
+    width: 1180px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 
 .profile-header {
@@ -59,9 +58,9 @@ body {
 }
 
 .profile-navigation a:hover {
-    color: white; /* Лек ефект при посочване */
+    color: white; 
     background-color:  #2f2f52;
-    box-shadow: 0 0 10px #0f0c29; /* Добавяне на синя сянка около елемента */
+    box-shadow: 0 0 10px #0f0c29; 
     transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -69,7 +68,7 @@ body {
     margin-bottom: 20px;
     border: 1px solid #ccc;
     padding: 10px;
-    background: rgba(255, 255, 255, 0.1); /* Леко прозрачен бял фон за секциите */
+    background: rgba(255, 255, 255, 0.1); 
     border-radius: 10px;
 }
 
