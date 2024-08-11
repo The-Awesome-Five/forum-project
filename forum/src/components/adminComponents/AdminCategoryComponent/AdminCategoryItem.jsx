@@ -19,7 +19,6 @@ export const AdminCategoryItem = ({category}) => {
                 <div className="admin-category-item-buttons">
                     <button>Edit</button>
                     <button>Hide</button>
-                    <button>Delete</button>
                 </div>
             }
         </ul>
