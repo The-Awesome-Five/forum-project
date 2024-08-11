@@ -82,7 +82,7 @@ export const AddSubcategory = () => {
                     <input type="text" value={subcategory.imgUrl} onChange={updateSubcategory('imgUrl')}/>
                 </div>
                 <div className="form-group" onBlur={handleBlur}>
-                    <label>Select Category:</label>
+                    <label>Select Parent Category:</label>
                     <input
                         type="text"
                         onFocus={() => setDropdownVisible(true)}
@@ -108,7 +108,7 @@ export const AddSubcategory = () => {
                         </select>
                     )}
                 </div>
-                <button className="add-subcategory-save-button" onClick={createSubcategoryHandler}>Save Changes</button>
+                <button className="add-subcategory-save-button" onClick={createSubcategoryHandler}>Create Subcategory</button>
             </div>
         </div>
     )

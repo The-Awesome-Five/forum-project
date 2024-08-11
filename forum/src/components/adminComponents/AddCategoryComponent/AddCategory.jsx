@@ -64,7 +64,7 @@ export const AddCategory = () => {
             </div>
             <br/>
             <div className="form-group">
-                <label>Image Url:</label>
+                <label>Image URL:</label>
                 <input
                 className='add-category-imgurl'
                 type="text"
@@ -73,7 +73,7 @@ export const AddCategory = () => {
             />
             <br/>
             </div>
-            <button className="add-category-save-button" onClick={createCategoryHandler}>Create</button>
+            <button className="add-category-save-button" onClick={createCategoryHandler}>Create Category</button>
         </div>
     )
 }

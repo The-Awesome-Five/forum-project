@@ -4,6 +4,17 @@
     margin: auto;
 }
 
+
+.add-subcategory-form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+    gap: 20px;
+}
+
 .dropdown-menu-subcategory-list {
     font-size: 16px;
     color: white;
@@ -39,15 +50,6 @@
     justify-content: center;
     text-align: center;
     margin: 10px 50px;
-}
-
-.add-subcategory-form {
-    width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    margin: auto;
 }
 
 .add-subcategory-save-button {
