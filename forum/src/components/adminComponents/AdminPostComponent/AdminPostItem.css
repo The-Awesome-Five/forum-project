@@ -1,0 +1,35 @@
+.admin-post-item {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: right;
+}
+
+.admin-post-item-header {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: left;
+    list-style: right;
+}
+
+.admin-post-item-header li {
+    list-style: none;
+}
+
+.admin-post-item-header a {
+    text-decoration: none;
+}
+
+.admin-post-item li {
+    max-width: 200px;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: left;
+}
+
+.admin-post-item-buttons {
+    text-align: left;
+}

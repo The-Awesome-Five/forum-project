@@ -9,7 +9,7 @@ export const AdminSubcategoryItem = ({subcategory}) => {
     useEffect(() => {
         if(!subcategory.isHeader && subcategory.id) {
             getCategoryNameBySubcategoryId(subcategory.id)
-                .then(data => setCategoryName(data))
+                .then(data => setCategoryName(data.name))
                 .catch(e => alert('Failed to get category name', e));
             }
     }, [])

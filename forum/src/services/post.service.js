@@ -115,9 +115,9 @@ export const getAllPosts = async () => {
         for (const subcategoryId in subcategories) {
             const postsSnapshot = await get(ref(db, `Posts/${subcategoryId}`));
             if (postsSnapshot.exists()) {
-                const posts = postsSnapshot.val();
+                const posts = {...postsSnapshot.val()};
                 for (const postId in posts) {
-                    allPosts[postId] = posts[postId];
+                    allPosts[postId] = {...posts[postId], subcategoryId};
                 }
             }
         }

@@ -4,7 +4,6 @@ import {AddSubcategory} from "../../../components/adminComponents/AddSubcategory
 import {
     AdminSubcategoryItem
 } from "../../../components/adminComponents/AdminSubcategoryComponent/AdminSubcategoryItem.jsx";
-import {loginUser} from "../../../services/auth.service.js";
 
 export const AdminSubcategoryView = () => {
 
@@ -35,7 +34,6 @@ export const AdminSubcategoryView = () => {
             <AdminSubcategoryItem subcategory={subcategoryHeader} />
             {categories && categories.map(category =>
                 Object.entries(category)
-                    .filter(([key, value]) => typeof value === 'object' && value !== null && 'id' in value)
                     .map(([key, subcategory]) => (
                         <AdminSubcategoryItem
                             key={subcategory.id}

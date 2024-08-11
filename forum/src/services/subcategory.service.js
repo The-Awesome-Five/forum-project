@@ -25,8 +25,6 @@ export const createSubcategory = async (name, imgUrl, category_id) => {
 
     }
 
-    console.log(subcategory)
-
     const id = await createElement(subcategory, `Subcategory/${category_id}`);
 
     await editCategory({id, name}, category_id, `subcategory_ids/${id}`)
@@ -106,4 +104,18 @@ export const deleteSubcategory = async (category_id, subcategory_id) => {
 
     return removePostsByCategoryId(subcategory_id);
 
+}
+
+
+export const getSubcategoryNameBySubcategoryId = async (subcategory_id) => {
+
+    try {
+        const categories = await getElement('Category');
+        const category = Object.values(categories).find(category => category.subcategory_ids[subcategory_id]);
+        console.log(category.subcategory_ids[subcategory_id])
+        return category.subcategory_ids[subcategory_id];
+    } catch (e) {
+        console.error('Failed to get category id by subcategory id', e);
+        return e.message;
+    }
 }
