@@ -142,5 +142,6 @@ div > .headerbar {
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
+    border: solid #2f2f2f;
 }
   
