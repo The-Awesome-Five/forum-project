@@ -28,6 +28,7 @@ import {AddSubcategory} from "./components/adminComponents/AddSubcategoryCompone
 import {AdminCategoryView} from "./views/AdminMenuView/AdminCategoryView/AdminCategoryView.jsx";
 import {AdminSubcategoryView} from "./views/AdminMenuView/AdminSubcategoryView/AdminSubcategoryView.jsx";
 import {AdminPostView} from "./views/AdminMenuView/AdminPostView/AdminPostView.jsx";
+import {AdminUserView} from "./views/AdminMenuView/AdminUserView/AdminUserView.jsx";
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -86,17 +87,17 @@ function App() {
                         <Route path="/category-management" element={<Administrated><AdminCategoryView/></Administrated>} />
                         <Route path="/subcategory-management" element={<Administrated><AdminSubcategoryView/></Administrated>} />
                         <Route path="/post-management" element={<Administrated><AdminPostView/></Administrated>} />
-                        <Route path="/user-management" element={<Administrated><AdminMenu/></Administrated>} />
+                        <Route path="/user-management" element={<Administrated><AdminUserView/></Administrated>} />
 
                         <Route path="/profile" element={<Authenticated><ProfileView/></Authenticated>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />
                         <Route path="/users-topics" element={<Authenticated><UsersTopics/></Authenticated>} />
                  {/* Uncomment and add your other routes as necessary */}
-                    {/* 
+                    {/*
                     <Route path="/latest" element={<Latest />} />
                     <Route path="/top" element={<Top />} />
                     <Route path="/about" element={<About />} />
-                    <Route path="/profile" element={<Profile />} /> 
+                    <Route path="/profile" element={<Profile />} />
                     */}
                 </Routes>
             </div>

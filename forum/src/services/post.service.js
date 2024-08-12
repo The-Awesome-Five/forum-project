@@ -1,6 +1,6 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
 import { ref, get, query, orderByChild, equalTo, update, OnDisconnect } from "firebase/database";
-import { db } from "../firebase/config"; 
+import { db } from "../firebase/config";
 import { deleteReply, getReplies } from "./reply.service.js";
 
 export const createPost = async (postInfo, subcategoriesId) => {
@@ -26,13 +26,21 @@ export const updatePost = async (postInfo, subcategory_id, postId) => {
 
 // added by Doni
 
+export const getPostsByUserId = async (user_id) => {
+
+    const postsPath = createPath('Users', user_id, 'Posts')
+
+    return Object.values(getElement(postsPath));
+
+}
+
 export const hidePosts = async (subcategory_id) => {
     try {
-       
+
         const posts = await getElement(`Posts/${subcategory_id}`);
         const postsToUpdate=Object.keys(posts)
 
- 
+
         await Promise.all(postsToUpdate.map(postId => updatePost({ isHidden: true, isLocked: true }, subcategory_id, postId)));
 
         return 'Posts hidden successfully!';
@@ -62,12 +70,12 @@ export const getSubcategoriesByPostId = async(post_id) => {
 
 export const lockPosts = async (subcategory_id) => {
     try {
-      
+
         const posts = await getElement(`Posts/${subcategory_id}`);
         const postsToUpdate=Object.keys(posts)
         // posts.flat();
 
-        
+
         await Promise.all(postsToUpdate.map(postId => updatePost({ isLocked: true }, subcategory_id, postId)));
 
     } catch (e) {
@@ -78,7 +86,7 @@ export const lockPosts = async (subcategory_id) => {
 
 export const removePostsByCategoryId = async (subcategory_id) => {
     try {
-       
+
         const posts = await getElement(`Posts/${subcategory_id}`);
         const postsToUpdate=Object.keys(posts)
 
@@ -111,7 +119,7 @@ export const getAllPosts = async () => {
 
         const allPosts = {};
         const subcategories = subcategoriesSnapshot.val();
-        
+
         for (const subcategoryId in subcategories) {
             const postsSnapshot = await get(ref(db, `Posts/${subcategoryId}`));
             if (postsSnapshot.exists()) {
@@ -135,16 +143,16 @@ export const likePost = (uid, postId, subcategoriesId) => {
         [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: true,
         [`Users/${uid}/likedPosts/${uid}`]: true,
     };
-  
+
     return update(ref(db), updateObject);
   };
-  
+
   export const dislikePost = (uid, postId, subcategoriesId) => {
     const updateObject = {
       [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: null,
       [`Users/${uid}/likedPosts/${uid}`]: null,
     };
-  
+
     return update(ref(db), updateObject);
   };
 
@@ -161,12 +169,12 @@ export const likePost = (uid, postId, subcategoriesId) => {
         }
 
         const { likedBy, Replies } = postData;
-        
+
         const updateObject = { [`Posts/${subcategoryId}/${postId}`]: null,
                                 [`Users/${postData.createdBy.ID}/Posts/${postId}`]: null,
                             };
 
-   
+
 
         if (likedBy) {
             Object.keys(likedBy).forEach(uid => {
@@ -177,15 +185,15 @@ export const likePost = (uid, postId, subcategoriesId) => {
         const replies= await  getReplies(postId);
         if (Replies) {
             const replyDeletionPromises = Object.keys(replies).map(replyId => {
-               
-                const createdByUid = replies[replyId].createdBy.ID; 
+
+                const createdByUid = replies[replyId].createdBy.ID;
                 getReplies(postId)
                 return deleteReply(postId, replyId, subcategoryId, createdByUid);
             });
             await Promise.all(replyDeletionPromises);
         }
 
-      
+
         await update(ref(db), updateObject);
 
     } catch (error) {

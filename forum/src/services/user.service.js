@@ -1,6 +1,6 @@
 import { get, set, ref, query, equalTo, orderByChild } from 'firebase/database';
 import { db } from '../firebase/config';
-import { createPath, updateElement, getElement } from '../firebase/firebase-funcs';
+import {createPath, updateElement, getElement, updateField} from '../firebase/firebase-funcs';
 import { useEffect } from 'react';
 
 // Fetch user by ID
@@ -48,6 +48,22 @@ export const getUserAvatar = async (subcategoryId, postId) => {
       },
   };
 };
+
+export const getAllUsers = async () => {
+
+  const users = await getElement('Users');
+
+  return Object.values(users)
+
+}
+
+export const updateUser = async (user_id, value, prop) => {
+
+  const pathToBeEdited = createPath('Users', user_id, prop);
+
+  return updateField(value, pathToBeEdited)
+
+}
 
 export const updateUserFirstName = async (uid, firstName) => {
   const updatePath = `Users/${uid}`
