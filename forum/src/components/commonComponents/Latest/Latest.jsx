@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getAllPosts, getSubcategoriesByPostId } from '../../../services/post.service.js';
 import { getCategoryIdBySubcategoryId } from '../../../services/category.service.js';
 
@@ -7,7 +7,7 @@ import { getCategoryIdBySubcategoryId } from '../../../services/category.service
 export const RecentPosts = () => {
     const [posts, setPosts] = useState([]);
     const [links, setLinks] = useState([]);
-
+    const navigate= useNavigate();
     useEffect(() => {
         getAllPosts()
             .then(async (postsObject) => {
@@ -59,7 +59,7 @@ export const RecentPosts = () => {
                         <ul key={index} className="admin-post-item">
                             <li><Link to={links[index]?.link}>{post.Title}</Link></li>
                             <li>{post.Content}</li>
-                            <li>{post.createdBy?.username}</li>
+                            <li> <Link to={`/profile/${post.createdBy?.ID}`}>{post.createdBy?.username}</Link></li>
                             <li>{new Date(post.CreatedOn).toLocaleDateString()}</li>
 
                          

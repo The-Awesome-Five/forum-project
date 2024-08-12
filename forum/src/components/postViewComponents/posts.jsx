@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { likePost, dislikePost, updatePost, deletePost } from '../../services/post.service';
 import { getUserAvatar } from '../../services/user.service';
 import { AppContext } from '../../../state/app.context';
@@ -99,6 +99,7 @@ export const PostDetail = () => {
         return <div>Loading...</div>;
     }
 
+    
     return (
         <div id="post-container">
             <div id="post-header">
@@ -110,7 +111,8 @@ export const PostDetail = () => {
                 />
                 
               
-                <span className="reply-author">{post.createdBy.username}</span>
+                <Link to={`/profile/${post.createdBy?.ID}`}><span className="reply-author">{post.createdBy.username}</span>
+                </Link>
                 <span className="reply-date">{new Date(post.CreatedOn).toLocaleString()}</span>
           
 

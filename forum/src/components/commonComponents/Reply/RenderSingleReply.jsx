@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { dislikeReply, likeReply, updateReply, deleteReply } from "../../../services/reply.service";
 import { AppContext } from "../../../../state/app.context";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import './RenderSingleReply.css';
 
 export const RenderSingleReply = ({ reply, subcategoryId }) => {
@@ -79,7 +79,8 @@ export const RenderSingleReply = ({ reply, subcategoryId }) => {
     return (
         <div id="reply-container">
             <div id="reply-header">
-                <span className="reply-author">{replyState.createdBy.username}</span>
+            <Link to={`/profile/${replyState.createdBy?.ID}`}><span className="reply-author">{replyState.createdBy.username}</span>
+            </Link>
                 <span className="reply-date">{new Date(replyState.CreatedOn).toLocaleString()}</span>
             </div>
             {isEditing ? (
