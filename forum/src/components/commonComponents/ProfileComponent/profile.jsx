@@ -67,7 +67,7 @@ const Profile = () => {
                         {topLikedPosts.map((post, index) => (
                             <li key={post.postId}>
                                 <Link to={`/category/${post.category}/${post.subcategoryId}/${post.postId}`}>
-                                    {post.title || `Post ${index + 1}`}
+                                    {post.Title || `Post ${index + 1}`}
                                 </Link>
                                 <span> - {post.likedBy ? Object.keys(post.likedBy).length : 0} likes</span>
                             </li>
