@@ -16,6 +16,7 @@ export const createElement = async (data, pathForCreating) => {
 
         }
         catch(e){
+            return e;
         }
 
 }
@@ -61,7 +62,7 @@ export const createPath = (...elements) => {
 export const getElement =async (pathing) =>{
     try {
         const snapshot = await get(ref(db, `${pathing}`));
-     
+
         return snapshot.val();
     } catch (e) {
         return 'Error occurred: ' + e;
@@ -96,8 +97,8 @@ export const getUserPosts = async (userId) => {
             const post = await getElement(postPath);
             return post ;
         });
-        
-        
+
+
         return  Promise.all( postPromises);
     } catch (e) {
         console.error('Failed to get user posts', e);

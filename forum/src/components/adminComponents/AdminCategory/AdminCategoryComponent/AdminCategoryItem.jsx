@@ -1,7 +1,25 @@
 import './AdminCategoryItem.css'
 import {Link} from "react-router-dom";
+import {hideCategory, showCategory} from "../../../../services/category.service.js";
+import {useState} from "react";
 
 export const AdminCategoryItem = ({category}) => {
+
+    const [hidden, setHidden] = useState(category.isHidden)
+
+    const hideHandler = async () => {
+        try {
+            if (!hidden) {
+                await hideCategory(category.id);
+                setHidden(true);
+            } else {
+                await showCategory(category.id);
+                setHidden(false);
+            }
+        } catch (e) {
+            alert(e)
+        }
+    }
 
     return (
         <ul className={category.isHeader ? "admin-category-item-header" : "admin-category-item"}>
@@ -17,8 +35,8 @@ export const AdminCategoryItem = ({category}) => {
             </ul>
             {category.isHeader ? "Buttons" :
                 <div className="admin-category-item-buttons">
-                    <Link to={"/edit-category"} state={{ categoryToBeEdited: category }}>Edit</Link>
-                    <button>Hide</button>
+                    <button><Link to={"/edit-category"} state={{ categoryToBeEdited: category }}>Edit</Link></button>
+                    <button onClick={hideHandler}>{hidden ? 'Show' : 'Hide'}</button>
                 </div>
             }
         </ul>

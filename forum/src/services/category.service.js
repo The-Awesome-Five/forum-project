@@ -47,6 +47,13 @@ export const hideCategory = async (category_id) => {
 
 }
 
+export const showCategory = async (category_id) => {
+
+        await editCategory(false, category_id, 'isHidden');
+
+        return hideSubcategories(category_id, false);
+}
+
 export const lockUserFromCategory = async (category_id, user_id, username) => {
 
     return editCategory(username, category_id, `locked_users/${user_id}`);
