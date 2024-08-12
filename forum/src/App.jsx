@@ -33,6 +33,7 @@ import {RecentPosts} from './components/commonComponents/Latest/Latest.jsx'
 import {
     AddEditSubcategory
 } from "./components/adminComponents/AdminSubcategory/AddEditSubcategoryComponent/AddEditSubcategory.jsx";
+import TopPosts from './components/commonComponents/Top/Top.jsx';
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -86,7 +87,7 @@ function App() {
                         {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
-
+                        <Route path="/top" element={<TopPosts />} />
                         <Route path="/admin-menu" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/category-management" element={<Administrated><AdminCategoryView/></Administrated>} />
                         <Route path="/subcategory-management" element={<Administrated><AdminSubcategoryView/></Administrated>} />
