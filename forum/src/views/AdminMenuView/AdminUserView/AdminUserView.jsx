@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getAllUsers} from "../../../services/user.service.js";
-import {AdminUserItem} from "../../../components/adminComponents/AdminUserComponent/AdminUserItem.jsx";
+import {AdminUserItem} from "../../../components/adminComponents/AdminUser/AdminUserComponent/AdminUserItem.jsx";
 
 export const AdminUserView = () => {
 
@@ -20,7 +20,7 @@ export const AdminUserView = () => {
         email: 'Email',
         isHeader: true,
         category_name: 'Parent Category',
-        role: 'User'
+        role: 'Role'
     }
 
     return (

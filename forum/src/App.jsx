@@ -1,9 +1,8 @@
-import {useContext, useEffect, useState} from 'react'
+import {    useEffect, useState} from 'react'
 import './App.css'
-import {createElement, getElement} from "./firebase/firebase-funcs.js";
+import { getElement} from "./firebase/firebase-funcs.js";
 import {Routes, Route} from 'react-router-dom';
 import HeaderBar from "./components/commonComponents/HeaderBar/HeaderBar.jsx";
-import {Category} from "./components/commonComponents/CategoryComponent/Category.jsx";
 import {Home} from "./views/HomeView/Home.jsx";
 import Register from './auth/Register.jsx';
 import Login from './auth/Login.jsx';
@@ -11,7 +10,7 @@ import {useAuthState} from 'react-firebase-hooks/auth';
 import {AppContext} from '../state/app.context.js';
 import {getUserDataByUID} from './services/user.service.js';
 import {auth} from './firebase/config.js';
-import {useLocation, useNavigate, Navigate} from "react-router-dom";
+import { useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
 import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
@@ -23,8 +22,9 @@ import { PostView } from './views/PostView/PostView.jsx';
 import {AdminMenu} from "./views/AdminMenuView/AdminMenu.jsx";
 import Administrated from "./hoc/Administratored.jsx";
 import Authenticated from "./hoc/Authenticated";
-import {AddCategory} from "./components/adminComponents/AddCategoryComponent/AddCategory";
-import {AddSubcategory} from "./components/adminComponents/AddSubcategoryComponent/AddSubcategory.jsx";
+import {
+    AddEditCategory
+} from "./components/adminComponents/AdminCategory/AddEditCategoryComponent/AddEditCategory.jsx";
 import {AdminCategoryView} from "./views/AdminMenuView/AdminCategoryView/AdminCategoryView.jsx";
 import {AdminSubcategoryView} from "./views/AdminMenuView/AdminSubcategoryView/AdminSubcategoryView.jsx";
 import {AdminPostView} from "./views/AdminMenuView/AdminPostView/AdminPostView.jsx";
@@ -88,6 +88,7 @@ function App() {
                         <Route path="/subcategory-management" element={<Administrated><AdminSubcategoryView/></Administrated>} />
                         <Route path="/post-management" element={<Administrated><AdminPostView/></Administrated>} />
                         <Route path="/user-management" element={<Administrated><AdminUserView/></Administrated>} />
+                        <Route path="/edit-category" element={<Administrated><AddEditCategory/></Administrated>} />
 
                         <Route path="/profile" element={<Authenticated><ProfileView/></Authenticated>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />

@@ -84,7 +84,7 @@ const HeaderBar = ({logout}) => {
                 </div>
             </div>
             <div className="banner">
-                <img src="img/banner.png" alt="Banner"/>
+                <img src="/img/banner.png" alt="Banner"/>
             </div>
         </div>
     );

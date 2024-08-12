@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {getCategoryNameBySubcategoryId} from "../../../services/category.service.js";
-import {getPostsByUserId} from "../../../services/post.service.js";
+import {getCategoryNameBySubcategoryId} from "../../../../services/category.service.js";
+import {getPostsByUserId} from "../../../../services/post.service.js";
 import './AdminUserItem.css'
 
 export const AdminUserItem = ({user}) => {
@@ -18,7 +18,6 @@ export const AdminUserItem = ({user}) => {
                 <div className="admin-user-item-buttons">
                     <button>Edit</button>
                     <button>Block</button>
-                    <button>Delete</button>
                 </div>
             }
         </ul>

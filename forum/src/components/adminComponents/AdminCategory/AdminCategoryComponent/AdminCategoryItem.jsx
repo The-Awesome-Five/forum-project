@@ -17,7 +17,7 @@ export const AdminCategoryItem = ({category}) => {
             </ul>
             {category.isHeader ? "Buttons" :
                 <div className="admin-category-item-buttons">
-                    <button>Edit</button>
+                    <Link to={"/edit-category"} state={{ categoryToBeEdited: category }}>Edit</Link>
                     <button>Hide</button>
                 </div>
             }

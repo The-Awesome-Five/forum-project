@@ -1,12 +1,23 @@
-import React, {useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {createCategory} from "../../../services/category.service.js";
-import './AddCategory.css'
+import {useEffect, useState} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {createCategory, editWholeCategory} from "../../../../services/category.service.js";
+import './AddEditCategory.css'
 
-export const AddCategory = () => {
+export const AddEditCategory = () => {
     const [category, setCategory] = useState({})
+    const [isEdit, setIsEdit] = useState(false)
+
+    const location = useLocation();
+    const { categoryToBeEdited } = location.state;
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (categoryToBeEdited) {
+            setIsEdit(true);
+            setCategory(categoryToBeEdited);
+        }
+    }, []);
 
     const updateCategory = (prop) => (e) => {
 
@@ -17,7 +28,7 @@ export const AddCategory = () => {
         }));
     };
 
-    const createCategoryHandler = async () => {
+    const submitHandler = async () => {
 
         const {name, description, imgUrl} = category;
 
@@ -33,9 +44,14 @@ export const AddCategory = () => {
 
         try {
 
-            await createCategory(category);
+            if (isEdit) {
+                await editWholeCategory(category, category.id);
+            } else {
+                await createCategory(category);
+            }
 
             navigate('/category-management');
+
         } catch (e) {
             alert(e)
         }
@@ -43,7 +59,7 @@ export const AddCategory = () => {
 
     return (
         <div className="add-category-form">
-            <h2>Add Category</h2>
+            <h2>{isEdit ? 'Edit' : 'Add'} Category</h2>
             <div className="form-group">
                 <label>Name:</label>
             <input
@@ -74,7 +90,7 @@ export const AddCategory = () => {
             />
             <br/>
             </div>
-            <button className="add-category-save-button" onClick={createCategoryHandler}>Create Category</button>
+            <button className="add-category-save-button" onClick={submitHandler}>{isEdit ? 'Edit' : 'Create'} Category</button>
         </div>
     )
 }

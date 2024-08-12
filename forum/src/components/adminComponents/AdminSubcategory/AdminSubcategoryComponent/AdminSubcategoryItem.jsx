@@ -1,6 +1,6 @@
 import './AdminSubcategoryItem.css'
 import {useEffect, useState} from "react";
-import {getCategoryNameBySubcategoryId} from "../../../services/category.service.js";
+import {getCategoryNameBySubcategoryId} from "../../../../services/category.service.js";
 
 export const AdminSubcategoryItem = ({subcategory}) => {
 

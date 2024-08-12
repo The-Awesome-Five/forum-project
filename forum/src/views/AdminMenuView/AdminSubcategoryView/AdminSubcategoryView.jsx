@@ -1,9 +1,9 @@
 import {useEffect, useState} from "react";
 import {getAllSubcategories} from "../../../services/subcategory.service.js";
-import {AddSubcategory} from "../../../components/adminComponents/AddSubcategoryComponent/AddSubcategory.jsx";
+import {AddSubcategory} from "../../../components/adminComponents/AdminSubcategory/AddSubcategoryComponent/AddSubcategory.jsx";
 import {
     AdminSubcategoryItem
-} from "../../../components/adminComponents/AdminSubcategoryComponent/AdminSubcategoryItem.jsx";
+} from "../../../components/adminComponents/AdminSubcategory/AdminSubcategoryComponent/AdminSubcategoryItem.jsx";
 
 export const AdminSubcategoryView = () => {
 

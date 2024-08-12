@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getAllPosts} from "../../../services/post.service.js";
-import {AdminPostItem} from "../../../components/adminComponents/AdminPostComponent/AdminPostItem.jsx";
+import {AdminPostItem} from "../../../components/adminComponents/AdminPosts/AdminPostComponent/AdminPostItem.jsx";
 
 export const AdminPostView = () => {
 

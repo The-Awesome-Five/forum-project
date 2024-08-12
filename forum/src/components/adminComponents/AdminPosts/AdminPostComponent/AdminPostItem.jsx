@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
-import {getSubcategoriesByPostId} from "../../../services/post.service.js";
+import {getSubcategoriesByPostId} from "../../../../services/post.service.js";
 import './AdminPostItem.css'
-import {getSubcategoryNameBySubcategoryId} from "../../../services/subcategory.service.js";
+import {getSubcategoryNameBySubcategoryId} from "../../../../services/subcategory.service.js";
 
 export const AdminPostItem = ({post}) => {
 

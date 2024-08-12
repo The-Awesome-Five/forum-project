@@ -1,7 +1,9 @@
-import {AdminCategoryItem} from "../../../components/adminComponents/AdminCategoryComponent/AdminCategoryItem.jsx";
-import {AddCategory} from "../../../components/adminComponents/AddCategoryComponent/AddCategory.jsx";
+import {AdminCategoryItem} from "../../../components/adminComponents/AdminCategory/AdminCategoryComponent/AdminCategoryItem.jsx";
 import {useEffect, useState} from "react";
 import {getAllCategories} from "../../../services/category.service.js";
+import {
+    AddEditCategory
+} from "../../../components/adminComponents/AdminCategory/AddEditCategoryComponent/AddEditCategory.jsx";
 
 export const AdminCategoryView = () => {
 
@@ -31,7 +33,7 @@ export const AdminCategoryView = () => {
         <div className="admin-category-view">
             {createMenuVisible
                 ? <div className="admin-menu-create-category">
-                    <AddCategory/>
+                    <AddEditCategory/>
                     <button type="button" onClick={() => setCreateMenuVisible(false)}>Close</button>
                 </div>
                 : <button type="button" onClick={() => setCreateMenuVisible(true)}>Create Category</button>}

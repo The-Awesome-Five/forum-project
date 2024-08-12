@@ -34,6 +34,11 @@ export const editCategory = async (data, category_id, prop = '') => {
     return updateField(data, pathToBeEdited);
 }
 
+export const editWholeCategory = async (data, category_id) => {
+
+        return updateElement(data, `Category/${category_id}`);
+}
+
 export const hideCategory = async (category_id) => {
 
     await editCategory(true, category_id, 'isHidden');
