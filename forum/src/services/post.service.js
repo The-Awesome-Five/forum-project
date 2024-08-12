@@ -165,6 +165,39 @@ export const getAllPosts = async () => {
     }
 };
 
+export const getTopLikedPostsByUser = async (userId) => {
+    try {
+        
+        const userPostsPath = createPath('Users', userId, 'Posts');
+        const userPosts = await getElement(userPostsPath);
+
+        if (!userPosts) {
+            return [];
+        }
+
+        const postDetails = await Promise.all(
+            Object.keys(userPosts).map(async (postId) => {
+                const subcategoryId = userPosts[postId].subId;
+                const post = await getSinglePost(subcategoryId, postId);
+                return { postId, subcategoryId, ...post };
+            })
+        );
+
+       
+        const sortedPosts = postDetails.sort((a, b) => {
+            const likesA = a.likedBy ? Object.keys(a.likedBy).length : 0;
+            const likesB = b.likedBy ? Object.keys(b.likedBy).length : 0;
+            return likesB - likesA; 
+        });
+
+        
+        return sortedPosts.slice(0, 3);
+    } catch (e) {
+        console.error('Failed to fetch top liked posts by user', e);
+        return [];
+    }
+};
+
 
 export const likePost = (uid, postId, subcategoriesId) => {
     const updateObject = {
