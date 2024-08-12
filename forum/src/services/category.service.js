@@ -77,7 +77,7 @@ export const getCategoryNameBySubcategoryId = async (subcategory_id) => {
     try {
         const categories = await getElement('Category');
         const category = Object.values(categories).find(category => category.subcategory_ids[subcategory_id]);
-        return category;
+        return category.name;
     } catch (e) {
         console.error('Failed to get category id by subcategory id', e);
         return e.message;
