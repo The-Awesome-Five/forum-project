@@ -51,7 +51,7 @@ const Profile = () => {
                 <img src={profileData[0].badgeUrl} alt="badge" />
             </div>
             <div className="profile-navigation">
-                <Link to="/users-topics">User's Topics</Link>
+                <Link to={`/users-topics/${uid}`}>User's Topics</Link>
                 {isCurrentUserProfile && (
                     <Link to='/edit-profile'>Edit Profile</Link>
                 )}
@@ -82,3 +82,4 @@ const Profile = () => {
 }
 
 export default Profile;
+
