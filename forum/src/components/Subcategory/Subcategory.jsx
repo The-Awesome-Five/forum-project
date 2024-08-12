@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getPostsBySubcategoryId } from "../../services/post.service";
 import './Subcategory.css';
 import { CreatePost } from "../commonComponents/CreateForm/CreateForm";
+import { AppContext } from "../../../state/app.context";
 
 export const Subcategory = () => {
     const { subcategoryId } = useParams();
@@ -13,7 +14,7 @@ export const Subcategory = () => {
     const [error, setError] = useState(null);
     const [sortOrder, setSortOrder] = useState('desc');
     const [sortOrderLikes, setSortOrderLikes] = useState('desc');
-
+    const {userData} = useContext(AppContext)
     useEffect(() => {
         getPostsBySubcategoryId(subcategoryId)
             .then(data => {
@@ -98,6 +99,7 @@ export const Subcategory = () => {
                 </tr>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map(post => (
+                        <>{post.isHidden && (!userData || userData.role!=='Admin') ? <></> :  <>
                         <div key={post.id} className='post-item'>
                             <Link to={`${post.id}`}>{post.Title}</Link>
                             <div className='post-details'>
@@ -110,6 +112,10 @@ export const Subcategory = () => {
                                 </span>
                             </div>
                         </div>
+                        </>
+                        
+                        }
+                        </>
                     ))
                 ) : (
                     <div>No posts available in this subcategory.</div>
