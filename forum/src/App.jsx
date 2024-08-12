@@ -29,6 +29,7 @@ import {AdminCategoryView} from "./views/AdminMenuView/AdminCategoryView/AdminCa
 import {AdminSubcategoryView} from "./views/AdminMenuView/AdminSubcategoryView/AdminSubcategoryView.jsx";
 import {AdminPostView} from "./views/AdminMenuView/AdminPostView/AdminPostView.jsx";
 import {AdminUserView} from "./views/AdminMenuView/AdminUserView/AdminUserView.jsx";
+import {RecentPosts} from './components/commonComponents/Latest/Latest.jsx'
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -78,7 +79,7 @@ function App() {
                         <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
                         <Route path="/create-post/:subcategoryId" element={<Authenticated><CreatePost /></Authenticated>} />
                         <Route path="/category/:categoryId/:subcategoryId/:postId" element={<PostView />} />
-
+                        <Route path="/latest" element={<RecentPosts />} />
                         {!user && <Route path="/register" element={<Register/>}/>}
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
@@ -89,6 +90,7 @@ function App() {
                         <Route path="/post-management" element={<Administrated><AdminPostView/></Administrated>} />
                         <Route path="/user-management" element={<Administrated><AdminUserView/></Administrated>} />
                         <Route path="/edit-category" element={<Administrated><AddEditCategory/></Administrated>} />
+
 
                         <Route path="/profile" element={<Authenticated><ProfileView/></Authenticated>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />
