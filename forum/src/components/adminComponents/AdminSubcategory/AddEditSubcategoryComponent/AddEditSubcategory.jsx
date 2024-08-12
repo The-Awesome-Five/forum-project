@@ -8,7 +8,7 @@ import {
 import {createSubcategory, editSubcategory} from "../../../../services/subcategory.service.js";
 import "./AddEditSubcategory.css"
 
-export const AddEditSubcategory = () => {
+export const AddEditSubcategory = ({setCreateMenuVisible}) => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('')
@@ -19,7 +19,11 @@ export const AddEditSubcategory = () => {
     const navigate = useNavigate();
 
     const location = useLocation();
-    const {subcategoryToBeEdited} = location.state;
+    let subcategoryToBeEdited;
+
+    if (location.state && location.state.subcategoryToBeEdited) {
+        subcategoryToBeEdited = location.state.subcategoryToBeEdited;
+    }
 
     useEffect(() => {
         if (subcategoryToBeEdited) {
@@ -89,6 +93,7 @@ export const AddEditSubcategory = () => {
                 await editSubcategory(subcategory, categoryId, subcategory.id);
             } else {
                 await createSubcategory(name, imgUrl, category);
+                setCreateMenuVisible(false);
             }
 
 

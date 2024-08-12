@@ -8,7 +8,11 @@ export const AddEditCategory = () => {
     const [isEdit, setIsEdit] = useState(false)
 
     const location = useLocation();
-    const { categoryToBeEdited } = location.state;
+    let categoryToBeEdited;
+
+    if (location.state && location.state.categoryToBeEdited) {
+        categoryToBeEdited = location.state.categoryToBeEdited;
+    }
 
     const navigate = useNavigate();
 

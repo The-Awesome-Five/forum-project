@@ -16,7 +16,7 @@ export const createElement = async (data, pathForCreating) => {
 
         }
         catch(e){
-            return e;
+            alert(e.message);
         }
 
 }

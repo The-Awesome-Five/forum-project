@@ -27,7 +27,7 @@ export const AdminSubcategoryView = () => {
         <div className="admin-subcategory-view">
             {createMenuVisible
                 ? <div className="admin-menu-create-subcategory">
-                    <AddEditSubcategory/>
+                    <AddEditSubcategory setCreateMenuVisible={setCreateMenuVisible}/>
                     <button type="button" onClick={() => setCreateMenuVisible(false)}>Close</button>
                 </div>
                 : <button type="button" onClick={() => setCreateMenuVisible(true)}>Create Subcategory</button>}

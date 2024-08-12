@@ -3,8 +3,6 @@ import {useEffect, useState} from "react";
 import {
     getCategoryIdBySubcategoryId,
     getCategoryNameBySubcategoryId,
-    hideCategory,
-    showCategory
 } from "../../../../services/category.service.js";
 import {Link} from "react-router-dom";
 import {
