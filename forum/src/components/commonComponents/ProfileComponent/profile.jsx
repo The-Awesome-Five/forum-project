@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useParams } from 'react-router-dom'; // Импортираме useParams директно тук
+import { Link, useParams } from 'react-router-dom';
 import { AppContext } from '../../../../state/app.context.js';
 import { getUserDataByUID } from '../../../services/user.service.js';
-import './profile.css'
+import './profile.css';
 
 const Profile = () => {
-    const { uid } = useParams(); // Извличаме userId от URL параметрите
+    const { uid } = useParams(); 
     const { userData } = useContext(AppContext);
     const [profileData, setProfileData] = useState(null);
 
@@ -13,24 +13,25 @@ const Profile = () => {
         console.log("userId:", uid);
         console.log("userData:", userData);
 
-    
         if (uid) {
             getUserDataByUID(uid)
             .then(data => {
-            console.log("Fetched data:", data);
-            setProfileData(Object.values(data));
+                console.log("Fetched data:", data);
+                setProfileData(Object.values(data)); 
             })
             .catch(error => console.error("Failed to fetch user data:", error));
-            
         } else {
-            setProfileData(userData);
+            setProfileData(Object.values(userData));
         }
     }, [uid, userData]);
 
     if (!profileData) {
         return <div>Loading...</div>;
     }
-    console.log(profileData);
+
+ 
+    const isCurrentUserProfile = userData && uid === userData.uid;
+
     return (
         <div className='profile-container'>
             <div className="profile-header">
@@ -43,8 +44,10 @@ const Profile = () => {
                 <img src={profileData[0].badgeUrl} alt="badge" />
             </div>
             <div className="profile-navigation">
-                <Link to="/users-topics">Your Topics</Link>
-                <Link to='/edit-profile'>Edit Profile</Link>
+                <Link to="/users-topics">User's Topics</Link>
+                {isCurrentUserProfile && (
+                    <Link to='/edit-profile'>Edit Profile</Link>
+                )}
             </div>
             <div className="profile-section">
                 <h3>Top Comments by User</h3>
@@ -55,7 +58,7 @@ const Profile = () => {
                 <p>{ 'No top topics available.'}</p>
             </div>
         </div>
-    )
+    );
 }
 
 export default Profile;
