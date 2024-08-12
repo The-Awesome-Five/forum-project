@@ -92,7 +92,7 @@ function App() {
                         <Route path="/edit-category" element={<Administrated><AddEditCategory/></Administrated>} />
 
 
-                        <Route path="/profile" element={<Authenticated><ProfileView/></Authenticated>} />
+                        <Route path="/profile/:uid" element={<ProfileView/>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />
                         <Route path="/users-topics" element={<Authenticated><UsersTopics/></Authenticated>} />
                  {/* Uncomment and add your other routes as necessary */}

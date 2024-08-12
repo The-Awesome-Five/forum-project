@@ -11,8 +11,9 @@ const HeaderBar = ({logout}) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [user] = useAuthState(auth);
     const [avatarUrl, setAvatarUrl] = useState(null);
-
+    const {userData} = useContext(AppContext)
     const handleLogoClick = () => {
+
         navigate('/');
     };
 
@@ -34,9 +35,10 @@ const HeaderBar = ({logout}) => {
         fetchUserAvatar();
     }, [user]);
 
-    const {userData} = useContext(AppContext)
+    
 
-
+    
+    console.log(user)
     return (
         <div className="header-wrapper">
 
@@ -75,7 +77,7 @@ const HeaderBar = ({logout}) => {
                         ) : (
                             <>
                                 <div className="profile-btn">
-                                    <Link to="/profile">PROFILE ▶️</Link>
+                                    <Link to={`profile/${user.uid}`}>PROFILE ▶️</Link>
                                 </div>
                                 <button onClick={() => logout()}>LOGOUT ▶️</button>
                             </>
