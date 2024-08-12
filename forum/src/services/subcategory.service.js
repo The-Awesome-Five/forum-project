@@ -33,13 +33,12 @@ export const createSubcategory = async (name, imgUrl, category_id) => {
 }
 
 export const editSubcategory = async (data, category_id, subcategory_id) => {
-
+    
     const pathToBeEdited = createPath('Subcategory', category_id, subcategory_id)
 
     return updateElement(data, pathToBeEdited);
 
 }
-
 export const hideSubcategory = async (category_id, subcategory_id) => {
 
     await editSubcategory({isHidden: true, isLocked: true}, category_id, subcategory_id)

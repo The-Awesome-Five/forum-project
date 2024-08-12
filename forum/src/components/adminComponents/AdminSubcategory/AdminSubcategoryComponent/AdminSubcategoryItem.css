@@ -34,3 +34,8 @@
 .admin-subcategory-item-buttons {
     text-align: left;
 }
+
+.admin-subcategory-item-buttons a {
+    text-decoration: none;
+    color: white;
+}

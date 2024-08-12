@@ -1,6 +1,7 @@
 import './AdminSubcategoryItem.css'
 import {useEffect, useState} from "react";
 import {getCategoryNameBySubcategoryId} from "../../../../services/category.service.js";
+import {Link} from "react-router-dom";
 
 export const AdminSubcategoryItem = ({subcategory}) => {
 
@@ -23,7 +24,7 @@ export const AdminSubcategoryItem = ({subcategory}) => {
             <li>{subcategory.isHeader ? "Parent Category" : categoryName}</li>
             {subcategory.isHeader ? "Buttons" :
                 <div className="admin-subcategory-item-buttons">
-                    <button>Edit</button>
+                    <button><Link to={"/edit-subcategory"} state={{ subcategoryToBeEdited: subcategory }}>Edit</Link></button>
                     <button>Hide</button>
                     <button>Lock</button>
                 </div>

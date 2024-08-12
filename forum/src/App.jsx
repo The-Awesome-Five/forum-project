@@ -30,6 +30,9 @@ import {AdminSubcategoryView} from "./views/AdminMenuView/AdminSubcategoryView/A
 import {AdminPostView} from "./views/AdminMenuView/AdminPostView/AdminPostView.jsx";
 import {AdminUserView} from "./views/AdminMenuView/AdminUserView/AdminUserView.jsx";
 import {RecentPosts} from './components/commonComponents/Latest/Latest.jsx'
+import {
+    AddEditSubcategory
+} from "./components/adminComponents/AdminSubcategory/AddEditSubcategoryComponent/AddEditSubcategory.jsx";
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -90,6 +93,7 @@ function App() {
                         <Route path="/post-management" element={<Administrated><AdminPostView/></Administrated>} />
                         <Route path="/user-management" element={<Administrated><AdminUserView/></Administrated>} />
                         <Route path="/edit-category" element={<Administrated><AddEditCategory/></Administrated>} />
+                        <Route path="/edit-subcategory" element={<Administrated><AddEditSubcategory/></Administrated>} />
 
 
                         <Route path="/profile/:uid" element={<ProfileView/>} />

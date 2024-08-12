@@ -1,23 +1,42 @@
 import React, {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {createCategory, getAllCategories} from "../../../../services/category.service.js";
-import {createSubcategory} from "../../../../services/subcategory.service.js";
-import "./AddSubcategory.css"
+import {useLocation, useNavigate} from "react-router-dom";
+import {
+    editWholeCategory,
+    getAllCategories,
+    getCategoryIdBySubcategoryId
+} from "../../../../services/category.service.js";
+import {createSubcategory, editSubcategory} from "../../../../services/subcategory.service.js";
+import "./AddEditSubcategory.css"
 
-export const AddSubcategory = () => {
+export const AddEditSubcategory = () => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('')
     const [isDropdownVisible, setDropdownVisible] = useState(false);
+    const [categoryId, setCategoryId] = useState('')
+    const [isEdit, setIsEdit] = useState(false)
 
     const navigate = useNavigate();
 
+    const location = useLocation();
+    const {subcategoryToBeEdited} = location.state;
+
     useEffect(() => {
-        getAllCategories()
-            .then(data => {
-                return setCategories(data)
-            })
-            .catch(e => alert(e));
+        if (subcategoryToBeEdited) {
+            setSubcategory(subcategoryToBeEdited);
+            getCategoryIdBySubcategoryId(subcategoryToBeEdited.id)
+                .then(data => {
+                    setCategoryId(data)
+                })
+                .catch(e => alert(e));
+            setIsEdit(true);
+        } else {
+            getAllCategories()
+                .then(data => {
+                    return setCategories(data)
+                })
+                .catch(e => alert(e));
+        }
     }, [categories])
 
 
@@ -48,31 +67,41 @@ export const AddSubcategory = () => {
         }
     }
 
-    const createSubcategoryHandler = async () => {
+    const submitHandler = async () => {
 
         const {name, imgUrl, category} = subcategory;
 
-        if (!name || !category || !imgUrl) {
+        if (!name || !imgUrl) {
             return alert('Please fill all of the needed fields');
         }
+
+        if (!isEdit && !category) {
+            return alert('Please select a category');
+        }
+
         if (name.length < 8 || 32 < name.length) {
             return alert('Name should be between 8 and 32 symbols');
         }
 
         try {
 
-            await createSubcategory(name, imgUrl, category);
+            if (isEdit) {
+                await editSubcategory(subcategory, categoryId, subcategory.id);
+            } else {
+                await createSubcategory(name, imgUrl, category);
+            }
 
-            navigate('/');
+
+            navigate('/subcategory-management');
         } catch (e) {
-            alert(e)
+            alert('Current Error: ' + e)
         }
     }
 
     return (
         <div className="add-subcategory-container">
             <div className="add-subcategory-form">
-                <h2>Add Subcategory</h2>
+                <h2>{isEdit ? 'Edit' : 'Add'} Subcategory</h2>
                 <div className="form-group">
                     <label>Name:</label>
                     <input type="text" value={subcategory.name} onChange={updateSubcategory('name')}/>
@@ -81,7 +110,7 @@ export const AddSubcategory = () => {
                     <label>Image URL:</label>
                     <input type="text" value={subcategory.imgUrl} onChange={updateSubcategory('imgUrl')}/>
                 </div>
-                <div className="form-group" onBlur={handleBlur}>
+                {!isEdit && <div className="form-group" onBlur={handleBlur}>
                     <label>Select Parent Category:</label>
                     <input
                         type="text"
@@ -107,8 +136,8 @@ export const AddSubcategory = () => {
                             )}
                         </select>
                     )}
-                </div>
-                <button className="add-subcategory-save-button" onClick={createSubcategoryHandler}>Create Subcategory</button>
+                </div>}
+                <button className="add-subcategory-save-button" onClick={submitHandler}>{isEdit ? 'Edit' : 'Add'} Subcategory</button>
             </div>
         </div>
     )

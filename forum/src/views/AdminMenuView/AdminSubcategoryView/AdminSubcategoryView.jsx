@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {getAllSubcategories} from "../../../services/subcategory.service.js";
-import {AddSubcategory} from "../../../components/adminComponents/AdminSubcategory/AddSubcategoryComponent/AddSubcategory.jsx";
+import {AddEditSubcategory} from "../../../components/adminComponents/AdminSubcategory/AddEditSubcategoryComponent/AddEditSubcategory.jsx";
 import {
     AdminSubcategoryItem
 } from "../../../components/adminComponents/AdminSubcategory/AdminSubcategoryComponent/AdminSubcategoryItem.jsx";
@@ -27,7 +27,7 @@ export const AdminSubcategoryView = () => {
         <div className="admin-subcategory-view">
             {createMenuVisible
                 ? <div className="admin-menu-create-subcategory">
-                    <AddSubcategory/>
+                    <AddEditSubcategory/>
                     <button type="button" onClick={() => setCreateMenuVisible(false)}>Close</button>
                 </div>
                 : <button type="button" onClick={() => setCreateMenuVisible(true)}>Create Subcategory</button>}
