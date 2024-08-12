@@ -15,6 +15,7 @@ export const createPost = async (postInfo, subcategoriesId) => {
 
 
 export const updatePost = async (postInfo, subcategory_id, postId) => {
+
     const path = createPath('Posts',subcategory_id, postId);
     await updateElement(postInfo, path);
 };
@@ -38,10 +39,8 @@ export const hidePosts = async (subcategory_id) => {
     try {
 
         const posts = await getElement(`Posts/${subcategory_id}`);
-        const postsToUpdate=Object.keys(posts)
 
-
-        await Promise.all(postsToUpdate.map(postId => updatePost({ isHidden: true, isLocked: true }, subcategory_id, postId)));
+        posts && await Promise.all(Object.keys(posts).map(postId => updatePost({ isHidden: true, isLocked: true }, subcategory_id, postId)));
 
         return 'Posts hidden successfully!';
     } catch (e) {
@@ -49,6 +48,20 @@ export const hidePosts = async (subcategory_id) => {
         return e.message;
     }
 };
+
+export const showPosts = async (subcategory_id) => {
+    try {
+
+        const posts = await getElement(`Posts/${subcategory_id}`);
+
+        posts && await Promise.all(Object.keys(posts).map(postId => updatePost({ isHidden: false, isLocked: false }, subcategory_id, postId)));
+
+        return 'Posts shown successfully!';
+    } catch (e) {
+        console.error('Failed to show posts', e);
+        return e.message;
+    }
+}
 
 export const getSubcategoriesByPostId = async(post_id) => {
     try{
@@ -201,3 +214,7 @@ export const likePost = (uid, postId, subcategoriesId) => {
         throw new Error('Failed to delete post');
     }
 };
+
+  export const showPost = async (subcategory_id, post_id) => {
+      return updatePost({ isHidden: false }, subcategory_id, post_id);
+  }

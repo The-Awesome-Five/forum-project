@@ -14,7 +14,7 @@ import {
     deleteSubcategory,
     getSubcategoriesByCategoryId, hideSubcategories,
     hideSubcategory,
-    lockSubcategory, unhideSubcategory, unlockSubcategory
+    lockSubcategory, showSubcategory, unlockSubcategory
 } from "../services/subcategory.service.js";
 import { createPost, deletePost, lockPosts, removePostsByCategoryId } from "../services/post.service.js";
 import { createReply } from "../services/reply.service.js";
@@ -63,7 +63,7 @@ import { createReply } from "../services/reply.service.js";
 
 //     const sub_id = await createSubcategory('PC Gaming', id);
 //     await hideSubcategory(id, sub_id);
-//    await unhideSubcategory(id, sub_id);
+//    await showSubcategory(id, sub_id);
 
 //     const id_2 = await createSubcategory('Console Gaming', id);
 

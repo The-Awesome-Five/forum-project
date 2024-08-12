@@ -1,5 +1,5 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
-import {hidePosts, lockPosts, removePostsByCategoryId} from "./post.service.js";
+import {hidePosts, lockPosts, removePostsByCategoryId, showPosts} from "./post.service.js";
 import {editCategory} from "./category.service.js";
 
 export const getSubcategoriesByCategoryId = async (category_id) => {
@@ -56,12 +56,11 @@ export const lockSubcategory = async (category_id, subcategory_id) => {
 
 }
 
-export const unhideSubcategory = async (category_id, subcategory_id) => {
+export const showSubcategory = async (category_id, subcategory_id) => {
 
     await editSubcategory({isHidden: false, isLocked: false}, category_id, subcategory_id)
 
-    //todo
-    return //unhidePosts(subcategory_id);
+    return showPosts(subcategory_id);
 
 }
 
@@ -75,15 +74,17 @@ export const unlockSubcategory = async (category_id, subcategory_id) => {
 }
 
 
-export const hideSubcategories = async (category_id) => {
+export const hideSubcategories = async (category_id, shouldHide = true) => {
 
     const subcategory_ids = await getSubcategoriesByCategoryId(category_id);
 
     const keys_sub_ids = Object.keys(subcategory_ids);
 
-    await keys_sub_ids.forEach(sub => hideSubcategory(category_id,sub));
-
-    return keys_sub_ids.forEach(sub => hidePosts(sub.id));
+    if (shouldHide) {
+        return keys_sub_ids.forEach(sub => hideSubcategory(category_id, sub));
+    } else {
+        return keys_sub_ids.forEach(sub => showSubcategory(category_id, sub));
+    }
 }
 
 
