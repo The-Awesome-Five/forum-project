@@ -7,7 +7,12 @@ import {
     showCategory
 } from "../../../../services/category.service.js";
 import {Link} from "react-router-dom";
-import {hideSubcategory, showSubcategory} from "../../../../services/subcategory.service.js";
+import {
+    hideSubcategory,
+    lockSubcategory,
+    showSubcategory,
+    unlockSubcategory
+} from "../../../../services/subcategory.service.js";
 
 export const AdminSubcategoryItem = ({subcategory}) => {
 
@@ -16,6 +21,7 @@ export const AdminSubcategoryItem = ({subcategory}) => {
         id: ''
     });
     const [isHidden, setHidden] = useState(subcategory.isHidden);
+    const [isLocked, setLocked] = useState(subcategory.isLocked);
 
     useEffect(() => {
         if(!subcategory.isHeader && subcategory.id) {
@@ -42,9 +48,26 @@ export const AdminSubcategoryItem = ({subcategory}) => {
             if (!isHidden) {
                 await hideSubcategory(category.id, subcategory.id);
                 setHidden(true);
+                setLocked(true);
             } else {
                 await showSubcategory(category.id, subcategory.id);
                 setHidden(false);
+                setLocked(false);
+            }
+        } catch (e) {
+            alert(e)
+        }
+    }
+
+
+    const lockHandler = async () => {
+        try {
+            if (!isLocked) {
+                await lockSubcategory(category.id, subcategory.id);
+                setLocked(true);
+            } else {
+                await unlockSubcategory(category.id, subcategory.id);
+                setLocked(false);
             }
         } catch (e) {
             alert(e)
@@ -62,7 +85,7 @@ export const AdminSubcategoryItem = ({subcategory}) => {
                 <div className="admin-subcategory-item-buttons">
                     <button><Link to={"/edit-subcategory"} state={{ subcategoryToBeEdited: subcategory }}>Edit</Link></button>
                     <button onClick={hideHandler}>{isHidden ? 'Show' : 'Hide'}</button>
-                    <button>Lock</button>
+                    <button onClick={lockHandler}>{isLocked ? 'Unlock' : 'Lock'}</button>
                 </div>
             }
         </ul>

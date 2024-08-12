@@ -1,5 +1,5 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
-import {hidePosts, lockPosts, removePostsByCategoryId, showPosts} from "./post.service.js";
+import {hidePosts, lockPosts, removePostsByCategoryId, showPosts, unlockPosts} from "./post.service.js";
 import {editCategory} from "./category.service.js";
 
 export const getSubcategoriesByCategoryId = async (category_id) => {
@@ -33,7 +33,7 @@ export const createSubcategory = async (name, imgUrl, category_id) => {
 }
 
 export const editSubcategory = async (data, category_id, subcategory_id) => {
-    
+
     const pathToBeEdited = createPath('Subcategory', category_id, subcategory_id)
 
     return updateElement(data, pathToBeEdited);
@@ -68,7 +68,7 @@ export const unlockSubcategory = async (category_id, subcategory_id) => {
     await editSubcategory({isLocked: false}, category_id, subcategory_id)
 
     //todo
-    return //unlockPosts(subcategory_id);
+    return unlockPosts(subcategory_id);
 
 }
 

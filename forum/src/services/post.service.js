@@ -97,6 +97,21 @@ export const lockPosts = async (subcategory_id) => {
     }
 };
 
+export const unlockPosts = async (subcategory_id) => {
+    try {
+
+        const posts = await getElement(`Posts/${subcategory_id}`);
+        const postsToUpdate=Object.keys(posts)
+
+        await Promise.all(postsToUpdate.map(postId => updatePost({ isLocked: false }, subcategory_id, postId)));
+
+        return 'Posts unlocked successfully!';
+    } catch (e) {
+        console.error('Failed to unlock posts', e);
+        return e.message;
+    }
+}
+
 export const removePostsByCategoryId = async (subcategory_id) => {
     try {
 
