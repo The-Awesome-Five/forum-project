@@ -108,6 +108,14 @@ export const PostDetail = () => {
                     id="post-avatar"
                     style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
                 />
+                
+              
+                <span className="reply-author">{post.createdBy.username}</span>
+                <span className="reply-date">{new Date(post.CreatedOn).toLocaleString()}</span>
+          
+
+
+
                 <h1 id="post-title">{post.Title}</h1>
             </div>
             <div id="post-separator"></div>
