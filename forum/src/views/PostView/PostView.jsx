@@ -47,7 +47,7 @@ export const PostView = () => {
                     <p>No replies yet</p>
                 )}
             </div>
-            {user && !post.isLocked && <CreateReplyForm postId={postId} />}
+            {user && (!post.isLocked || user.isBlocked) && <CreateReplyForm postId={postId} />}
         </div>
     );
 };

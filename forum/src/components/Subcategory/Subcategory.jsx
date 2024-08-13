@@ -77,7 +77,8 @@ export const Subcategory = () => {
     }
     return (
         <div className='subcategory'>
-            <button onClick={handleCreatePost}>Make a Post</button>
+            {userData && !userData.isBlocked ?  <button onClick={handleCreatePost}>Make a Post</button> : <></> }
+            {/* <button onClick={handleCreatePost}>Make a Post</button> */}
 
             <h2>Posts in this Subcategory</h2>
              
