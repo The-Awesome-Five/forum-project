@@ -37,7 +37,7 @@ const UsersTopics = () => {
     }, [uid]);
 
     if (!posts.length) {
-        return <p>Loading...</p>;
+        return <p>No posts available.</p>;
     }
     console.log(uid)
     return (
