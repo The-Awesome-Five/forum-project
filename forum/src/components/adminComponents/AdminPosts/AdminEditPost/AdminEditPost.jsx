@@ -3,7 +3,7 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {updatePost} from "../../../../services/post.service.js";
 import './AdminEditPost.css';
 
-export const AdminEditPost = ({  }) => {
+export const AdminEditPost = () => {
     const [post, setPost] = useState({})
 
     const location = useLocation();
@@ -32,7 +32,7 @@ export const AdminEditPost = ({  }) => {
 
     const submitHandler = async () => {
 
-        const {Title, Content, imgUrl} = post;
+        const {Title, Content} = post;
 
         if (!Title || !Content) {
             return alert('Please fill all of the needed fields');
