@@ -48,17 +48,13 @@ const Profile = () => {
                     <h3>{profileData[0].firstName} {profileData[0].lastName}</h3>
                     <p>{profileData[0].customInfo || 'Custom information'}</p>
                 </div>
-                <img src={profileData[0].badgeUrl} alt="badge" />
+                {/* <img src={profileData[0].badgeUrl} alt="badge" /> */}
             </div>
             <div className="profile-navigation">
                 <Link to={`/users-topics/${uid}`}>User's Topics</Link>
                 {isCurrentUserProfile && (
                     <Link to='/edit-profile'>Edit Profile</Link>
                 )}
-            </div>
-            <div className="profile-section">
-                <h3>Top Comments by User</h3>
-                <p>{'No top comments available.'}</p>
             </div>
             <div className="profile-section">
                 <h3>Top Topics by User</h3>
