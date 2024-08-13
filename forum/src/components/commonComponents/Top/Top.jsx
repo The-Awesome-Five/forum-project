@@ -29,7 +29,7 @@ export const TopPosts = () => {
     }, []);
 
     return (
-        <div>
+        <div className='top-container'>
             <h1>Top 10 Most Liked Posts</h1>
             {topLikedPosts.length === 0 ? (
                 <p>No posts available.</p>
