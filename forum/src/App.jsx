@@ -35,6 +35,7 @@ import {
 } from "./components/adminComponents/AdminSubcategory/AddEditSubcategoryComponent/AddEditSubcategory.jsx";
 import TopPosts from './components/commonComponents/Top/Top.jsx';
 import {AdminEditPost} from "./components/adminComponents/AdminPosts/AdminEditPost/AdminEditPost.jsx";
+import { Footer } from './components/commonComponents/Footer/Footer.jsx';
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -110,8 +111,11 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/profile" element={<Profile />} />
                     */}
+
+                   
                 </Routes>
             </div>
+            <Footer/>
         </AppContext.Provider>
     </>
 

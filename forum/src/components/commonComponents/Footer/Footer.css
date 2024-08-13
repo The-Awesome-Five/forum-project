@@ -1,0 +1,11 @@
+#Footer {
+    position: bottom;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
+    color: #FFFFFF; /* White text color */
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}

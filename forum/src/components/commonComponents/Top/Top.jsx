@@ -57,6 +57,7 @@ export const TopPosts = () => {
                                 {post.Title}
                             </Link>
                             <p>Replies: {Object.keys(post.Replies || {}).length}</p>
+                            
                         </li>
                     ))}
                 </ul>
