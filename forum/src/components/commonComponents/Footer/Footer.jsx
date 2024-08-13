@@ -20,7 +20,7 @@ export const Footer= () => {
 
         getUsers();
         getPosts();
-    })
+    },[])
 
 
     return (
