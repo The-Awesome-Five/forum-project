@@ -7,15 +7,14 @@ Users: {
         LastName: String
         Email: String
         Username: String
-        Notification:  [number]
-        FavoritesIDs: [number];
+        avatarURL:
+        Posts: {}
         RoleId: number
-        PostsID: {
-            postid:true
-        }
         ReplyID: {
             replyid:true
         }
+        likedPosts:{}
+        likedReplies: {}
     }
     ....
 }
@@ -34,6 +33,8 @@ Categories: {
         name: string
         isHidden: False;
         imgURL: string
+        description: string
+        id:
     },
     ...
 }
@@ -42,11 +43,11 @@ Subcategories: {
     CategoryID
         {
             id: {
-                isLocked:false
-                isHidden:false;
-                Name of the Subcategory: String,
-                imgURL: string
-        
+                  name: string
+                    isHidden: False;
+                    imgURL: string
+                 isLocked: False;
+                    id:
         },
             id: {
                 isLocked:false
@@ -70,9 +71,10 @@ subcategoryID:{
             ID: Username
         }
         CreatedOn: Date;
-        Likes: [{ID: Username},...];
-        ReportsID: [reports.ID,...]
-        Latest Reply Date: Date
+        likedBy: {}
+        subcategoryID:
+        UpdatedOn:
+        Replies:
     },
     ...
     }
@@ -86,71 +88,26 @@ Reply: {
             ID: Username
         }
         CreatedOn: Date;
-        Likes: [{ID: Username},...];
-        ReportsID: [reports.ID,...]
+        likedBy:{}
+        id: string
+        isHidden: false
+        isLocked: false
     },
     }
     ...
 }
 
+Prerequisites
+Before you begin, ensure you have the following installed on your machine:
 
-Reports: {
+Node.js: Install the latest stable version of Node.js from the official website.
+npm: Comes bundled with Node.js. Verify it's installed by running npm -v in your terminal.
+Git: If you're cloning the project from a repository, make sure you have Git installed. You can download it from the official website.
 
-    id:{
-        Title: String
-        Content: String;
-        CreatedBy : {
-            ID: Username
-        }
-        CreatedOn: Date;
-        ReportedPostID: ID
-        Resolved: Boolean;
-    },
-    ...
-}
+1. Clone the Repository (If Applicable)
 
-#Components:
-Main Page
-Subcategory Page
-Post Page
-Notification Page
-Notification Component 
-Account Profile
-Admin Menu
-Login Component
-Register Component
-Report Component
-Post Component
-Reports Page
+2. Install Dependencies
+After navigating to the project directory, install all necessary dependencies. The package manager (npm or yarn) will read the package.json file and install the required package
 
-/// Category, Subcategory Pages - isHidden && !isAdmin = hidden
-
-// administrator - reports, user management, create, edit and delete categories, create, edit and delete subcategories, lock, delete and hide posts, hide and delete replies
-
-// moderator - lock users from category, create, edit and delete subcategories, lock, delete and hide posts, hide and delete replies
-
-// user - create, edit and delete posts, create, edit and delete replies
-
-// when we delete post / reply made by user, we delete the post / reply and the user's post / reply ids are updated
-// only when the user tries to access them
-
-// category state - active, deleted or hidden
-// delete - delete everything - not recommended (optional)
-// hide - hide and lock everything - isHidden == true
-
-// subcategory state - active, locked, deleted or hidden
-// lock - lock creating posts and replying to them
-// delete - delete subcategory, posts and replies 
-// hide - hide subcategory and posts - isHidden === true
-
-// posts - active, locked, deleted or hidden
-// lock - lock creating replies
-// delete - delete post and replies
-// hide - hide post - isHidden === true
-
-// reply - delete
-// delete - delete reply
-Search Page
-Search Component 
-Edit Post Component 
- 
+3. Run the Project 
+npm run dev
