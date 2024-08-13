@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import './AdminPostItem.css'
 import {getSubcategoryNameBySubcategoryId} from "../../../../services/subcategory.service.js";
+import {Link} from "react-router-dom";
 
 export const AdminPostItem = ({post}) => {
 
@@ -23,6 +24,7 @@ export const AdminPostItem = ({post}) => {
             <li>{post.isHeader ? 'Subcategory' : subcategory}</li>
             {post.isHeader ? "Buttons" :
                 <div className="admin-post-item-buttons">
+                    <button><Link to='/edit-post' state={{postToBeEdited: post}}>Edit</Link></button>
                     <button>Hide</button>
                     <button>Lock</button>
                     <button>Delete</button>
