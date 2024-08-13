@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getAllPosts, getSubcategoriesByPostId } from '../../../services/post.service.js';
 import { getCategoryIdBySubcategoryId } from '../../../services/category.service.js';
-
+import './Latest.css'
 
 export const RecentPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -52,7 +52,7 @@ export const RecentPosts = () => {
                         <ul key={index} className='post-item'>
                             <ul><Link to={links[index]?.link}>{post.Title}</Link></ul>
                             
-                            <p><Link to={`/profile/${post.createdBy?.ID}`}>{post.createdBy?.username}</Link></p>
+                            <p className='name'><Link to={`/profile/${post.createdBy?.ID}`}>{post.createdBy?.username}</Link></p>
                             <p>{new Date(post.CreatedOn).toLocaleDateString()}</p>
 
 
