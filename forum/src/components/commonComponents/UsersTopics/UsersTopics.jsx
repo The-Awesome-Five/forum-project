@@ -46,13 +46,13 @@ const UsersTopics = () => {
             {links.length === 0 ? (
                 <p>No posts available.</p>
             ) : (
-                <ul>
+                <ul className='post-item'>
                     {links.map((linkData) => (
-                        <li key={linkData.id}>
+                        <ul key={linkData.id}>
                             <Link to={linkData.link}>
                                 {linkData.title}
                             </Link>
-                        </li>
+                        </ul>
                     ))}
                 </ul>
             )}
