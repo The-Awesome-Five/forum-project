@@ -3,13 +3,13 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { getPostsBySubcategoryId } from "../../services/post.service";
 import './Subcategory.css';
 import { CreatePost } from "../commonComponents/CreateForm/CreateForm";
-import { AppContext } from "../../../state/app.context";
+import { AppContext } from "../../state/app.context";
 
 export const Subcategory = () => {
     const { subcategoryId } = useParams();
     const [posts, setPosts] = useState([]);
     const [filteredPosts, setFilteredPosts] = useState([]);
-    const [filterKeyword, setFilterKeyword] = useState(''); 
+    const [filterKeyword, setFilterKeyword] = useState('');
     const navigate = useNavigate();
     const [error, setError] = useState(null);
     const [sortOrder, setSortOrder] = useState('desc');
@@ -24,7 +24,7 @@ export const Subcategory = () => {
                 } else {
                     const postList = Object.values(data);
                     setPosts(postList);
-                    setFilteredPosts(postList); 
+                    setFilteredPosts(postList);
                 }
             })
             .catch(e => {
@@ -66,9 +66,9 @@ export const Subcategory = () => {
         setFilterKeyword(keyword);
 
         if (keyword.trim() === '') {
-            setFilteredPosts(posts); 
+            setFilteredPosts(posts);
         } else {
-            const filtered = posts.filter(post => 
+            const filtered = posts.filter(post =>
                 post.Title.toLowerCase().includes(keyword) ||
                 post.Content.toLowerCase().includes(keyword)
             );
@@ -81,7 +81,7 @@ export const Subcategory = () => {
             {/* <button onClick={handleCreatePost}>Make a Post</button> */}
 
             <h2>Posts in this Subcategory</h2>
-             
+
             <input
                 type="text"
                 placeholder="Filter by keyword..."
@@ -104,7 +104,7 @@ export const Subcategory = () => {
                         <>{post.isHidden && (!userData || userData.role!=='Admin' ) ? <></> :  <>
                         <div key={post.id} className='post-item'>
                             {post.isLocked ?<>🔒</> :<></>}
-                           
+
                             <Link to={`${post.id}`}>{post.Title}</Link>
                             {post.isHidden ? <div className='post-details'>This is a hidden post</div>: <></>}
                             <div className='post-details'>
@@ -119,7 +119,7 @@ export const Subcategory = () => {
                             </div>
                         </div>
                         </>
-                        
+
                         }
                         </>
                     ))
@@ -127,6 +127,6 @@ export const Subcategory = () => {
                     <div>No posts available in this subcategory.</div>
                 )}
             </div>
-       
+
     );
 }

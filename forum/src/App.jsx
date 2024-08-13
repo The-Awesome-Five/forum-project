@@ -7,7 +7,7 @@ import {Home} from "./views/HomeView/Home.jsx";
 import Register from './auth/Register.jsx';
 import Login from './auth/Login.jsx';
 import {useAuthState} from 'react-firebase-hooks/auth';
-import {AppContext} from '../state/app.context.js';
+import {AppContext} from './state/app.context.js';
 import {getUserDataByUID} from './services/user.service.js';
 import {auth} from './firebase/config.js';
 import { useNavigate, Navigate} from "react-router-dom";

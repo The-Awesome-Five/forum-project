@@ -3,7 +3,7 @@ import './HeaderBar.css';
 import {Link, useNavigate} from "react-router-dom";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../../firebase/config.js";
-import {AppContext} from "../../../../state/app.context.js";
+import {AppContext} from "../../../state/app.context.js";
 import {getUserByID} from "../../../services/user.service.js";
 
 const HeaderBar = ({logout}) => {
@@ -35,9 +35,9 @@ const HeaderBar = ({logout}) => {
         fetchUserAvatar();
     }, [user]);
 
-    
 
-    
+
+
     console.log(user)
     return (
         <div className="header-wrapper">

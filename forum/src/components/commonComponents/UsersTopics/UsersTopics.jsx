@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getUserPosts } from '../../../firebase/firebase-funcs.js';
-import { AppContext } from '../../../../state/app.context.js';
+import { AppContext } from '../../../state/app.context.js';
 import { getSubcategoriesByPostId } from '../../../services/post.service.js';
 import { getCategoryIdBySubcategoryId } from '../../../services/category.service.js';
 
 const UsersTopics = () => {
-    const { uid } = useParams(); 
+    const { uid } = useParams();
     const [posts, setPosts] = useState([]);
     const [links, setLinks] = useState([]);
 

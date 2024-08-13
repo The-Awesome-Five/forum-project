@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../state/app.context';
+import { AppContext } from '../state/app.context';
 import { getUserDataByUID, createUserID, getUserDataByEmail } from '../services/user.service';
 import { registerUser } from '../services/auth.service';
 export default function Register() {
@@ -15,46 +15,46 @@ export default function Register() {
     });
     const { setAppState } = useContext(AppContext);
     const navigate = useNavigate();
-  
+
     const updateUser = (prop) => (e) => {
-       
-  
+
+
       setUser((prevUser) => ({
-        
+
         ...prevUser,
         [prop]: e.target.value,
       }));
     };
-  
+
     const register = async () => {
       const { username, firstName, lastName, email, password, avatarUrl } = user;
-  
+
       if (!email || !password || !username || !firstName || !lastName) {
         return alert('All fields are required!');
       }
-  
+
       if (firstName.length < 4 || firstName.length > 32) {
         return alert('First name must be between 4 and 32 characters!');
       }
-  
+
       if (lastName.length < 4 || lastName.length > 32) {
         return alert('Last name must be between 4 and 32 characters!');
       }
-  
+
 
       try {
         const userFromDB = await getUserDataByUID(username);
         if (userFromDB) {
           return alert(`User {${username}} already exists!`);
         }
-  
+
         const emailInUse = await getUserDataByEmail(email);
         if (emailInUse) {
           return alert(`Email {${email}} is already in use!`);
         }
-  
+
         const credential = await registerUser(email, password);
-      
+
         await createUserID(username, firstName, lastName, credential.user.uid, email, avatarUrl);
         setAppState({ user: credential.user, userData: credential.user.uid });
         navigate('/');
@@ -63,7 +63,7 @@ export default function Register() {
         alert(error.message);
       }
     };
-  
+
     return (
       <div>
         <h2>Register</h2>
@@ -105,11 +105,11 @@ export default function Register() {
         <input
           type="text"
           placeholder="Avatar URL"
-          value={user.avatarUrl}  
+          value={user.avatarUrl}
            onChange={updateUser('avatarUrl')}
         />
           <br/>
-        
+
         <button onClick={register}>Register</button>
       </div>
     );

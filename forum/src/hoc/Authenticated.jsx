@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {Navigate, useLocation} from "react-router-dom";
-import {AppContext} from "../../state/app.context.js";
+import {AppContext} from "../state/app.context.js";
 
 export default function Authenticated ({children}) {
 
