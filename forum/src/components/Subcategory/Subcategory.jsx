@@ -102,9 +102,11 @@ export const Subcategory = () => {
 
                         <>{post.isHidden && (!userData || userData.role!=='Admin' ) ? <></> :  <>
                         <div key={post.id} className='post-item'>
-                         
+                            {post.isLocked ?<>🔒</> :<></>}
+                            {post.isHidden ? <>👁️‍🗨️ </>
+                                            :<></>}
                             <Link to={`${post.id}`}>{post.Title}</Link>
-                            <div className='post-details'>This is a hidden post</div>
+                            {post.isHidden ? <div className='post-details'>This is a hidden post</div>: <></>}
                             <div className='post-details'>
                             <Link to={`/profile/${post.createdBy?.ID}`}><span className="post-author">{post.createdBy.username}</span>
                             </Link>
