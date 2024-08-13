@@ -19,21 +19,22 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 } */
 
-button {
-  margin: 10px auto;
-  background-color: #56527d;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 14px;
+/* button {
+  text-decoration: none;
+  color: #D3D3D3;
+  padding: 10px;
+  transition: color 0.3s ease;
+  background-color: #24243e;
+  margin-bottom: 10px;
+  border-radius: 10px;
 }
 
 button:hover {
-  margin: 10px auto;
-  background-color: black;
-}
+    color: white; 
+    background-color:  #2f2f52;
+    box-shadow: 0 0 10px #0f0c29; 
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+} */
 
 button:disabled {
   background-color: #888;
