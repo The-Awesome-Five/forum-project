@@ -1,0 +1,44 @@
+.create-reply-container {
+    background-color: #23272A; /* Slightly lighter background for contrast */
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 100%;
+    margin: 20px auto;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.7);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.reply-textarea {
+    width: 97%;
+    padding: 15px;
+    border: 1px solid #7289DA; /* Thinner border for a subtle effect */
+    border-radius: 8px;
+    background-color: #2C2F33; /* Darker textarea background for better contrast */
+    color: #FFF;
+    font-size: 16px;
+    resize: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.reply-textarea:focus {
+    border-color: #A3B1E6;
+    background-color: #3A3E47; /* Slightly lighter background on focus */
+    outline: none;
+}
+
+.submit-reply-button {
+    align-self: center;
+    padding: 10px 20px;
+
+}
+
+/* .submit-reply-button:hover {
+    background-color: #A3B1E6;
+    transform: translateY(-2px);
+} */
+
+.submit-reply-button:active {
+    transform: translateY(0);
+}
