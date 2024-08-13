@@ -61,7 +61,7 @@ const Profile = () => {
                 {topLikedPosts.length > 0 ? (
                     <ul>
                         {topLikedPosts.map((post, index) => (
-                            <li key={post.postId}>
+                            <li key={post.postId} className='post-item'>
                                 <Link to={`/category/${post.category}/${post.subcategoryId}/${post.postId}`}>
                                     {post.Title || `Post ${index + 1}`}
                                 </Link>
