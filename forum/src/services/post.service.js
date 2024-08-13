@@ -1,10 +1,10 @@
 import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
-import { ref, get, query, orderByChild, equalTo, update, OnDisconnect } from "firebase/database";
-import { db } from "../firebase/config";
-import { deleteReply, getReplies } from "./reply.service.js";
+import {ref, get, query, orderByChild, equalTo, update, OnDisconnect} from "firebase/database";
+import {db} from "../firebase/config";
+import {deleteReply, getReplies} from "./reply.service.js";
 
 export const createPost = async (postInfo, subcategoriesId) => {
-    const path = createPath('Posts',subcategoriesId );
+    const path = createPath('Posts', subcategoriesId);
     const postId = await createElement(postInfo, path);
 
     const pathForUserUpdate = createPath('Users', postInfo.createdBy.ID, 'Posts', postId);
@@ -16,7 +16,7 @@ export const createPost = async (postInfo, subcategoriesId) => {
 
 export const updatePost = async (postInfo, subcategory_id, postId) => {
 
-    const path = createPath('Posts',subcategory_id, postId);
+    const path = createPath('Posts', subcategory_id, postId);
     await updateElement(postInfo, path);
 };
 
@@ -40,7 +40,10 @@ export const hidePosts = async (subcategory_id) => {
 
         const posts = await getElement(`Posts/${subcategory_id}`);
 
-        posts && await Promise.all(Object.keys(posts).map(postId => updatePost({ isHidden: true, isLocked: true }, subcategory_id, postId)));
+        posts && await Promise.all(Object.keys(posts).map(postId => updatePost({
+            isHidden: true,
+            isLocked: true
+        }, subcategory_id, postId)));
 
         return 'Posts hidden successfully!';
     } catch (e) {
@@ -54,7 +57,10 @@ export const showPosts = async (subcategory_id) => {
 
         const posts = await getElement(`Posts/${subcategory_id}`);
 
-        posts && await Promise.all(Object.keys(posts).map(postId => updatePost({ isHidden: false, isLocked: false }, subcategory_id, postId)));
+        posts && await Promise.all(Object.keys(posts).map(postId => updatePost({
+            isHidden: false,
+            isLocked: false
+        }, subcategory_id, postId)));
 
         return 'Posts shown successfully!';
     } catch (e) {
@@ -63,19 +69,19 @@ export const showPosts = async (subcategory_id) => {
     }
 }
 
-export const getSubcategoriesByPostId = async(post_id) => {
-    try{
+export const getSubcategoriesByPostId = async (post_id) => {
+    try {
         const posts = await getElement('Posts');
         const subcategories = Object.keys(posts)
-       for(let key in posts) {
-        let obj = posts[key]
-            for(let val in obj) {
-                if(val === post_id) {
+        for (let key in posts) {
+            let obj = posts[key]
+            for (let val in obj) {
+                if (val === post_id) {
                     return key;
                 }
             }
-       }
-    }catch (e){
+        }
+    } catch (e) {
         console.error('Failed to fetch subcategory!', e);
         return e.message;
     }
@@ -85,11 +91,11 @@ export const lockPosts = async (subcategory_id) => {
     try {
 
         const posts = await getElement(`Posts/${subcategory_id}`);
-        const postsToUpdate=Object.keys(posts)
+        const postsToUpdate = Object.keys(posts)
         // posts.flat();
 
 
-        await Promise.all(postsToUpdate.map(postId => updatePost({ isLocked: true }, subcategory_id, postId)));
+        await Promise.all(postsToUpdate.map(postId => updatePost({isLocked: true}, subcategory_id, postId)));
 
     } catch (e) {
         console.error('Failed to lock posts', e);
@@ -101,9 +107,9 @@ export const unlockPosts = async (subcategory_id) => {
     try {
 
         const posts = await getElement(`Posts/${subcategory_id}`);
-        const postsToUpdate=Object.keys(posts)
+        const postsToUpdate = Object.keys(posts)
 
-        await Promise.all(postsToUpdate.map(postId => updatePost({ isLocked: false }, subcategory_id, postId)));
+        await Promise.all(postsToUpdate.map(postId => updatePost({isLocked: false}, subcategory_id, postId)));
 
         return 'Posts unlocked successfully!';
     } catch (e) {
@@ -116,7 +122,7 @@ export const removePostsByCategoryId = async (subcategory_id) => {
     try {
 
         const posts = await getElement(`Posts/${subcategory_id}`);
-        const postsToUpdate=Object.keys(posts)
+        const postsToUpdate = Object.keys(posts)
 
         await Promise.all(postsToUpdate.map(postId => deletePost(subcategory_id, postId)));
 
@@ -133,7 +139,7 @@ export const getPostsBySubcategoryId = async (subcategoryId) => {
 };
 //missing hiding and getting post funcs
 
-export const getSinglePost= async (subcategoryId, postId) =>{
+export const getSinglePost = async (subcategoryId, postId) => {
     return getElement(`Posts/${subcategoryId}/${postId}`)
 
 }
@@ -167,7 +173,7 @@ export const getAllPosts = async () => {
 
 export const getTopLikedPostsByUser = async (userId) => {
     try {
-        
+
         const userPostsPath = createPath('Users', userId, 'Posts');
         const userPosts = await getElement(userPostsPath);
 
@@ -179,18 +185,18 @@ export const getTopLikedPostsByUser = async (userId) => {
             Object.keys(userPosts).map(async (postId) => {
                 const subcategoryId = userPosts[postId].subId;
                 const post = await getSinglePost(subcategoryId, postId);
-                return { postId, subcategoryId, ...post };
+                return {postId, subcategoryId, ...post};
             })
         );
 
-       
+
         const sortedPosts = postDetails.sort((a, b) => {
             const likesA = a.likedBy ? Object.keys(a.likedBy).length : 0;
             const likesB = b.likedBy ? Object.keys(b.likedBy).length : 0;
-            return likesB - likesA; 
+            return likesB - likesA;
         });
 
-        
+
         return sortedPosts.slice(0, 3);
     } catch (e) {
         console.error('Failed to fetch top liked posts by user', e);
@@ -206,19 +212,19 @@ export const likePost = (uid, postId, subcategoriesId) => {
     };
 
     return update(ref(db), updateObject);
-  };
+};
 
-  export const dislikePost = (uid, postId, subcategoriesId) => {
+export const dislikePost = (uid, postId, subcategoriesId) => {
     const updateObject = {
-      [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: null,
-      [`Users/${uid}/likedPosts/${uid}`]: null,
+        [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: null,
+        [`Users/${uid}/likedPosts/${uid}`]: null,
     };
 
     return update(ref(db), updateObject);
-  };
+};
 
 
-  export const deletePost = async (subcategoryId, postId) => {
+export const deletePost = async (subcategoryId, postId) => {
     try {
         const postRef = ref(db, `Posts/${subcategoryId}/${postId}`);
 
@@ -229,12 +235,12 @@ export const likePost = (uid, postId, subcategoriesId) => {
             throw new Error('Post not found');
         }
 
-        const { likedBy, Replies } = postData;
+        const {likedBy, Replies} = postData;
 
-        const updateObject = { [`Posts/${subcategoryId}/${postId}`]: null,
-                                [`Users/${postData.createdBy.ID}/Posts/${postId}`]: null,
-                            };
-
+        const updateObject = {
+            [`Posts/${subcategoryId}/${postId}`]: null,
+            [`Users/${postData.createdBy.ID}/Posts/${postId}`]: null,
+        };
 
 
         if (likedBy) {
@@ -243,7 +249,7 @@ export const likePost = (uid, postId, subcategoriesId) => {
             });
         }
 
-        const replies= await  getReplies(postId);
+        const replies = await getReplies(postId);
         if (Replies) {
             const replyDeletionPromises = Object.keys(replies).map(replyId => {
 
@@ -263,6 +269,17 @@ export const likePost = (uid, postId, subcategoriesId) => {
     }
 };
 
-  export const showPost = async (subcategory_id, post_id) => {
-      return updatePost({ isHidden: false }, subcategory_id, post_id);
-  }
+export const hidePost = async (subcategory_id, post_id) => {
+    return updatePost({isHidden: true, isLocked: true}, subcategory_id, post_id);
+}
+export const showPost = async (subcategory_id, post_id) => {
+    return updatePost({isHidden: false, isLocked: false}, subcategory_id, post_id);
+}
+
+export const lockPost = async (subcategory_id, post_id) => {
+    return updatePost({isLocked: true}, subcategory_id, post_id);
+}
+
+export const unlockPost = async (subcategory_id, post_id) => {
+    return updatePost({isLocked: false}, subcategory_id, post_id);
+}
