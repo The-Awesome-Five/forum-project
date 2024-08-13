@@ -47,20 +47,17 @@ export const RecentPosts = () => {
                 <p>No posts available.</p>
             ) : (
                 <div>
-                    <ul className="admin-post-item-header">
-                        <li>Title</li>
-                        <li>Content</li>
-                        <li>Created By</li>
-                        <li>Created On</li>
-                       
-                       
-                    </ul>
+                 
                     {posts.map((post, index) => (
-                        <ul key={index} className="admin-post-item">
-                            <li><Link to={links[index]?.link}>{post.Title}</Link></li>
-                            <li>{post.Content}</li>
-                            <li> <Link to={`/profile/${post.createdBy?.ID}`}>{post.createdBy?.username}</Link></li>
-                            <li>{new Date(post.CreatedOn).toLocaleDateString()}</li>
+                        <ul key={index} className='post-item'>
+                            <ul><Link to={links[index]?.link}>{post.Title}</Link></ul>
+                            
+                            <p><Link to={`/profile/${post.createdBy?.ID}`}>{post.createdBy?.username}</Link></p>
+                            <p>{new Date(post.CreatedOn).toLocaleDateString()}</p>
+
+
+                            
+                    
 
                          
                         </ul>
