@@ -27,6 +27,8 @@ export const Footer= () => {
         <div id='Footer'>
         <h4> Number of users: {users.length}</h4>
         <h4> Number of posts on the forum: {posts.length}</h4>
+        <br></br>
+        <h4>© 2024 TEAM05 TELERIK. All rights reserved.</h4>
         </div>
     )
 
