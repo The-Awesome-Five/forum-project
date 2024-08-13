@@ -1,8 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../state/app.context';
-import { getUserByID, updateUserAvatar, updateUserFirstName, updateUserLastName, updateCustomInfo } from '../../../services/user.service';
-import { useNavigate } from 'react-router-dom';
-import './EditProfileComponent.css'; // Импорт на CSS
+import {
+    getUserByID,
+    updateUserAvatar,
+    updateUserFirstName,
+    updateUserLastName,
+    updateCustomInfo,
+    updateUserRole
+} from '../../../services/user.service';
+import {useNavigate, useParams} from 'react-router-dom';
+import './EditProfileComponent.css';
+import {getPostsByUserId} from "../../../services/post.service.js"; // Импорт на CSS
 
 const EditProfile = () => {
     const { userData, setAppState } = useContext(AppContext);
@@ -12,13 +20,18 @@ const EditProfile = () => {
     const [info, setInfo] = useState('');
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState('');
+    const [userId, setUserId] = useState('');
     const isAdmin = userData && userData.role === 'Admin';
+
+    const { uid } = useParams();
 
     useEffect(() => {
       const loadUserData = async () => {
         if (userData) {
           try {
-            const userDataFromDB = await getUserByID(userData.uid);
+            const id = uid || userData.uid;
+            const userDataFromDB = await getUserByID(id);
+            setUserId(id);
             setAvatarUrl(userDataFromDB.avatarUrl || '');
             setFirstName(userDataFromDB.firstName || '');
             setLastName(userDataFromDB.lastName || '');
@@ -58,11 +71,13 @@ const EditProfile = () => {
     const saveChanges = async () => {
       try {
         if (userData) {
-          await updateUserAvatar(userData.uid, avatarUrl);
-          await updateUserFirstName(userData.uid, firstName);
-          await updateUserLastName(userData.uid, lastName);
-          await updateCustomInfo(userData.uid, info);
-          const updatedUserData = await getUserByID(userData.uid);
+          await updateUserAvatar(userId, avatarUrl);
+          await updateUserFirstName(userId, firstName);
+          await updateUserLastName(userId, lastName);
+          await updateCustomInfo(userId, info);
+            console.log(role)
+          await updateUserRole(userId, role);
+          const updatedUserData = await getUserByID(userId);
           setAppState({ userData: updatedUserData });
 
           window.location.reload();

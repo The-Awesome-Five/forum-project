@@ -94,9 +94,10 @@ export const updateUsersPostWithSubCat= async (subcategory_id, userID, postId) =
   await updateElement(info, path);
 }
 
-export const changeUserRole = async (role, userId) => {
-
-  return set(ref(db), `Users/${userId}/role`, role);
+export const updateUserRole = async (userId, role) => {
+  console.log('role', role)
+  console.log('userId', userId)
+  return updateField(role, `Users/${userId}/role`);
 }
 
 export const blockUser = async (userId) => {
