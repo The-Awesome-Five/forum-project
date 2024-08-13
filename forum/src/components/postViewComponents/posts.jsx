@@ -103,6 +103,7 @@ export const PostDetail = () => {
     return (
         <div id="post-container">
             <div id="post-header">
+                {post.isHidden ? <div>Post is Hidden</div> :<></> }
                 <img 
                     src={post.createdBy.avatarUrl || 'default-avatar.png'} 
                     alt="User Avatar" 
@@ -110,7 +111,7 @@ export const PostDetail = () => {
                     style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
                 />
                 
-              
+                
                 <Link to={`/profile/${post.createdBy?.ID}`}><span className="reply-author">{post.createdBy.username}</span>
                 </Link>
                 <span className="reply-date">{new Date(post.CreatedOn).toLocaleString()}</span>
