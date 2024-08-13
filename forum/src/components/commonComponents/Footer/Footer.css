@@ -1,11 +1,19 @@
 #Footer {
+    margin-top: 10px;
     position: bottom;
     left: 0;
     bottom: 0;
-    width: 100%;
-    background: linear-gradient(to right, #0f0c29, #302b63, #24243e);
-    color: #FFFFFF; /* White text color */
+    width: 1260px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white; 
     text-align: center;
     padding: 10px;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+    font-size: 13px;
+}
+
+#Footer > h4 {
+    margin-top: 0;
+    margin-bottom: 0;
 }
