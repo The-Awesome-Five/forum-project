@@ -13,7 +13,7 @@
 .reply-textarea {
     width: 97%;
     padding: 15px;
-    border: 1px solid #7289DA; /* Thinner border for a subtle effect */
+    border: 1px solid white; /* Thinner border for a subtle effect */
     border-radius: 8px;
     background-color: #2C2F33; /* Darker textarea background for better contrast */
     color: #FFF;
