@@ -98,3 +98,11 @@ export const changeUserRole = async (role, userId) => {
 
   return set(ref(db), `Users/${userId}/role`, role);
 }
+
+export const blockUser = async (userId) => {
+  return updateField(true, `Users/${userId}/isBlocked`);
+}
+
+export const unblockUser = async (userId) => {
+  return updateField(false, `Users/${userId}/isBlocked`);
+}

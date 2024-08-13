@@ -42,8 +42,8 @@ export const AddEditCategory = () => {
         if (name.length < 8 || 32 < name.length) {
             return alert('Name should be between 8 and 32 symbols');
         }
-        if (description.length < 16 || 32 < description.length) {
-            return alert('Description needs to be between 16 and 32 symbols');
+        if (description.length < 16 || 64 < description.length) {
+            return alert('Description needs to be between 16 and 64 symbols');
         }
 
         try {

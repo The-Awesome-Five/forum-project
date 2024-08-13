@@ -3,8 +3,25 @@ import {getCategoryNameBySubcategoryId} from "../../../../services/category.serv
 import {getPostsByUserId} from "../../../../services/post.service.js";
 import './AdminUserItem.css'
 import {Link} from "react-router-dom";
+import {blockUser, unblockUser} from "../../../../services/user.service.js";
 
 export const AdminUserItem = ({user}) => {
+
+    const [isBlocked, setIsBlocked] = useState(user.isBlocked ? user.isBlocked : false);
+
+    const blockHandler = async () => {
+        try {
+            if (isBlocked) {
+                await unblockUser(user.uid)
+                setIsBlocked(false);
+            } else {
+                await blockUser(user.uid);
+                setIsBlocked(true);
+            }
+        } catch (e) {
+            alert(e)
+        }
+    }
 
     return (
         <ul className={user.isHeader ? "admin-user-item-header" : "admin-user-item"}>
@@ -18,7 +35,7 @@ export const AdminUserItem = ({user}) => {
             {user.isHeader ? "Buttons" :
                 <div className="admin-user-item-buttons">
                     <button><Link to={`/edit-profile/${user.uid}`}>Edit </Link></button>
-                    <button>Block</button>
+                    <button onClick={blockHandler}>{isBlocked ? 'Unblock' : 'Block'}</button>
                 </div>
             }
         </ul>

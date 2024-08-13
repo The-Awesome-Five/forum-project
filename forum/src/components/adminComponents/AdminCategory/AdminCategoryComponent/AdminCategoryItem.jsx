@@ -27,7 +27,7 @@ export const AdminCategoryItem = ({category}) => {
             <li>{category.name}</li>
             <li>{category.description}</li>
             <ul>
-                {Object.values(category.subcategory_ids).map(subcategory => <li key={subcategory.id}>
+                {category.subcategory_ids && Object.values(category.subcategory_ids).map(subcategory => <li key={subcategory.id}>
                     {category.isHeader
                         ? subcategory.name
                         :<Link to={`/category/${category.id}/${subcategory.id}`}>{subcategory.name}</Link>
