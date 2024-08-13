@@ -4,26 +4,37 @@ import { getReplies } from '../../services/reply.service.js';
 import { RenderSingleReply } from '../../components/commonComponents/Reply/RenderSingleReply.jsx';
 import { CreateReplyForm } from '../../components/commonComponents/CreateReplyForm/CreateReplyForm.jsx';
 import { PostDetail } from '../../components/postViewComponents/posts.jsx';
-import {AppContext} from "../../../state/app.context.js";
+import {AppContext} from "../../state/app.context.js";
+import { getSinglePost } from '../../services/post.service.js';
 
 export const PostView = () => {
     const { postId } = useParams();
     const [replies, setReplies] = useState([]);
     const {user} = useContext(AppContext);
     const {subcategoryId}= useParams()
+    const [post, setPost]= useState({});
     useEffect(() => {
         const fetchReplies = async () => {
             try {
                 const fetchedReplies = await getReplies(postId);
-                setReplies(Object.values(fetchedReplies)); 
+                setReplies(Object.values(fetchedReplies));
             } catch (error) {
                 console.error('Error fetching replies:', error);
             }
         };
-        
+
+        const fetchPost = async () => {
+            try {
+                const fetchedPost = await getSinglePost( subcategoryId, postId);
+                setPost((fetchedPost));
+            } catch (error) {
+                console.error('Error fetching replies:', error);
+            }
+        };
+        fetchPost();
         fetchReplies();
     }, [postId]);
-
+    console.log(post);
     return (
         <div>
             <PostDetail />
@@ -36,7 +47,7 @@ export const PostView = () => {
                     <p>No replies yet</p>
                 )}
             </div>
-            {user && <CreateReplyForm postId={postId} />}
+            {user && (!post.isLocked || user.isBlocked) && <CreateReplyForm postId={postId} />}
         </div>
     );
 };

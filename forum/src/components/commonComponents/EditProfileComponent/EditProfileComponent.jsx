@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../../../../state/app.context';
+import { AppContext } from '../../../state/app.context';
 import { getUserByID, updateUserAvatar, updateUserFirstName, updateUserLastName, updateCustomInfo } from '../../../services/user.service';
 import { useNavigate } from 'react-router-dom';
 import './EditProfileComponent.css'; // Импорт на CSS

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { likePost, dislikePost, updatePost, deletePost } from '../../services/post.service';
 import { getUserAvatar } from '../../services/user.service';
-import { AppContext } from '../../../state/app.context';
+import { AppContext } from '../../state/app.context';
 import './posts.css';
 
 export const PostDetail = () => {
@@ -12,7 +12,7 @@ export const PostDetail = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState('');
     const navigate = useNavigate();
-    
+
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -28,10 +28,10 @@ export const PostDetail = () => {
                 console.error('Error fetching post:', e);
             }
         };
-    
+
         fetchPost();
     }, [subcategoryId, postId]);
-    
+
 
     const toggleLike = async () => {
         if (!userData || !post) {
@@ -99,32 +99,33 @@ export const PostDetail = () => {
         return <div>Loading...</div>;
     }
 
-    
+
     return (
         <div id="post-container">
             <div id="post-header">
-                <img 
-                    src={post.createdBy.avatarUrl || 'default-avatar.png'} 
-                    alt="User Avatar" 
+                {post.isHidden ? <div>Post is Hidden</div> :<></> }
+                <img
+                    src={post.createdBy.avatarUrl || 'default-avatar.png'}
+                    alt="User Avatar"
                     id="post-avatar"
                     style={{ width: '50px', height: '50px', borderRadius: '50%', marginRight: '10px' }}
                 />
-                
-              
+
+
                 <Link to={`/profile/${post.createdBy?.ID}`}><span className="reply-author">{post.createdBy.username}</span>
                 </Link>
                 <span className="reply-date">{new Date(post.CreatedOn).toLocaleString()}</span>
-          
+
 
 
 
                 <h1 id="post-title">{post.Title}</h1>
             </div>
             <div id="post-separator"></div>
-            
+
             {isEditing ? (
                 <div id="post-edit">
-                    <textarea 
+                    <textarea
                         value={editedContent}
                         onChange={(e) => setEditedContent(e.target.value)}
                     />
@@ -134,7 +135,7 @@ export const PostDetail = () => {
             ) : (
                 <div id="post-body">{post.Content}</div>
             )}
-    
+
             <div id="post-footer-separator"></div>
             <>
                 <div>Likes: {Object.keys(post.likedBy).length}</div>

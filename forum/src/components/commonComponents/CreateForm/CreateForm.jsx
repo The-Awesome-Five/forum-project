@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../../state/app.context";
+import { AppContext } from "../../../state/app.context";
 import { useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../../../services/post.service";
 import { getUserByID } from "../../../services/user.service";
 import { updateUsersPostWithSubCat } from "../../../services/user.service";
 
 export const CreatePost = () =>  {
-    const { userData } = useContext(AppContext); 
+    const { userData } = useContext(AppContext);
     const { subcategoryId } = useParams();
-  
+
 const [post, setPost] = useState({
     createdBy: {
         username: '',
@@ -24,12 +24,12 @@ const [post, setPost] = useState({
     },
 
   });
-  
+
   const navigate = useNavigate();
   const updatePost = (prop) => (e) => {
-     
+
       setPost((prevPost) => ({
-      
+
       ...prevPost,
       [prop]: e.target.value,
     }));
@@ -73,9 +73,9 @@ return (
         placeholder="Content"
         value={post.Content}
         onChange={updatePost('Content')}
-        rows="5" 
+        rows="5"
       />
-         
+
          <br/>
          <button onClick={create}>Post</button>
   </div>

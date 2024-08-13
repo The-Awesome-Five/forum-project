@@ -1,15 +1,15 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { AppContext } from '../../../../state/app.context.js';
+import { AppContext } from '../../../state/app.context.js';
 import { getUserDataByUID } from '../../../services/user.service.js';
-import { getTopLikedPostsByUser } from '../../../services/post.service.js'; 
+import { getTopLikedPostsByUser } from '../../../services/post.service.js';
 import './profile.css';
 
 const Profile = () => {
-    const { uid } = useParams(); 
+    const { uid } = useParams();
     const { userData } = useContext(AppContext);
     const [profileData, setProfileData] = useState(null);
-    const [topLikedPosts, setTopLikedPosts] = useState([]); 
+    const [topLikedPosts, setTopLikedPosts] = useState([]);
 
     useEffect(() => {
         console.log("userId:", uid);
