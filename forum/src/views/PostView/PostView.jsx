@@ -5,12 +5,14 @@ import { RenderSingleReply } from '../../components/commonComponents/Reply/Rende
 import { CreateReplyForm } from '../../components/commonComponents/CreateReplyForm/CreateReplyForm.jsx';
 import { PostDetail } from '../../components/postViewComponents/posts.jsx';
 import {AppContext} from "../../../state/app.context.js";
+import { getSinglePost } from '../../services/post.service.js';
 
 export const PostView = () => {
     const { postId } = useParams();
     const [replies, setReplies] = useState([]);
     const {user} = useContext(AppContext);
     const {subcategoryId}= useParams()
+    const [post, setPost]= useState({});
     useEffect(() => {
         const fetchReplies = async () => {
             try {
@@ -20,10 +22,19 @@ export const PostView = () => {
                 console.error('Error fetching replies:', error);
             }
         };
-        
+
+        const fetchPost = async () => {
+            try {
+                const fetchedPost = await getSinglePost( subcategoryId, postId);
+                setPost((fetchedPost)); 
+            } catch (error) {
+                console.error('Error fetching replies:', error);
+            }
+        };
+        fetchPost();
         fetchReplies();
     }, [postId]);
-
+    console.log(post);
     return (
         <div>
             <PostDetail />
@@ -36,7 +47,7 @@ export const PostView = () => {
                     <p>No replies yet</p>
                 )}
             </div>
-            {user && <CreateReplyForm postId={postId} />}
+            {user && !post.isLocked && <CreateReplyForm postId={postId} />}
         </div>
     );
 };
