@@ -12,7 +12,7 @@ body {
   .edit-profile-wraper {
     display: grid;
     place-items: center;
-    margin: 0 auto; /* Центрира по хоризонтал */
+    margin: 0 auto;
   }
   
   .edit-profile-container {

@@ -13,6 +13,7 @@ import {auth} from './firebase/config.js';
 import { useNavigate, Navigate} from "react-router-dom";
 import {logoutUser} from './services/auth.service.js';
 import ProfileView from './views/ProfileView/Profile.jsx';
+import About from './components/commonComponents/About/AboutComponent.jsx';
 import EditProfileView from './components/commonComponents/EditProfileComponent/EditProfileComponent.jsx';
 import { Subcategory } from './components/Subcategory/Subcategory.jsx';
 import UsersTopics from "./components/commonComponents/UsersTopics/UsersTopics.jsx";
@@ -90,6 +91,7 @@ function App() {
                         {!user && <Route path="/login" element={<Login/>}/>}
                         {user && <Route path="/login" element={<Navigate to="/" replace/>}/>}
                         <Route path="/top" element={<TopPosts />} />
+                        <Route path="/about" element={<About />} />
                         <Route path="/admin-menu" element={<Administrated><AdminMenu/></Administrated>} />
                         <Route path="/category-management" element={<Administrated><AdminCategoryView/></Administrated>} />
                         <Route path="/subcategory-management" element={<Administrated><AdminSubcategoryView/></Administrated>} />
