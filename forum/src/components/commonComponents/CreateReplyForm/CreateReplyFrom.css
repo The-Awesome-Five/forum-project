@@ -1,5 +1,5 @@
 .create-reply-container {
-    background-color: #23272A; /* Slightly lighter background for contrast */
+    background-color: #23272A; 
     border-radius: 12px;
     padding: 20px;
     max-width: 100%;
@@ -13,9 +13,9 @@
 .reply-textarea {
     width: 97%;
     padding: 15px;
-    border: 1px solid white; /* Thinner border for a subtle effect */
+    border: 1px solid white; 
     border-radius: 8px;
-    background-color: #2C2F33; /* Darker textarea background for better contrast */
+    background-color: #2C2F33; 
     color: #FFF;
     font-size: 16px;
     resize: none;
@@ -24,7 +24,7 @@
 
 .reply-textarea:focus {
     border-color: #A3B1E6;
-    background-color: #3A3E47; /* Slightly lighter background on focus */
+    background-color: #3A3E47; 
     outline: none;
 }
 
@@ -34,10 +34,7 @@
 
 }
 
-/* .submit-reply-button:hover {
-    background-color: #A3B1E6;
-    transform: translateY(-2px);
-} */
+
 
 .submit-reply-button:active {
     transform: translateY(0);
