@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../state/app.context';
 import { getUserDataByUID, createUserID, getUserDataByEmail } from '../services/user.service';
 import { registerUser } from '../services/auth.service';
+import './Register.css'
 export default function Register() {
     const [user, setUser] = useState({
       username: '',
@@ -65,7 +66,7 @@ export default function Register() {
     };
 
     return (
-      <div>
+      <div className='reg-container'>
         <h2>Register</h2>
         <input
           type="text"

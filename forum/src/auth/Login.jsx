@@ -3,6 +3,7 @@ import { AppContext } from '../state/app.context';
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/auth.service";
 import { getUserByID } from "../services/user.service";
+import './Login.css'
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -42,7 +43,7 @@ export default function Login() {
   }
 
   return (
-    <div>
+    <div className="login-container">
       <h1>Login</h1>
       <label htmlFor="email">Email: </label>
       <input value={user.email} onChange={updateUser('email')} type="text" name="email" id="email" /><br /><br />
