@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getAllPosts } from '../../../services/post.service.js';
-
+import './Top.css'
 export const TopPosts = () => {
     const [topLikedPosts, setTopLikedPosts] = useState([]);
     const [topRepliedPosts, setTopRepliedPosts] = useState([]);
@@ -36,7 +36,7 @@ export const TopPosts = () => {
             ) : (
                 <ul>
                     {topLikedPosts.map((post, index) => (
-                        <li key={index}>
+                        <li key={index}  className='post-item'>
                             <Link to={`/category/${post.categoryId}/${post.subcategoryId}/${post.id}`}>
                                 {post.Title}
                             </Link>
@@ -52,7 +52,7 @@ export const TopPosts = () => {
             ) : (
                 <ul>
                     {topRepliedPosts.map((post, index) => (
-                        <li key={index}>
+                        <li key={index}   className='post-item'>
                             <Link to={`/category/${post.categoryId}/${post.subcategoryId}/${post.id}`}>
                                 {post.Title}
                             </Link>

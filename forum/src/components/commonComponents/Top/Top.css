@@ -1,0 +1,9 @@
+.post-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #333; /* Add a line between posts */
+    color: #fff; /* Adjust this color according to your theme */
+    transition: background-color 0.3s ease;
+}
