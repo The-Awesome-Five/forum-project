@@ -99,6 +99,7 @@ function App() {
 
                         <Route path="/profile/:uid" element={<ProfileView/>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />
+                        <Route path="/edit-profile/:uid" element={<Authenticated><EditProfileView/></Authenticated>} />
                         <Route path="/users-topics/:uid" element={<UsersTopics/>} />
                  {/* Uncomment and add your other routes as necessary */}
                     {/*

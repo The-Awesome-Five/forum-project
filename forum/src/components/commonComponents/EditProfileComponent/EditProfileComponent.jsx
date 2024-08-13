@@ -11,7 +11,9 @@ const EditProfile = () => {
     const [lastName, setLastName] = useState('');
     const [info, setInfo] = useState('');
     const [loading, setLoading] = useState(true);
-  
+    const [role, setRole] = useState('');
+    const isAdmin = userData && userData.role === 'Admin';
+
     useEffect(() => {
       const loadUserData = async () => {
         if (userData) {
@@ -21,24 +23,25 @@ const EditProfile = () => {
             setFirstName(userDataFromDB.firstName || '');
             setLastName(userDataFromDB.lastName || '');
             setInfo(userDataFromDB.info || '');
+            setRole(userDataFromDB.role || '');
           } catch (error) {
             console.error('Failed to load user data:', error);
           }
         }
         setLoading(false);
       };
-  
+
       loadUserData();
     }, [userData]);
-  
+
     const handleAvatarUrlChange = (e) => {
       setAvatarUrl(e.target.value);
     };
-  
+
     const handleFirstNameChange = (e) => {
       setFirstName(e.target.value);
     };
-  
+
     const handleLastNameChange = (e) => {
       setLastName(e.target.value);
     };
@@ -46,8 +49,12 @@ const EditProfile = () => {
     const handleInfoChange = (e) => {
         setInfo(e.target.value);
       };
-    
-  
+
+    const handleRoleChange = (e) => {
+        setRole(e.target.value);
+    }
+
+
     const saveChanges = async () => {
       try {
         if (userData) {
@@ -57,7 +64,7 @@ const EditProfile = () => {
           await updateCustomInfo(userData.uid, info);
           const updatedUserData = await getUserByID(userData.uid);
           setAppState({ userData: updatedUserData });
-  
+
           window.location.reload();
           alert('Profile updated successfully!');
         } else {
@@ -68,11 +75,11 @@ const EditProfile = () => {
         alert('Failed to update profile.');
       }
     };
-  
+
     if (loading) {
       return <div>Loading...</div>;
     }
-  
+
     return (
         <div className='edit-profile-wraper'>
             <div className="edit-profile-container">
@@ -89,6 +96,10 @@ const EditProfile = () => {
                 <label>Last Name:</label>
                 <input type="text" value={lastName} onChange={handleLastNameChange} />
                 </div>
+                {isAdmin && <div className="form-group">
+                    <label>Role:</label>
+                <input type="text" value={role} onChange={handleRoleChange} />
+                </div>}
                 <div className="form-group">
                 <label>Custom Information:</label>
                 <textarea value={info} onChange={handleInfoChange} />
@@ -98,5 +109,5 @@ const EditProfile = () => {
         </div>
     );
   };
-  
+
   export default EditProfile;
