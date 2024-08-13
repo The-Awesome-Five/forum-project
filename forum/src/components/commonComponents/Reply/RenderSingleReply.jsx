@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { dislikeReply, likeReply, updateReply, deleteReply } from "../../../services/reply.service";
-import { AppContext } from "../../../../state/app.context";
+import { AppContext } from "../../../state/app.context";
 import { Link, useParams } from "react-router-dom";
 import './RenderSingleReply.css';
 
@@ -10,8 +10,8 @@ export const RenderSingleReply = ({ reply, subcategoryId }) => {
         ...reply,
         likedBy: reply.likedBy || {}
     });
-    const [isEditing, setIsEditing] = useState(false);  
-    const [editedContent, setEditedContent] = useState(reply.Content); 
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedContent, setEditedContent] = useState(reply.Content);
     const { postId } = useParams();
 
     const toggleLike = async () => {
@@ -88,7 +88,7 @@ export const RenderSingleReply = ({ reply, subcategoryId }) => {
                     <textarea
                         value={editedContent}
                         onChange={(e) => setEditedContent(e.target.value)}
-                        style={{ width: '100%', overflow: 'hidden', minHeight: '50px' }} 
+                        style={{ width: '100%', overflow: 'hidden', minHeight: '50px' }}
                     />
                     <button onClick={handleSave}>Save</button>
                     <button onClick={() => setIsEditing(false)}>Cancel</button>

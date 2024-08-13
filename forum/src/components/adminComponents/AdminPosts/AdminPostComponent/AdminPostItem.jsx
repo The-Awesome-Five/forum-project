@@ -46,6 +46,15 @@ export const AdminPostItem = ({post}) => {
         }
     }
 
+    const deleteHandler = async () => {
+
+        try {
+            await deletePost(post.subcategoryId, post.id);
+        } catch (e) {
+            alert(e)
+        }
+    }
+
     return (
         <ul className={post.isHeader ? "admin-post-item-header" : "admin-post-item"}>
             <li>{post.Title}</li>

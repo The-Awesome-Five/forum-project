@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { AppContext } from '../../state/app.context';
+import { AppContext } from '../state/app.context';
 import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/auth.service";
 import { getUserByID } from "../services/user.service";
@@ -29,12 +29,12 @@ export default function Login() {
     try {
       const credentials = await loginUser(user.email, user.password);
       const userInfo= await getUserByID(credentials.user.uid)
-  
+
       setAppState({
         user: credentials.user,
         userData: userInfo,
       });
-  
+
       navigate(location.state?.from.pathname ?? '/');
     } catch (error) {
       alert(error.message);

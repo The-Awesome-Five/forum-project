@@ -4,7 +4,7 @@ import { getReplies } from '../../services/reply.service.js';
 import { RenderSingleReply } from '../../components/commonComponents/Reply/RenderSingleReply.jsx';
 import { CreateReplyForm } from '../../components/commonComponents/CreateReplyForm/CreateReplyForm.jsx';
 import { PostDetail } from '../../components/postViewComponents/posts.jsx';
-import {AppContext} from "../../../state/app.context.js";
+import {AppContext} from "../../state/app.context.js";
 import { getSinglePost } from '../../services/post.service.js';
 
 export const PostView = () => {
@@ -17,7 +17,7 @@ export const PostView = () => {
         const fetchReplies = async () => {
             try {
                 const fetchedReplies = await getReplies(postId);
-                setReplies(Object.values(fetchedReplies)); 
+                setReplies(Object.values(fetchedReplies));
             } catch (error) {
                 console.error('Error fetching replies:', error);
             }
@@ -26,7 +26,7 @@ export const PostView = () => {
         const fetchPost = async () => {
             try {
                 const fetchedPost = await getSinglePost( subcategoryId, postId);
-                setPost((fetchedPost)); 
+                setPost((fetchedPost));
             } catch (error) {
                 console.error('Error fetching replies:', error);
             }
