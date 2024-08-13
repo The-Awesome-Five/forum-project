@@ -6,12 +6,13 @@
     "logo links";
     grid-template-rows: 100px 1fr;
     grid-template-columns: 100px 1fr;
-    background-color: rgb(57, 103, 149);
+    background-color: rgba(255, 255, 255, 0.1);
     color: white;
-    border: 2px solid white;
+    /* border: 2px solid white; */
     padding: 20px;
     margin: 10px;
     border-radius: 9px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
 }
 
 .category:hover {
@@ -35,7 +36,7 @@
 }
 
 .category-title p {
-    color: lightblue;
+    color: #A3B1E6;
     margin: 0;
 }
 
@@ -58,4 +59,11 @@
 
 .category-subcategory a {
     color: white
+}
+
+.category-view > h2, p {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
