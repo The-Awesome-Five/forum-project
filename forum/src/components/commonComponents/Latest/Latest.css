@@ -7,3 +7,11 @@
     color: #fff; /* Adjust this color according to your theme */
     transition: background-color 0.3s ease;
 }
+
+.latest-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 10px;
+    width: 1180px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
+}
