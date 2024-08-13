@@ -42,7 +42,7 @@ const Profile = () => {
     return (
         <div className='profile-container'>
             <div className="profile-header">
-                <img src={profileData[0].avatarUrl} alt="profile-pic" />
+                <img src={profileData[0].avatarUrl || '../../../../public/img/default-avatar.png'} alt="profile-pic" />
                 <div className="profile-info">
                     <h2>{profileData[0].username}</h2>
                     <h3>{profileData[0].firstName} {profileData[0].lastName}</h3>
@@ -65,7 +65,7 @@ const Profile = () => {
                                 <Link to={`/category/${post.category}/${post.subcategoryId}/${post.postId}`}>
                                     {post.Title || `Post ${index + 1}`}
                                 </Link>
-                                <span> - {post.likedBy ? Object.keys(post.likedBy).length : 0} likes</span>
+                                <span>  {post.likedBy ? Object.keys(post.likedBy).length : 0} likes</span>
                             </li>
                         ))}
                     </ul>
