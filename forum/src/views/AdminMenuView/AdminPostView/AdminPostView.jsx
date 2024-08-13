@@ -5,6 +5,7 @@ import {AdminPostItem} from "../../../components/adminComponents/AdminPosts/Admi
 export const AdminPostView = () => {
 
     const [posts, setPosts] = useState([]);
+    const [refresh, setRefresh] = useState(false);
 
     const postHeader = {
         Title: 'Title',
@@ -17,14 +18,12 @@ export const AdminPostView = () => {
     useEffect(() => {
         getAllPosts()
             .then(data => setPosts(Object.entries(data).map(([key, value]) => value)))
-    }, []);
-
-    console.log(posts)
+    }, [refresh]);
 
     return (
         <div className="admin-post-view">
             <AdminPostItem post={postHeader}/>
-            {posts && posts.map(post => <AdminPostItem key={post.id} post={post}/>)}
+            {posts && posts.map(post => <AdminPostItem key={post.id} post={post} setRefresh={setRefresh}/>)}
         </div>
 
     )
