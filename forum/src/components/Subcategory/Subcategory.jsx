@@ -99,9 +99,12 @@ export const Subcategory = () => {
                 </tr>
                 {filteredPosts.length > 0 ? (
                     filteredPosts.map(post => (
+
                         <>{post.isHidden && (!userData || userData.role!=='Admin' ) ? <></> :  <>
                         <div key={post.id} className='post-item'>
+                         
                             <Link to={`${post.id}`}>{post.Title}</Link>
+                            <div className='post-details'>This is a hidden post</div>
                             <div className='post-details'>
                             <Link to={`/profile/${post.createdBy?.ID}`}><span className="post-author">{post.createdBy.username}</span>
                             </Link>
