@@ -24,7 +24,7 @@ export const Category = ({category}) => {
                 <p>{category.description ? category.description : ''}</p>
             </div>
             <div className='category-subcategory'>
-                {subcategories && subcategories.map(subcategory => <Link key={subcategory.id} to={`/category/${category.id}/${subcategory.id}`}>
+                {subcategories && subcategories.filter(sub => !sub.isHidden).map(subcategory => <Link key={subcategory.id} to={`/category/${category.id}/${subcategory.id}`}>
                         <img src={subcategory.imgUrl} alt="logo"/> {subcategory.name}
                 </Link>)}
             </div>
