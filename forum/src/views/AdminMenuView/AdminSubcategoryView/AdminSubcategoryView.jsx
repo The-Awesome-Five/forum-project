@@ -4,11 +4,13 @@ import {AddEditSubcategory} from "../../../components/adminComponents/AdminSubca
 import {
     AdminSubcategoryItem
 } from "../../../components/adminComponents/AdminSubcategory/AdminSubcategoryComponent/AdminSubcategoryItem.jsx";
+import {toast} from "react-toastify";
 
 export const AdminSubcategoryView = () => {
 
     const [createMenuVisible, setCreateMenuVisible] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [refresh, setRefresh] = useState();
 
     const subcategoryHeader = {
         name: 'Name',
@@ -20,14 +22,14 @@ export const AdminSubcategoryView = () => {
     useEffect(() => {
         getAllSubcategories()
             .then(data => setCategories(data))
-            .catch(e => alert('Failed to get categories', e));
-    }, []);
+            .catch(e => toast.error('Failed to get categories', e));
+    }, [refresh]);
 
     return (
         <div className="admin-subcategory-view">
             {createMenuVisible
                 ? <div className="admin-menu-create-subcategory">
-                    <AddEditSubcategory setCreateMenuVisible={setCreateMenuVisible}/>
+                    <AddEditSubcategory setCreateMenuVisible={setCreateMenuVisible} setRefresh={setRefresh}/>
                     <button type="button" onClick={() => setCreateMenuVisible(false)}>Close</button>
                 </div>
                 : <button type="button" onClick={() => setCreateMenuVisible(true)}>Create Subcategory</button>}

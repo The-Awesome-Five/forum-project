@@ -11,6 +11,7 @@ import {
     showSubcategory,
     unlockSubcategory
 } from "../../../../services/subcategory.service.js";
+import {toast} from "react-toastify";
 
 export const AdminSubcategoryItem = ({subcategory}) => {
 
@@ -29,7 +30,7 @@ export const AdminSubcategoryItem = ({subcategory}) => {
                         ...sub,
                         name: data
                     }}))
-                .catch(e => alert('Failed to get category name', e));
+                .catch(e => toast.error('Failed to get category name', e));
             }
         getCategoryIdBySubcategoryId(subcategory.id)
             .then(data => setCategory(sub => {
@@ -37,7 +38,7 @@ export const AdminSubcategoryItem = ({subcategory}) => {
                     ...sub,
                     id: data
             }}))
-            .catch(e => alert('Failed to get category id', e));
+            .catch(e => toast.error('Failed to get category id', e));
 
     }, [])
 
@@ -47,13 +48,15 @@ export const AdminSubcategoryItem = ({subcategory}) => {
                 await hideSubcategory(category.id, subcategory.id);
                 setHidden(true);
                 setLocked(true);
+                toast.success(`Subcategory ${subcategory.name} has been hidden successfully!`)
             } else {
                 await showSubcategory(category.id, subcategory.id);
                 setHidden(false);
                 setLocked(false);
+                toast.success(`Subcategory ${subcategory.name} is no longer hidden!`)
             }
         } catch (e) {
-            alert(e)
+            toast.error(e)
         }
     }
 
@@ -63,12 +66,14 @@ export const AdminSubcategoryItem = ({subcategory}) => {
             if (!isLocked) {
                 await lockSubcategory(category.id, subcategory.id);
                 setLocked(true);
+                toast.success(`Subcategory ${subcategory.name} has been locked successfully!`)
             } else {
                 await unlockSubcategory(category.id, subcategory.id);
                 setLocked(false);
+                toast.success(`Subcategory ${subcategory.name} has been unlocked successfully!`)
             }
         } catch (e) {
-            alert(e)
+            toast.error(e)
         }
     }
 

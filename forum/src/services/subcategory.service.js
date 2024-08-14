@@ -12,7 +12,7 @@ export const getAllSubcategories = async () => {
 
         const subcategories = await getElement('Subcategory');
 
-        return Object.values(subcategories);
+        return subcategories ? Object.values(subcategories) : [];
 }
 
 export const createSubcategory = async (name, imgUrl, category_id) => {

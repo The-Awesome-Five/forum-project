@@ -7,8 +7,9 @@ import {
 } from "../../../../services/category.service.js";
 import {createSubcategory, editSubcategory} from "../../../../services/subcategory.service.js";
 import "./AddEditSubcategory.css"
+import {toast} from "react-toastify";
 
-export const AddEditSubcategory = ({setCreateMenuVisible}) => {
+export const AddEditSubcategory = ({setCreateMenuVisible, setRefresh}) => {
     const [subcategory, setSubcategory] = useState({})
     const [categories, setCategories] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('')
@@ -32,14 +33,14 @@ export const AddEditSubcategory = ({setCreateMenuVisible}) => {
                 .then(data => {
                     setCategoryId(data)
                 })
-                .catch(e => alert(e));
+                .catch(e => toast.error(e));
             setIsEdit(true);
         } else {
             getAllCategories()
                 .then(data => {
                     return setCategories(data)
                 })
-                .catch(e => alert(e));
+                .catch(e => toast.error(e));
         }
     }, [categories])
 
@@ -76,30 +77,33 @@ export const AddEditSubcategory = ({setCreateMenuVisible}) => {
         const {name, imgUrl, category} = subcategory;
 
         if (!name || !imgUrl) {
-            return alert('Please fill all of the needed fields');
+            return toast.error('Please fill all of the needed fields');
         }
 
         if (!isEdit && !category) {
-            return alert('Please select a category');
+            return toast.error('Please select a category');
         }
 
         if (name.length < 8 || 32 < name.length) {
-            return alert('Name should be between 8 and 32 symbols');
+            return toast.error('Name should be between 8 and 32 symbols');
         }
 
         try {
 
             if (isEdit) {
                 await editSubcategory(subcategory, categoryId, subcategory.id);
+                toast.success(`The subcategory ${name} has been edited successfully!`)
             } else {
                 await createSubcategory(name, imgUrl, category);
                 setCreateMenuVisible(false);
+                setRefresh(prevRef => !prevRef);
+                toast.success(`The subcategory ${name} has been created!`)
             }
 
 
             navigate('/subcategory-management');
         } catch (e) {
-            alert('Current Error: ' + e)
+            toast.error('Current Error: ' + e)
         }
     }
 
