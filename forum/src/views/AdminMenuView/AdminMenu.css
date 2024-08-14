@@ -13,7 +13,7 @@
     color: white;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
-    background-color: rgb(57, 103, 149);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 5px;
 }
 
