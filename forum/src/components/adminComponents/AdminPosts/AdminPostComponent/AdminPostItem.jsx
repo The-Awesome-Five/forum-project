@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 import {deletePost, hidePost, lockPost, showPost, unlockPost} from "../../../../services/post.service.js";
 import {toast} from "react-toastify";
 
-export const AdminPostItem = ({post, setRefresh}) => {
+export const AdminPostItem = ({post, setRefresh, setSort}) => {
 
     const [subcategory, setSubcategory] = useState('');
     const [isHidden, setHidden] = useState(post.isHidden);
@@ -64,13 +64,18 @@ export const AdminPostItem = ({post, setRefresh}) => {
         }
     }
 
+    const sortHandler = (prop) => {
+        console.log('Sorted ', prop)
+        setSort(prop);
+    }
+
     return (
         <ul className={post.isHeader ? "admin-post-item-header" : "admin-post-item"}>
-            <li>{post.Title}</li>
-            <li>{post.Content}</li>
-            <li>{post.isHeader ? "Created By" : post.createdBy.username}</li>
-            <li>{post.CreatedOn}</li>
-            <li>{post.isHeader ? 'Subcategory' : subcategory}</li>
+            <li>{post.isHeader ? <button onClick={() => sortHandler('Title')}>{post.Title}</button> : post.Title}</li>
+            <li>{post.isHeader ? <button onClick={() => sortHandler('Content')}>{post.Content}</button> : post.Content}</li>
+            <li>{post.isHeader ? <button onClick={() => sortHandler('createdBy')}>{post.CreatedBy}</button> : post.createdBy.username}</li>
+            <li>{post.isHeader ? <button onClick={() => sortHandler('CreatedOn')}>{post.CreatedOn}</button> : post.CreatedOn}</li>
+            <li>{post.isHeader ? <button onClick={() => sortHandler('subcategory')}>{post.subcategory}</button> : subcategory}</li>
             {post.isHeader ? "Buttons" :
                 <div className="admin-post-item-buttons">
                     <button><Link to='/edit-post' state={{postToBeEdited: post}}>Edit </Link></button>

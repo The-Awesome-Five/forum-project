@@ -10,7 +10,7 @@ import { getSinglePost } from '../../services/post.service.js';
 export const PostView = () => {
     const { postId } = useParams();
     const [replies, setReplies] = useState([]);
-    const {user} = useContext(AppContext);
+    const {userData} = useContext(AppContext);
     const {subcategoryId}= useParams()
     const [post, setPost]= useState({});
     useEffect(() => {
@@ -34,7 +34,7 @@ export const PostView = () => {
         fetchPost();
         fetchReplies();
     }, [postId]);
-    console.log(post);
+    console.log('The user is ' + userData.isBlocked);
     return (
         <div>
             <PostDetail />
@@ -47,7 +47,7 @@ export const PostView = () => {
                     <p>No replies yet</p>
                 )}
             </div>
-            {user && (!post.isLocked || user.isBlocked) && <CreateReplyForm postId={postId} />}
+            {userData && !post.isLocked && !userData.isBlocked && <CreateReplyForm postId={postId} />}
         </div>
     );
 };
