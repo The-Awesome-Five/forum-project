@@ -3,6 +3,7 @@ import './AdminPostItem.css'
 import {getSubcategoryNameBySubcategoryId} from "../../../../services/subcategory.service.js";
 import {Link} from "react-router-dom";
 import {deletePost, hidePost, lockPost, showPost, unlockPost} from "../../../../services/post.service.js";
+import {toast} from "react-toastify";
 
 export const AdminPostItem = ({post, setRefresh}) => {
 
@@ -15,7 +16,7 @@ export const AdminPostItem = ({post, setRefresh}) => {
         if(!post.isHeader) {
             getSubcategoryNameBySubcategoryId(post.subcategoryId)
                 .then(data => setSubcategory(data.name))
-                .catch(e => alert(e));
+                .catch(e => toast.error(e));
         }
     }, []);
 
@@ -26,13 +27,15 @@ export const AdminPostItem = ({post, setRefresh}) => {
                 await hidePost(post.subcategoryId, post.id);
                 setHidden(true);
                 setLocked(true);
+                toast.success(`The ${post.Title} has been hidden!`)
             } else {
                 await showPost(post.subcategoryId, post.id);
                 setHidden(false);
                 setLocked(false);
+                toast.success(`The ${post.Title} is no longer hidden!`)
             }
         } catch(e) {
-            alert(e)
+            toast.error(e)
         }
 
     }
@@ -41,9 +44,12 @@ export const AdminPostItem = ({post, setRefresh}) => {
         if(!isLocked) {
             await lockPost(post.subcategoryId, post.id)
             setLocked(true);
+            toast.success(`The ${post.Title} has been locked!`)
         } else {
             await unlockPost(post.subcategoryId, post.id)
             setLocked(false);
+            toast.success(`The ${post.Title} has been unlocked!`)
+
         }
     }
 
@@ -54,7 +60,7 @@ export const AdminPostItem = ({post, setRefresh}) => {
             setRefresh(prev => !prev);
 
         } catch (e) {
-            alert(e)
+            toast.error(e)
         }
     }
 
