@@ -10,7 +10,8 @@ import {
 } from '../../../services/user.service';
 import {useNavigate, useParams} from 'react-router-dom';
 import './EditProfileComponent.css';
-import {getPostsByUserId} from "../../../services/post.service.js"; // Импорт на CSS
+import {getPostsByUserId} from "../../../services/post.service.js";
+import {toast} from "react-toastify"; // Импорт на CSS
 
 const EditProfile = () => {
     const { userData, setAppState } = useContext(AppContext);
@@ -38,7 +39,7 @@ const EditProfile = () => {
             setInfo(userDataFromDB.info || '');
             setRole(userDataFromDB.role || '');
           } catch (error) {
-            console.error('Failed to load user data:', error);
+            toast.error('The user could not be fetched -> ', error)
           }
         }
         setLoading(false);
@@ -81,13 +82,13 @@ const EditProfile = () => {
           setAppState({ userData: updatedUserData });
 
           window.location.reload();
-          alert('Profile updated successfully!');
+          toast.success('Profile updated successfully!');
         } else {
-          alert('User not found or not logged in.');
+          toast.error('User not found or not logged in.');
         }
       } catch (error) {
         console.error('Failed to update profile:', error);
-        alert('Failed to update profile.');
+        toast.error('Failed to update profile.');
       }
     };
 

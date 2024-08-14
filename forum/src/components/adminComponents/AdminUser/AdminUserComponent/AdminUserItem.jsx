@@ -4,6 +4,7 @@ import {getPostsByUserId} from "../../../../services/post.service.js";
 import './AdminUserItem.css'
 import {Link} from "react-router-dom";
 import {blockUser, unblockUser} from "../../../../services/user.service.js";
+import {toast} from "react-toastify";
 
 export const AdminUserItem = ({user}) => {
 
@@ -14,12 +15,14 @@ export const AdminUserItem = ({user}) => {
             if (isBlocked) {
                 await unblockUser(user.uid)
                 setIsBlocked(false);
+                toast.success(`The ${user.username} is un-blocked!`)
             } else {
                 await blockUser(user.uid);
                 setIsBlocked(true);
+                toast.success(`The ${user.username} is blocked!`)
             }
         } catch (e) {
-            alert(e)
+            toast.error(e)
         }
     }
 

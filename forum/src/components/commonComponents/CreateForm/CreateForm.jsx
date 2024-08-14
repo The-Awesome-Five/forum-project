@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../../state/app.context";
 import { useNavigate, useParams } from "react-router-dom";
 import { createPost } from "../../../services/post.service";
-import './CreateFrom.css'
+import './CreateFrom.css';
 
 export const CreatePost = () => {
     const { userData } = useContext(AppContext);
