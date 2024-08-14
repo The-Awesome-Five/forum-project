@@ -4,7 +4,7 @@ import {createCategory, editWholeCategory} from "../../../../services/category.s
 import './AddEditCategory.css'
 import {toast} from "react-toastify";
 
-export const AddEditCategory = () => {
+export const AddEditCategory = ({setRefresh}) => {
     const [category, setCategory] = useState({})
     const [isEdit, setIsEdit] = useState(false)
 
@@ -55,6 +55,7 @@ export const AddEditCategory = () => {
             } else {
                 await createCategory(category);
                 toast.success(`Category ${name} has been created successfully!`)
+                setRefresh(prevRef => !prevRef)
             }
 
             navigate('/category-management');

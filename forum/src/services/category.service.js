@@ -7,7 +7,7 @@ export const getAllCategories = async () => {
 
     const categories = await getElement('Category');
 
-    return Object.values(categories);
+    return categories ? Object.values(categories) : [];
 }
 
 export const createCategory = async ({name, imgUrl, description}) => {

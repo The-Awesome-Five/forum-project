@@ -4,11 +4,13 @@ import {getAllCategories} from "../../../services/category.service.js";
 import {
     AddEditCategory
 } from "../../../components/adminComponents/AdminCategory/AddEditCategoryComponent/AddEditCategory.jsx";
+import {toast} from "react-toastify";
 
 export const AdminCategoryView = () => {
 
     const [createMenuVisible, setCreateMenuVisible] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [ refresh, setRefresh ] = useState(false);
 
     const categoryHeader = {
         name: 'Name',
@@ -26,14 +28,14 @@ export const AdminCategoryView = () => {
     useEffect(() => {
         getAllCategories()
             .then(data => setCategories(data))
-            .catch(e => alert('Failed to get categories', e));
-    }, []);
+            .catch(e => toast.error('Failed to get categories', e));
+    }, [refresh]);
 
     return (
         <div className="admin-category-view">
             {createMenuVisible
                 ? <div className="admin-menu-create-category">
-                    <AddEditCategory/>
+                    <AddEditCategory setRefresh={setRefresh}/>
                     <button type="button" onClick={() => setCreateMenuVisible(false)}>Close</button>
                 </div>
                 : <button type="button" onClick={() => setCreateMenuVisible(true)}>Create Category</button>}
