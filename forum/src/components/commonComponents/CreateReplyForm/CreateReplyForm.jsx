@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../../state/app.context";
 import { useNavigate, useParams } from "react-router-dom";
 import { createReply } from "../../../services/reply.service";
+import './CreateReplyFrom.css'
 
 export const CreateReplyForm = () => {
   const { userData } = useContext(AppContext);
