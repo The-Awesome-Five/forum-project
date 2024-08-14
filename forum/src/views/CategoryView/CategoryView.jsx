@@ -14,7 +14,7 @@ export const CategoryView = () => {
 
     return (
         <div className='category-view'>
-            {categories && categories.map(category => <Category key={category.id} category={category}/>)}
+            {categories && categories.filter(cat => !cat.isHidden).map(category => <Category key={category.id} category={category}/>)}
         </div>
     )
 
