@@ -46,9 +46,9 @@ const UsersTopics = () => {
             {links.length === 0 ? (
                 <p>No posts available.</p>
             ) : (
-                <ul className='post-item'>
+                <ul>
                     {links.map((linkData) => (
-                        <ul key={linkData.id}>
+                        <ul key={linkData.id}  className='post-item'>
                             <Link to={linkData.link}>
                                 {linkData.title}
                             </Link>

@@ -58,7 +58,7 @@ export const AdminPostItem = ({post, setRefresh}) => {
         try {
             await deletePost(post.subcategoryId, post.id);
             setRefresh(prev => !prev);
-
+            toast.success(`The ${post.Title} has been deleted!`);
         } catch (e) {
             toast.error(e)
         }
