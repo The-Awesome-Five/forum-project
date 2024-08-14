@@ -196,16 +196,10 @@ Each user profile includes personal details, their posts, roles, and preferences
 Once everything is set up, start the development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
-Or
-
-```bash
-yarn start
-```
-
-Your React forum should now be running locally at `http://localhost:3000`.
+Your React forum should now be running locally at ` http://127.0.0.1:5173/`.
 
 ## Forum Functionality
 
