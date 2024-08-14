@@ -4,6 +4,7 @@ import { AppContext } from '../state/app.context';
 import { getUserDataByUID, createUserID, getUserDataByEmail } from '../services/user.service';
 import { registerUser } from '../services/auth.service';
 import './Register.css'
+import {toast} from "react-toastify";
 export default function Register() {
     const [user, setUser] = useState({
       username: '',
@@ -31,37 +32,37 @@ export default function Register() {
       const { username, firstName, lastName, email, password, avatarUrl } = user;
 
       if (!email || !password || !username || !firstName || !lastName) {
-        return alert('All fields are required!');
+        return toast.error('All fields are required!');
       }
 
       if (firstName.length < 4 || firstName.length > 32) {
-        return alert('First name must be between 4 and 32 characters!');
+        return toast.error('First name must be between 4 and 32 characters!');
       }
 
       if (lastName.length < 4 || lastName.length > 32) {
-        return alert('Last name must be between 4 and 32 characters!');
+        return toast.error('Last name must be between 4 and 32 characters!');
       }
 
 
       try {
         const userFromDB = await getUserDataByUID(username);
         if (userFromDB) {
-          return alert(`User {${username}} already exists!`);
+          return toast.error(`User {${username}} already exists!`);
         }
 
         const emailInUse = await getUserDataByEmail(email);
         if (emailInUse) {
-          return alert(`Email {${email}} is already in use!`);
+          return toast.error(`Email {${email}} is already in use!`);
         }
 
         const credential = await registerUser(email, password);
 
         await createUserID(username, firstName, lastName, credential.user.uid, email, avatarUrl);
         setAppState({ user: credential.user, userData: credential.user.uid });
+          toast.success(`User ${username} has been registered!`);
         navigate('/');
       } catch (error) {
-        console.error("Registration error:", error);
-        alert(error.message);
+          toast.error(`There has been a problem with the register - ${error}`);
       }
     };
 

@@ -37,6 +37,9 @@ import {
 import TopPosts from './components/commonComponents/Top/Top.jsx';
 import {AdminEditPost} from "./components/adminComponents/AdminPosts/AdminEditPost/AdminEditPost.jsx";
 import { Footer } from './components/commonComponents/Footer/Footer.jsx';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
     const [elements, setElements] = useState({});
     const navigate = useNavigate();
@@ -79,6 +82,7 @@ function App() {
     return (
         <>
             <AppContext.Provider value={{...appState, setAppState}}>
+                <ToastContainer />
                 <HeaderBar logout={logout}/>
                 <div className="app">
                     <Routes>

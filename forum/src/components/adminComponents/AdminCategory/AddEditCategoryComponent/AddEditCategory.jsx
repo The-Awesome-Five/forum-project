@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {createCategory, editWholeCategory} from "../../../../services/category.service.js";
 import './AddEditCategory.css'
+import {toast} from "react-toastify";
 
 export const AddEditCategory = () => {
     const [category, setCategory] = useState({})
@@ -37,27 +38,29 @@ export const AddEditCategory = () => {
         const {name, description, imgUrl} = category;
 
         if (!name || !description || !imgUrl) {
-            return alert('Please fill all of the needed fields');
+            return toast.error('Please fill all of the needed fields');
         }
         if (name.length < 8 || 32 < name.length) {
-            return alert('Name should be between 8 and 32 symbols');
+            return toast.error('Name should be between 8 and 32 symbols');
         }
         if (description.length < 16 || 64 < description.length) {
-            return alert('Description needs to be between 16 and 64 symbols');
+            return toast.error('Description needs to be between 16 and 64 symbols');
         }
 
         try {
 
             if (isEdit) {
                 await editWholeCategory(category, category.id);
+                toast.success(`Category ${name} has been edited successfully!`)
             } else {
                 await createCategory(category);
+                toast.success(`Category ${name} has been created successfully!`)
             }
 
             navigate('/category-management');
 
         } catch (e) {
-            alert(e)
+            toast.error(e)
         }
     }
 

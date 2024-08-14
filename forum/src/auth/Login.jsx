@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/auth.service";
 import { getUserByID } from "../services/user.service";
 import './Login.css'
+import {toast} from "react-toastify";
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -24,7 +25,7 @@ export default function Login() {
 
   const login = async () => {
     if (!user.email || !user.password) {
-      return alert('No credentials provided!');
+      return toast.error('No credentials provided!');
     }
 
     try {
@@ -36,9 +37,11 @@ export default function Login() {
         userData: userInfo,
       });
 
+      toast.success(`You logged in successfully!`)
+
       navigate(location.state?.from.pathname ?? '/');
     } catch (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   }
 

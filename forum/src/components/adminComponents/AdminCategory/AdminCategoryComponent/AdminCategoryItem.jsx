@@ -2,6 +2,7 @@ import './AdminCategoryItem.css'
 import {Link} from "react-router-dom";
 import {hideCategory, showCategory} from "../../../../services/category.service.js";
 import {useState} from "react";
+import {toast} from "react-toastify";
 
 export const AdminCategoryItem = ({category}) => {
 
@@ -12,12 +13,14 @@ export const AdminCategoryItem = ({category}) => {
             if (!hidden) {
                 await hideCategory(category.id);
                 setHidden(true);
+                toast.success(`Category ${category.name} has been hidden successfully!`)
             } else {
                 await showCategory(category.id);
                 setHidden(false);
+                toast.success(`Category ${category.name} is no longer hidden!`)
             }
         } catch (e) {
-            alert(e)
+            toast.error(e)
         }
     }
 
