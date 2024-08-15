@@ -5,6 +5,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../../firebase/config.js";
 import {AppContext} from "../../../state/app.context.js";
 import {getUserByID} from "../../../services/user.service.js";
+import {Notification} from "../../userComponents/NotificationComponent/Notification.jsx";
 
 const HeaderBar = ({logout}) => {
     const navigate = useNavigate();
@@ -59,7 +60,10 @@ const HeaderBar = ({logout}) => {
                 <div className="dropdown">
                     <div className="profile-icon" onClick={handleProfileClick} tabIndex="0">
                         {user && avatarUrl ? (
+                            <div style={{display: "flex", flexDirection: "row"}}>
+                            <Notification/>
                             <img src={avatarUrl} alt="User Avatar" className="user-avatar"/>
+                            </div>
                         ) : (
                             <img src="/img/profile-icon.png" alt="profile icon"/>
                         )}

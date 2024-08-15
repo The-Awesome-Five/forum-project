@@ -1,4 +1,11 @@
-import {createElement, createPath, getElement, removeElement, updateElement} from "../firebase/firebase-funcs.js";
+import {
+    createElement,
+    createPath,
+    getElement,
+    removeElement,
+    updateElement,
+    updateField
+} from "../firebase/firebase-funcs.js";
 import {ref, get, query, orderByChild, equalTo, update, OnDisconnect} from "firebase/database";
 import {db} from "../firebase/config";
 import {deleteReply, getReplies} from "./reply.service.js";
@@ -205,11 +212,33 @@ export const getTopLikedPostsByUser = async (userId) => {
 };
 
 
-export const likePost = (uid, postId, subcategoriesId) => {
+/*export const likePost = (uid, postId, subcategoriesId) => {
     const updateObject = {
         [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: true,
         [`Users/${uid}/likedPosts/${uid}`]: true,
     };
+
+    return update(ref(db), updateObject);
+};*/
+
+export const likePost =  async (uid, postId, subcategoriesId, title, createdByID, username) => {
+    const updateObject = {
+        [`Posts/${subcategoriesId}/${postId}/likedBy/${uid}`]: true,
+        [`Users/${uid}/likedPosts/${uid}`]: true,
+    };
+
+    const notification = {
+        'user': username,
+        'timestamp': new Date().toString(),
+        'title': title,
+        'type': 'like',
+        'read': false
+    }
+
+    const notificationID = await createElement(notification, `Notifications/${createdByID}`);
+    const path= createPath('Users', createdByID, 'Notifications', notificationID);
+    await updateElement(notification, path);
+    await updateField(null,`Notifications/${createdByID}/${notificationID}`);
 
     return update(ref(db), updateObject);
 };

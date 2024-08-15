@@ -43,7 +43,7 @@ export const PostDetail = () => {
 
         try {
             if (!isLiked) {
-                await likePost(userData.uid, postId, subcategoryId);
+                await likePost(userData.uid, postId, subcategoryId, post.Title, post.createdBy?.ID, userData.username);
                 setPost(prevPost => ({
                     ...prevPost,
                     likedBy: {
