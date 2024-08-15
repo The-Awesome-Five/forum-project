@@ -34,13 +34,7 @@ export const PostView = () => {
         fetchPost();
         fetchReplies();
     }, [postId]);
-<<<<<<< HEAD
   
-=======
-
-    console.log(userData)
-
->>>>>>> aa4aa6c51381166b4ccfd4a5dad7d7d9a9a2374b
     return (
         <div>
             <PostDetail />
