@@ -76,7 +76,6 @@ const EditProfile = () => {
           await updateUserFirstName(userId, firstName);
           await updateUserLastName(userId, lastName);
           await updateCustomInfo(userId, info);
-            console.log(role)
           await updateUserRole(userId, role);
           const updatedUserData = await getUserByID(userId);
           setAppState({ userData: updatedUserData });
