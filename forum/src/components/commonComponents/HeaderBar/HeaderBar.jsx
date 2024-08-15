@@ -5,6 +5,7 @@ import {useAuthState} from "react-firebase-hooks/auth";
 import {auth} from "../../../firebase/config.js";
 import {AppContext} from "../../../state/app.context.js";
 import {getUserByID} from "../../../services/user.service.js";
+import { NotificationBell } from "../Notifications/Notifications.jsx";
 
 const HeaderBar = ({logout}) => {
     const navigate = useNavigate();
@@ -54,6 +55,7 @@ const HeaderBar = ({logout}) => {
                     {userData && userData.role === 'Admin' &&
                         <Link to="/admin-menu">ADMIN MENU</Link>
                     }
+                    {userData && <NotificationBell/>}
                 </div>
 
                 <div className="dropdown">

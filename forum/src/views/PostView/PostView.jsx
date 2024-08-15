@@ -34,7 +34,7 @@ export const PostView = () => {
         fetchPost();
         fetchReplies();
     }, [postId]);
-    console.log('The user is ' + userData.isBlocked);
+  
     return (
         <div>
             <PostDetail />
@@ -47,7 +47,7 @@ export const PostView = () => {
                     <p>No replies yet</p>
                 )}
             </div>
-            {userData && !post.isLocked && !userData.isBlocked && <CreateReplyForm postId={postId} />}
+            {userData && !post.isLocked && (userData && !userData.isBlocked) && <CreateReplyForm postId={postId} />}
         </div>
     );
 };

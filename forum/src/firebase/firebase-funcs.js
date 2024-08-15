@@ -70,6 +70,7 @@ export const getElement =async (pathing) =>{
 
 }
 
+
 export const removeElement = async (pathing) => {
     try {
         await remove(ref(db, `${pathing}`));

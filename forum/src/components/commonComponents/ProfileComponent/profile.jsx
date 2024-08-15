@@ -44,7 +44,7 @@ const Profile = () => {
             <div className="profile-header">
                 <img src={profileData[0].avatarUrl || '../../../../public/img/default-avatar.png'} alt="profile-pic" />
                 <div className="profile-info">
-                    <h2>{profileData[0].username}</h2>
+                    <h2>{profileData[0].username} 🔔</h2>
                     <h3>{profileData[0].firstName} {profileData[0].lastName}</h3>
                     <p>{profileData[0].customInfo || 'Custom information'}</p>
                 </div>

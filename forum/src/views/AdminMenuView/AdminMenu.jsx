@@ -9,6 +9,7 @@ export const AdminMenu = () => {
             <Link to="/subcategory-management">Subcategory Management</Link>
             <Link to="/post-management">Post Management</Link>
             <Link to="/user-management">User Management</Link>
+            <Link to="/reported-posts">Reported Posts</Link>
         </div>
     )
 }

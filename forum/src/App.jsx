@@ -39,6 +39,8 @@ import {AdminEditPost} from "./components/adminComponents/AdminPosts/AdminEditPo
 import { Footer } from './components/commonComponents/Footer/Footer.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { AdminReportsView } from './views/AdminMenuView/AdminReportsView/AdminReportsView.jsx';
+import { NotificationBell } from './components/commonComponents/Notifications/Notifications.jsx';
 
 function App() {
     const [elements, setElements] = useState({});
@@ -86,6 +88,7 @@ function App() {
                 <HeaderBar logout={logout}/>
                 <div className="app">
                     <Routes>
+                        
                         <Route path="/" element={<Home />} />
                         <Route path="/category/:categoryId/:subcategoryId" element={<Subcategory />} />
                         <Route path="/create-post/:subcategoryId" element={<Authenticated><CreatePost /></Authenticated>} />
@@ -103,8 +106,9 @@ function App() {
                         <Route path="/user-management" element={<Administrated><AdminUserView/></Administrated>} />
                         <Route path="/edit-category" element={<Administrated><AddEditCategory/></Administrated>} />
                         <Route path="/edit-subcategory" element={<Administrated><AddEditSubcategory/></Administrated>} />
+                        <Route path="/reported-posts" element={<Administrated><AdminReportsView/></Administrated>} />
                         <Route path="/edit-post" element={<Administrated><AdminEditPost/></Administrated>} />
-
+                        <Route path="/notifications" element={<Authenticated><NotificationBell /></Authenticated>} />
 
                         <Route path="/profile/:uid" element={<ProfileView/>} />
                         <Route path="/edit-profile" element={<Authenticated><EditProfileView/></Authenticated>} />

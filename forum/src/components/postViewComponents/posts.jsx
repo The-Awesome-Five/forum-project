@@ -4,9 +4,10 @@ import { likePost, dislikePost, updatePost, deletePost } from '../../services/po
 import { getUserAvatar } from '../../services/user.service';
 import { AppContext } from '../../state/app.context';
 import './posts.css';
+import { reportPost, UpdateReport } from '../../services/report.service';
 
 export const PostDetail = () => {
-    const { postId, subcategoryId } = useParams();
+    const { postId, subcategoryId, categoryId } = useParams();
     const [post, setPost] = useState(null);
     const { userData } = useContext(AppContext);
     const [isEditing, setIsEditing] = useState(false);
@@ -43,7 +44,7 @@ export const PostDetail = () => {
 
         try {
             if (!isLiked) {
-                await likePost(userData.uid, postId, subcategoryId);
+                await likePost(userData.uid, postId, subcategoryId, post.Title, post.createdBy?.ID, userData.username);
                 setPost(prevPost => ({
                     ...prevPost,
                     likedBy: {
@@ -84,6 +85,20 @@ export const PostDetail = () => {
             alert(error.message);
         }
     };
+
+    const handelReport = async () => {
+
+        try {
+            await UpdateReport(userData.uid, postId);
+            await reportPost (userData.uid, postId ,subcategoryId,  categoryId);
+       
+        }
+        catch(e){
+            console.log(e);
+        }
+
+      window.location.reload()
+    }
 
     const handleDelete = async () => {
         try {
@@ -141,6 +156,10 @@ export const PostDetail = () => {
                 <div>Likes: {Object.keys(post.likedBy).length}</div>
                 <button onClick={toggleLike} disabled={!userData}>
                     {userData && Object.keys(post.likedBy).includes(userData.uid) ? 'Dislike' : 'Like'}
+                    
+                </button>
+                <button onClick={handelReport} disabled={!userData}>
+                    {userData && post.reportedBy && (Object.keys(post.reportedBy).includes(userData.uid)) ? 'Reported' : 'Report'}
                 </button>
                 {userData && (post.createdBy.ID === userData.uid || userData.role === "Admin") && (
                     <>
